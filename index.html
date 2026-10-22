@@ -503,9 +503,61 @@ html,body{background:#F1EDE6}
 [hidden]{display:none!important}
 .pvstrip{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;padding:8px 16px;background:#0F3B3A;color:#FBF8F2;font:600 12px/1.3 'Proxima Nova',system-ui,sans-serif}
 .pvbtn{background:#AAF6E6;color:#0F3B3A!important;text-decoration:none;border-radius:100px;padding:7px 12px;font:800 10px/1 'Druk Text Wide',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- Intro: el video del estadio como pantalla de carga (mismo patrón que pslsc-school; lo maneja el script
+   "intro" al final del body). Apaisado: el video cubre la pantalla. Vertical: franja 16:9 más ancha que la pantalla,
+   centrada sobre el verde profundo. Sin JS, con reduced motion, sin autoplay o si el video no arranca en 5 s: no hay intro. */
+.intro{--stage-w:max(100vw,177.78vh);--stage-h:calc(var(--stage-w)*.5625);--p:0;display:none;position:fixed;inset:0;z-index:1000;overflow:hidden;background:#0B2A2A;transition:opacity .9s ease}
+@supports (height:100dvh){.intro{--stage-w:max(100vw,177.78dvh)}}
+@media (max-aspect-ratio:1/1){.intro{--stage-w:160vw;--stage-h:90vw}}
+.intro-on{overflow:hidden}
+.intro-on .intro,.intro.is-leaving{display:block}
+.intro.is-leaving{opacity:0;pointer-events:none}
+/* La página espera abajo y sube mientras el video se desvanece */
+body>:not(.intro){transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.intro-on body>:not(.intro){opacity:0;transform:translateY(56px)}
+.intro__stage{position:absolute;left:50%;top:50%;width:var(--stage-w);height:var(--stage-h);transform:translate(-50%,-50%)}
+.intro__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Línea pegada al borde de arriba del video (si el video se sale por arriba, al de la pantalla) */
+.intro__loader{position:absolute;left:0;right:0;top:max(0px,calc(50% - var(--stage-h)/2))}
+.intro__bar{display:block;height:4px;background:#AAF6E6;box-shadow:0 1px 8px rgba(0,0,0,.3);transform:scaleX(var(--p));transform-origin:left}
+.intro__track{position:absolute;top:12px;left:16px;right:16px}
+/* El "Loading" acompaña la punta sin salirse: al 0% arranca en el borde izquierdo, al 100% termina en el derecho */
+.intro__label{position:absolute;top:0;left:calc(var(--p)*100%);transform:translateX(calc(var(--p)*-100%));padding:8px 11px 7px;border-radius:8px;background:rgba(11,42,42,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#AAF6E6;font:800 11px/1 'Druk Text Wide',sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.intro__skip{position:absolute;right:16px;bottom:max(16px,env(safe-area-inset-bottom));padding:11px 14px 10px;border:0;border-radius:8px;background:rgba(11,42,42,.6);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 1px rgba(170,246,230,.35);color:#FBF8F2;font:800 10px/1 'Druk Text Wide',sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.intro__skip:hover{color:#AAF6E6}
+.intro__skip:focus-visible{outline:2px solid #AAF6E6;outline-offset:3px}
+@media (min-width:900px){
+  .intro__bar{height:6px}
+  .intro__track{top:18px;left:32px;right:32px}
+  .intro__label{font-size:14px;padding:10px 14px 9px}
+  .intro__skip{right:32px;bottom:32px;font-size:11px;padding:13px 18px 12px}
+}
 </style>
+<script>
+  // Intro (ver el script "intro" al final del body): la clase va antes del primer pintado para que la página no
+  // asome un instante por debajo. Sin JS o con reduced motion no hay intro.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('intro-on');
+    // Red de seguridad: si el script de la intro no toma el control, la página se ve igual.
+    setTimeout(function () { if (!window.gbIntro) document.documentElement.classList.remove('intro-on'); }, 4000);
+  }
+</script>
 </head>
 <body>
+
+<!-- Intro: "Port St Lucie Stadium - Video Final" (cuadros 0–446, sin el cierre en negro con el escudo) como pantalla de
+     carga. Termina en la vista aérea y la página sube fundiéndose con el video. El video lo carga el script (720p o 1080p). -->
+<div class="intro" data-intro role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="intro__stage">
+    <video class="intro__video" data-intro-video muted playsinline preload="auto" poster="assets/intro/intro-poster.webp" aria-hidden="true"></video>
+  </div>
+  <div class="intro__loader" aria-hidden="true">
+    <span class="intro__bar"></span>
+    <span class="intro__track"><span class="intro__label">Loading <span data-intro-pct>0</span>%</span></span>
+  </div>
+  <button type="button" class="intro__skip" data-intro-skip>Skip intro →</button>
+</div>
 
 <div class="pvstrip"><span>Vista previa · Groundbreaking, versión B</span><a href="#postales" class="pvbtn">Ver las postales →</a></div>
 <div id="app"></div>
@@ -1683,6 +1735,83 @@ class Component extends DCLogic {
   });
   window.addEventListener('resize', function(){ if (!host.hidden) fit(); });
   if (location.hash === '#postales') open();
+})();
+</script>
+
+<script>
+// ---------- intro
+// El video del estadio (cuadros 0–446, ver "Intro" en CLAUDE.md) como pantalla de carga, con un "Loading" que avanza con el video.
+// Poco antes del final la página sube fundiéndose con él. Se puede saltear con el botón o con Escape.
+(function(){
+  var INTRO_STALL_MS = 5000;
+  var INTRO_FADE_MS = 900;   // = la transición de .intro y de la página en el CSS
+  var INTRO_FADE_LEAD = 0.6; // s antes del final: la página sube mientras el video todavía se mueve
+  var root = document.documentElement;
+  var intro = document.querySelector('[data-intro]');
+  if (!intro || !root.classList.contains('intro-on')) return;
+  window.gbIntro = true; // apaga la red de seguridad del <head>
+
+  var video = intro.querySelector('[data-intro-video]');
+  var pct = intro.querySelector('[data-intro-pct]');
+  var page = Array.prototype.filter.call(document.body.children, function(el){ return el !== intro && el.tagName !== 'SCRIPT' && el.tagName !== 'TEMPLATE'; });
+  page.forEach(function(el){ el.inert = true; });
+
+  // 1080p solo si el video se dibuja con más de 1400 px reales y no es un teléfono (ver --stage-w en el CSS).
+  var portrait = matchMedia('(max-aspect-ratio: 1/1)').matches;
+  var stageWidth = portrait ? innerWidth * 1.6 : Math.max(innerWidth, innerHeight * 16 / 9);
+  var isPhone = Math.min(innerWidth, innerHeight) < 600;
+  var quality = !isPhone && stageWidth * (window.devicePixelRatio || 1) > 1400 ? '1080' : '720';
+  video.src = 'assets/intro/intro-' + quality + '.mp4';
+
+  var done = false, shown = -1;
+  // Si el video no arranca (red lenta), la página no espera.
+  var stall = setTimeout(finish, INTRO_STALL_MS);
+
+  function setProgress(ratio){
+    var progress = Math.min(Math.max(ratio, 0), 1);
+    intro.style.setProperty('--p', progress.toFixed(4)); // la línea crece continua; el número, de a 1%
+    var value = Math.round(progress * 100);
+    if (value === shown) return;
+    shown = value;
+    pct.textContent = value;
+    intro.setAttribute('aria-valuenow', value);
+  }
+
+  function finish(){
+    if (done) return;
+    done = true;
+    clearTimeout(stall);
+    setProgress(1);
+    page.forEach(function(el){ el.inert = false; });
+    intro.classList.add('is-leaving');
+    root.classList.remove('intro-on');
+    setTimeout(function(){
+      intro.classList.remove('is-leaving');
+      intro.hidden = true;
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+    }, INTRO_FADE_MS);
+  }
+
+  function tick(){
+    if (done) return;
+    var end = video.duration - INTRO_FADE_LEAD;
+    if (end > 0){
+      setProgress(video.currentTime / end);
+      if (video.currentTime >= end){ finish(); return; }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  video.addEventListener('playing', function(){ clearTimeout(stall); }, { once: true });
+  video.addEventListener('ended', finish);
+  intro.querySelector('[data-intro-skip]').addEventListener('click', finish);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') finish(); });
+  // Sin autoplay (p. ej. modo ahorro de batería en iOS) no hay intro.
+  var playing = video.play();
+  if (playing && playing.then) playing.then(function(){ requestAnimationFrame(tick); }, finish);
+  else requestAnimationFrame(tick);
 })();
 </script>
 
