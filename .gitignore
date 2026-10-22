@@ -1,3 +1,7 @@
 .DS_Store
 # Video fuente de la intro (60 MB): no se versiona. Los cortes comprimidos están en assets/intro/ (ver CLAUDE.md).
 /Port St Lucie Stadium - Video Final.mp4
+# Exploración del loop del hero (27 MB): se queda local; prompts, scripts y anclaje chico sí se versionan
+/docs/hero-loop/*.mp4
+/docs/hero-loop/intro-last-frame.png
+/docs/hero-loop/anchor-b-menos-gente.png
