@@ -1289,7 +1289,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   <div class="mdl-box" role="dialog" aria-modal="true" aria-labelledby="wmdl-title">
     <button type="button" class="mdl-x" data-wmdl-close aria-label="Close">✕</button>
     <form class="mdl-form" data-wmdl-form novalidate action="#" method="post">
-      <div class="mdl-head"><span class="k">Community wall</span><h2 id="wmdl-title">I’m building this home for…</h2><p>Finish the sentence. We read every message before it goes up, and all of them will be shown on opening day.</p></div>
+      <div class="mdl-head"><span class="k">Community wall</span><h2 id="wmdl-title">I’m building this home for…</h2><p>Finish the sentence. It goes up on the wall right away, and on opening day it rains down from the stands.</p></div>
       <fieldset><legend>1 · The message</legend>
         <label class="mdl-f">I’m building this home for…<textarea name="text" required maxlength="140" rows="3" placeholder="my son, who will play on this pitch one day." data-wmdl-text></textarea><span class="wm-count"><b data-wmdl-count>0</b> / 140</span></label>
         <div class="mdl-fields" style="margin-top:14px">
@@ -1303,7 +1303,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
         <div class="mdl-fields">
           <label class="mdl-f">Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
         </div>
-        <label class="mdl-chk"><input type="checkbox" name="consent" value="1" required>Show this message on the wall and print it for opening day. Your email stays private.</label>
+        <label class="mdl-chk"><input type="checkbox" name="consent" value="1" required>Show this message on the wall and print it for opening day. A moderator may take it down if it doesn’t belong. Your email stays private.</label>
         <label class="mdl-chk"><input type="checkbox" name="adult" value="1" required>I’m 18 or older.</label>
         <input type="text" name="hp" tabindex="-1" autocomplete="off" class="wm-hp" aria-hidden="true">
       </fieldset>
@@ -2178,7 +2178,7 @@ window.gbApi = function(payload){
   function say(msg){
     if (!toast) return;
     toast.textContent = msg; toast.hidden = false; toast.classList.add('is-on');
-    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toast.classList.remove('is-on'); setTimeout(function(){ toast.hidden = true; }, 400); }, 7000);
+    clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toast.classList.remove('is-on'); setTimeout(function(){ toast.hidden = true; }, 400); }, 9000);
   }
   document.addEventListener('click', function(e){
     var t = e.target; if (!t.closest) return;
@@ -2206,7 +2206,7 @@ window.gbApi = function(payload){
           close(true); form.reset(); count.textContent = '0';
           var stage = document.querySelector('.wall-stage'); if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
           setTimeout(function(){ if (window.gbWall) window.gbWall.add({ id: res.id, t: t, n: d.name, b: d.badge, stk: d.sticker }); }, 380);
-          say('It’s on the wall. And on opening day it rains down from the stands.');
+          say('It’s on the wall. Our team reads every message and may take one down if it doesn’t belong.');
           return;
         }
         // Con moderación (lo normal): gracias + aviso de que se aprueba y se ve en los próximos días.
