@@ -9,6 +9,13 @@ carpeta madre `PSLSC/`. Este archivo es lo propio de este repo.
 - HTML + CSS + JS estándar, sin frameworks, hasta que se defina dónde se publica (si termina en WordPress, aplican las
   reglas de bloques del sitio del club: CSS bajo `.pslsc`, JS como data URI).
 
+## Dónde se ve
+- **Público (Vercel, cuenta de Mariano, proyecto `groundbreaking`)**: https://groundbreaking-eight.vercel.app/v2/ (v2)
+  y https://groundbreaking-eight.vercel.app/ (v1). Se publica con `npx vercel deploy --prod --yes` desde la raíz del
+  repo (el vínculo está en `.vercel/`, ignorado por git; `.vercelignore` deja afuera `docs/`). No está conectado al
+  repo de GitHub: hay que volver a correr el deploy después de cada push.
+- Sin hosting: `https://raw.githack.com/ItPortstlucieSC/groundbreaking/develop/v2/index.html` (pantalla intermedia).
+
 ## Ramas
 - `main` = lo publicado. `develop` = trabajo. Nada a `main` sin el OK de Martín.
 
@@ -111,6 +118,10 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
 - Sin la card "From first shovel to gates open" (`.bx-when`); el bento queda con 3 cards.
 - Intro a pantalla completa también en vertical (cover, recortada; sin la franja 16:9 ni el zoom de salida), con la
   línea de carga arriba y el contador en el tercio inferior (`.intro__cd{top:78%}`).
+- Intro robusta (22-oct, noche; Mariano no veía la carga en su iPhone): si el autoplay se rechaza (bajo consumo en
+  iOS), el video da error, no arranca en 12 s o se traba 8 s, la intro NO se saltea: pasa a `.intro--still` (el
+  still del hero, `.intro__still`), la línea completa la carga en 2,8 s y entra la página; mientras espera, la línea
+  avanza con el buffer hasta 15 %. La red de seguridad del `<head>` pasó de 4 a 8 s. Reduce Motion sigue sin intro.
 - Nav sticky: `.pg{overflow:clip}` (con `hidden` el `.pg` era contenedor de scroll y anulaba el `position:sticky`).
 - Bloques que aparecen al entrar en pantalla: clase `rv` en el template (cabeceras de sección, cards del bento,
   countdown, ticket, grillas), `IntersectionObserver` en el script "reveal" del final del body, animación `rvIn`

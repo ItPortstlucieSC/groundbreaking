@@ -5,3 +5,5 @@
 /docs/hero-loop/*.mp4
 /docs/hero-loop/intro-last-frame.png
 /docs/hero-loop/anchor-b-menos-gente.png
+# Vínculo local con el proyecto de Vercel
+.vercel

@@ -538,6 +538,9 @@ html,body{background:#F1EDE6}
 .intro__stage{position:absolute;left:50%;top:50%;width:var(--stage-w);height:var(--stage-h);transform:translate(-50%,-50%);transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 .intro.is-leaving .intro__stage{transform:translate(-50%,-50%) scale(var(--zoom,1))}
 .intro__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Sin autoplay (bajo consumo en iOS), video roto o red lenta: la carga sigue sobre el still del estadio */
+.intro__still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.intro--still .intro__video{display:none}.intro--still .intro__still{display:block}
 /* Línea pegada al borde de arriba del video (si el video se sale por arriba, al de la pantalla) */
 .intro__loader{position:absolute;left:0;right:0;top:max(0px,calc(50% - var(--stage-h)/2))}
 .intro__bar{display:block;height:4px;background:#AAF6E6;box-shadow:0 1px 8px rgba(0,0,0,.3);transform:scaleX(var(--p));transform-origin:left}
@@ -782,7 +785,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('intro-on');
     // Red de seguridad: si el script de la intro no toma el control, la página se ve igual.
-    setTimeout(function () { if (!window.gbIntro) document.documentElement.classList.remove('intro-on'); }, 4000);
+    setTimeout(function () { if (!window.gbIntro) document.documentElement.classList.remove('intro-on'); }, 8000);
   }
 </script>
 </head>
@@ -793,6 +796,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 <div class="intro" data-intro role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
   <div class="intro__stage">
     <video class="intro__video" data-intro-video muted playsinline preload="auto" poster="../assets/intro/intro-poster.webp" aria-hidden="true"></video>
+    <img class="intro__still" src="../assets/hero/still.webp" alt="" aria-hidden="true" decoding="async">
   </div>
   <div class="intro__loader" aria-hidden="true">
     <span class="intro__bar"></span>
@@ -1938,7 +1942,9 @@ class Component extends DCLogic {
 })();
 
 (function(){
-  var INTRO_STALL_MS = 5000;
+  var INTRO_STALL_MS = 12000; // si el video no arranca en 12 s, sigue sobre el still
+  var INTRO_FALLBACK_MS = 2800; // duración de la carga sobre el still
+  var INTRO_FREEZE_MS = 8000;   // video que se traba a mitad de camino
   var INTRO_FADE_MS = 900;   // = la transición de .intro y de la página en el CSS
   var INTRO_FADE_LEAD = 0.6; // s antes del final: la página sube mientras el video todavía se mueve
   var root = document.documentElement;
@@ -1969,9 +1975,28 @@ class Component extends DCLogic {
   // En vertical la franja termina haciendo zoom hasta el encuadre del loop del hero (cover de la pantalla, centrado).
   intro.style.setProperty('--zoom', Math.max(1, (innerHeight * 16 / 9) / stageWidth).toFixed(3));
 
-  var done = false, shown = -1;
-  // Si el video no arranca (red lenta), la página no espera.
-  var stall = setTimeout(finish, INTRO_STALL_MS);
+  var done = false, shown = -1, fallbackOn = false;
+  // Si el video no arranca (red lenta, bajo consumo, error), la carga sigue sobre el still y después entra la página.
+  var stall = setTimeout(fallback, INTRO_STALL_MS);
+  function fallback(){
+    if (done || fallbackOn) return; fallbackOn = true;
+    clearTimeout(stall);
+    try { video.pause(); } catch (e) {}
+    intro.classList.add('intro--still');
+    var from = Math.max(0, shown / 100), t0 = performance.now();
+    (function step(){
+      if (done) return;
+      var r = from + (1 - from) * (performance.now() - t0) / INTRO_FALLBACK_MS;
+      setProgress(r);
+      if (r >= 1){ startHero(); finish(true); } else requestAnimationFrame(step);
+    })();
+  }
+  // Mientras espera, la línea avanza con lo que va bajando (hasta un 15 %)
+  video.addEventListener('progress', function(){
+    if (fallbackOn || done || video.currentTime > 0) return;
+    try { var b = video.buffered; if (b.length) setProgress(Math.min(0.15, b.end(b.length - 1) / (video.duration || 18.6))); } catch (e) {}
+  });
+  video.addEventListener('error', fallback);
 
   function setProgress(ratio){
     var progress = Math.min(Math.max(ratio, 0), 1);
@@ -2006,8 +2031,11 @@ class Component extends DCLogic {
     }, INTRO_FADE_MS);
   }
 
+  var lastT = -1, lastMove = performance.now();
   function tick(){
-    if (done) return;
+    if (done || fallbackOn) return;
+    if (video.currentTime !== lastT){ lastT = video.currentTime; lastMove = performance.now(); }
+    else if (video.currentTime > 0 && performance.now() - lastMove > INTRO_FREEZE_MS){ fallback(); return; }
     var end = video.duration - INTRO_FADE_LEAD;
     if (end > 0){
       setProgress(video.currentTime / end);
@@ -2023,7 +2051,7 @@ class Component extends DCLogic {
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') finish(); });
   // Sin autoplay (p. ej. modo ahorro de batería en iOS) no hay intro.
   var playing = video.play();
-  if (playing && playing.then) playing.then(function(){ requestAnimationFrame(tick); }, finish);
+  if (playing && playing.then) playing.then(function(){ requestAnimationFrame(tick); }, fallback);
   else requestAnimationFrame(tick);
 })();
 </script>
