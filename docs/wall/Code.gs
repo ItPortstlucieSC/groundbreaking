@@ -38,6 +38,11 @@ function setup() {
   }
 }
 
+/** Corre setup() una sola vez, solo, la primera vez que llega un envío (sin pestaña config todavía). */
+function ensureSetup_() {
+  if (!SpreadsheetApp.getActive().getSheetByName('config')) setup();
+}
+
 /** Lee auto_approve de la pestaña config (cacheado 30 s). Sin pestaña, vale AUTO_APPROVE_DEFAULT. */
 function autoApprove_() {
   var cache = CacheService.getScriptCache(), c = cache.get('cfg:auto_approve');
@@ -70,6 +75,7 @@ function doPost(e) {
 
   var lock = LockService.getScriptLock(); lock.waitLock(10000);
   try {
+    ensureSetup_();
     if (d.type === 'message') return json_(saveMessage_(d, email));
     if (d.type === 'register') return json_(saveRegistration_(d, email));
     return json_({ ok: false, error: 'unknown type' });

@@ -155,8 +155,10 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   `registrations`, moderación por columna `status`, honeypot y 1 envío/email/minuto) + `docs/wall/README.md` con el
   deploy. La URL del web app va en `v2/config.js` (`window.GB_API`); `?api=` la pisa para probar con
   `docs/wall/mock-server.mjs`. Sheet actual (22-oct, Drive de Mariano, cambiable por otro):
-  https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit. Web app desplegado el 22-oct (URL en `v2/config.js`); con `GB_API` vacío
-  aparece una etiqueta roja "Demo mode · nothing is saved". Sin URL, los formularios corren en modo demo (no guardan, avisan en consola).
+  https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit. Web app en `v2/config.js`; con `GB_API` vacío aparece una etiqueta roja
+  "Demo mode · nothing is saved". `docs/wall/` es el proyecto clasp del script (ID en `.clasp.json`): para publicar
+  cambios, `clasp push` + `create-version` + `update-deployment` a la implementación `AKfycbyLk…` (ver README).
+  Versión 3 activa desde el 23-oct: publica al instante; `hidden` en la columna status lo saca del muro. Sin URL, los formularios corren en modo demo (no guardan, avisan en consola).
   El componente carga los aprobados en `componentDidMount` (`_addMessages`: banda de 9 columnas debajo de las 42
   tarjetas de muestra, el mundo `W×H` crece) y expone `window.gbWall.add`. "Leave your message" abre el modal
   `[data-wmdl]`: mensaje (140), nombre como aparece, insignia, sticker, email (nunca se muestra), consentimiento y

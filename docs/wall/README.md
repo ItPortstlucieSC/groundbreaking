@@ -18,23 +18,30 @@ panel de moderación a la vez.
 ## El Sheet actual
 **Groundbreaking · muro y registros** (creado el 22-oct-2026 en el Drive de Mariano, para arrancar):
 https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit
-Web app desplegado el 22-oct-2026 (ya en `v2/config.js`):
+Web app (ya en `v2/config.js`), versión 3 desde el 23-oct-2026:
 `https://script.google.com/macros/s/AKfycbyLkNTj13PDbgY3wvYeAM1borHAGv9Rw2xZjQh-k7qZHuN42I0nONRiJLycNE1TVSio/exec`
 Cambiarlo por otro (p. ej. uno de la cuenta del club, `press@portstluciesc.com`) es repetir el deploy en el Sheet
 nuevo y pegar la URL nueva en `v2/config.js`. Los datos viejos se copian a mano (dos pestañas).
 
-## Deploy (una vez, 5 minutos, desde el navegador)
-1. Abrir el Sheet (o crear uno nuevo si se cambia de cuenta).
-2. Extensiones → Apps Script. Borrar el contenido, pegar `Code.gs`, guardar.
-3. En el editor, elegir la función `setup` y ejecutarla (crea las pestañas con los encabezados). Aceptar los
-   permisos que pide.
-4. Implementar → Nueva implementación → tipo **Aplicación web** → "Ejecutar como: yo" · "Quién tiene acceso:
-   cualquier persona" → Implementar. Copiar la URL (`https://script.google.com/macros/s/…/exec`).
-5. Pegar esa URL en `v2/config.js`: `window.GB_API = 'https://script.google.com/macros/s/…/exec';`.
-6. Probar: dejar un mensaje desde el sitio, ver la fila en `messages`, poner `approved`, recargar el sitio.
+## Actualizar el script (desde la terminal, sin abrir el editor)
+`docs/wall/` es el proyecto de Apps Script (`.clasp.json` apunta al script del Sheet; `.claspignore` deja subir solo
+`Code.gs` y `appsscript.json`). La implementación pública es `AKfycbyLkNTj13PD…` y no cambia de URL entre versiones.
 
-Cada vez que se cambie `Code.gs` hay que hacer **Implementar → Administrar implementaciones → editar → nueva
-versión**; si no, el sitio sigue hablando con la versión vieja.
+```bash
+cd docs/wall
+npx -y @google/clasp push --force                                  # sube Code.gs (no toca lo publicado)
+npx -y @google/clasp create-version "qué cambió"                  # devuelve el número N
+npx -y @google/clasp update-deployment AKfycbyLkNTj13PDbgY3wvYeAM1borHAGv9Rw2xZjQh-k7qZHuN42I0nONRiJLycNE1TVSio -V N
+```
+Requiere `npx -y @google/clasp login` con la cuenta dueña del Sheet y el interruptor "Google Apps Script API" en On
+(https://script.google.com/home/usersettings). Si alguien edita el código en el editor web, hacer `clasp pull` antes
+de tocar nada acá para no pisarlo.
+
+## Deploy inicial (si se cambia de Sheet)
+1. En el Sheet nuevo: Extensiones → Apps Script. Pegar `Code.gs`, guardar.
+2. Implementar → Nueva implementación → Aplicación web → "Ejecutar como: yo" · "Acceso: cualquier persona".
+3. Pegar la URL `/exec` en `v2/config.js` y el ID del script (Configuración del proyecto) en `docs/wall/.clasp.json`.
+   No hace falta correr `setup`: el primer envío crea la pestaña `config` y el desplegable de status.
 
 ## Probar en local sin deploy
 ```bash
