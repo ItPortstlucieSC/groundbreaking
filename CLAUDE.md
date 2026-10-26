@@ -174,6 +174,32 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   links en nav, menú móvil y footer; la card "B · Where" del bento ahora abre Google Maps (US-1 & Walton Rd) en
   otra pestaña. El `state.pos`/`onSlide` del componente quedaron sin uso. En la cabecera del muro el lead es
   `.wall-hl` "Be part of the wall →" (Ferryman, subrayado aquamarine, abre el modal) + la instrucción debajo.
+- 26-oct: el tour (`#tour`) se rehízo como recorrido de 6 paradas con render real (`assets/tour/gate|plaza|terrace|
+  pitch|district|lawn.webp`, 1600×900 q80, sacados del deck "Media Push · Groundbreaking" del 28-sep que dejó Mariano en
+  `~/Desktop/groundbreaking | walk through/`). Luca (bust) cuenta en primera persona qué vas a hacer en cada lugar, en
+  globos de historieta: 3 líneas por parada (guion `STOPS` en `renderVals`, aprobado el 26-oct; todo sale de los
+  documentos del club), tipeadas letra por letra solo con CSS (un `<i>` por letra con `animation-delay`; el bloque
+  `.sc-dlg` lleva `id="tour-{parada}-{línea}"`, así morphdom lo recrea al cambiar de línea y las animaciones arrancan de
+  cero; el tipeo espera a que `.scene.rv` tenga `is-in`). Un toque en el globo o en Next mientras tipea completa la
+  línea (clase `tour-done` en `<html>`, fuera del re-render); después Next pasa de línea, de parada y al final muestra
+  el ticket "Register · get your postcard" + "Take the tour again". Estado en `ts`/`tl`/`tend`. Índice: directorio de
+  señalética (`.dir`: tótem "Stadium directory" en escritorio con "● You are here", tira horizontal de placas en móvil;
+  reemplazó a la aérea con pines, que quedaba rara ahí). Luca va en un marco de retrato (`.sc-port`, cuadrado
+  redondeado con borde aquamarina) como en los diálogos de videojuego: cuando se generen los videos de Luca hablando
+  (idle + talking, 1:1, mudos, pendiente), un `<video>` reemplaza la imagen dentro del mismo marco. Título elegido por
+  Mariano: antetítulo "Six stops with Luca", h2 "Meet your future home." (se evitó "walk through": al club le suena a
+  recorrer el estadio a pie); el CTA del hero pasó a "Meet the stadium" y el de la card A a "Take a look →". Se quitaron las seis "experiencias" que no existían (penal contra Luca,
+  camiseta con tu nombre, etc.) y el ticket por sector. Reduce Motion: texto completo, sin tipeo. Chequeo headless:
+  `python3 docs/tour/shoot.py` (Playwright con el Chrome instalado; salta la intro con Escape y recorre el tour).
+  Segunda vuelta (26-oct, tarde): el directorio se estira a la altura exacta del render (grid de dos filas,
+  `grid-template-areas:"win dir" "body ."`, filas del tótem con `flex:1`); el render activo siempre en leve
+  movimiento (Ken Burns `scKb`/`scKb2`, 16 s ida y vuelta, alternado por parada; sin movimiento con Reduce
+  Motion); la sección `#tour` pasó ANTES de `#build` ("Drag to see it rise"), y `#build` quedó en crema (sin
+  `bg-con`) para que no se pegue al muro, que también es `bg-con`. Ojo con los nombres de las aéreas:
+  `assets/aerial.webp` es la aérea nocturna ACTUAL (la del deck y la intro) e `assets/iso-night.webp` es un render
+  VIEJO con torres residenciales; iso-night se usaba en el plano del tour (ya no existe), en la card A del bento y en
+  `.mini-post .pb`, y esos dos usos pasaron a `aerial.webp`. `aerial.webp` también va en el slider y en los rellenos
+  de texto `.post-big`/`.big`.
 Para regenerarla desde la v1 hay que rehacer esos cambios (no hay build): es una copia editada, no una derivación.
 
 ## Reglas

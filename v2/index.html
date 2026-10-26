@@ -152,23 +152,60 @@ button{font-family:inherit;cursor:pointer}
 .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize}
 .note{font-size:12px;color:#7A6E5E;margin-top:12px}
 
-/* TOUR */
+/* TOUR (v2, 26-oct): seis paradas con render real; Luca cuenta qué vas a hacer en cada una, en globos de historieta.
+   El texto se tipea letra por letra solo con CSS (un <i> por letra con animation-delay); el bloque del diálogo
+   (.sc-dlg) lleva id = parada-línea, así morphdom lo recrea al cambiar de línea y las animaciones arrancan de cero. */
 .tour-grid{display:flex;flex-direction:column;gap:20px;margin-top:30px}
-.plan{position:relative;aspect-ratio:1612/784;border-radius:20px;background:url('../assets/iso-night.webp') center/cover;margin-bottom:24%}
-.plan::before{content:'';position:absolute;inset:0;border-radius:20px;background:linear-gradient(160deg,rgba(255,176,92,.28),rgba(15,59,58,.2));mix-blend-mode:soft-light;pointer-events:none}
 .pin{position:absolute;z-index:2;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:9px;border:2px solid #FBF8F2;background:#0F3B3A;color:#AAF6E6;font:800 12px/1 'Druk Text Wide';display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 6px 14px rgba(0,0,0,.35)}
 .pin.is-on{background:#AAF6E6;color:#0F3B3A;transform:scale(1.15);box-shadow:0 0 0 8px rgba(170,246,230,.35)}
-.luca{position:absolute;left:-1%;top:76%;width:25%;filter:drop-shadow(0 12px 20px rgba(0,0,0,.3));pointer-events:none;z-index:3}
-.bubble{position:absolute;left:27%;top:calc(100% + 18px);background:#FFFFFF;color:#141414;font:700 13px/1.3 'Proxima Nova';padding:11px 14px;border-radius:14px 14px 14px 2px;max-width:66%;border:1px solid #E2D8C4}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
-.chip{flex-shrink:0;height:42px;padding:0 12px;border-radius:10px;border:1.5px solid #CDBFA6;background:#FFFFFF;color:#141414;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.06em;text-transform:uppercase}
-.chip.is-on{background:#0F3B3A;color:#AAF6E6;border-color:#0F3B3A}
-.scard{background:#FFFFFF;border:1px solid #E2D8C4;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px}
-.scard-h{display:flex;align-items:center;gap:14px}
-.scard-h .plate-n{width:58px;height:58px;font-size:24px}
-.scard h3{margin:0;font:800 22px/1.05 'Druk Text Wide';letter-spacing:.02em;text-transform:uppercase}
-.scard p{margin:0;font-size:14.5px;line-height:1.55;color:#5A5145}
-.scard .ticket{--hole:#FFFFFF}
+/* directorio: las seis paradas como señalética de estadio. En móvil, tira horizontal de placas; en escritorio, tótem. */
+.dir{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.dir::-webkit-scrollbar{display:none}
+.dir-h{display:none}
+.dir-row{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 12px 0 6px;border-radius:10px;border:1.5px solid rgba(251,248,242,.3);background:transparent;color:#FBF8F2;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.dir-n{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:rgba(251,248,242,.12);font:800 11px/1 'Druk Text Wide';flex-shrink:0}
+.dir-row.is-on{background:#AAF6E6;color:#0F3B3A;border-color:#AAF6E6}
+.dir-row.is-on .dir-n{background:#0F3B3A;color:#AAF6E6}
+.dir-here,.dir-arrow{display:none}
+/* escena: el render de la parada y, debajo, Luca con el globo */
+.sc-body{display:flex;flex-direction:column;gap:14px}
+.sc-win{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0B2A2A}
+/* el render activo siempre en leve movimiento (Ken Burns, 16 s ida y vuelta; las paradas pares van al revés) */
+.sc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
+.sc-img.is-on{opacity:1;animation:scKb 16s ease-in-out infinite alternate;will-change:transform}
+.sc-img.is-on:nth-child(even){animation-name:scKb2}
+@keyframes scKb{from{transform:scale(1) translate(0,0)}to{transform:scale(1.09) translate(-1.4%,1%)}}
+@keyframes scKb2{from{transform:scale(1.09) translate(1.2%,-.8%)}to{transform:scale(1) translate(0,0)}}
+.sc-tag{position:absolute;left:12px;top:12px;padding:9px 11px;border-radius:8px;background:rgba(11,42,42,.78);color:#FBF8F2;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.08em;text-transform:uppercase;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.sc-tag b{color:#AAF6E6;font-weight:800}
+.sc-fact{position:absolute;right:12px;top:12px;padding:9px 11px;border-radius:8px;background:#AAF6E6;color:#0F3B3A;font:800 9.5px/1 'Druk Text Wide';letter-spacing:.1em;text-transform:uppercase}
+.sc-dlg{display:flex;align-items:flex-end;gap:10px}
+/* retrato de Luca en un marco (como el retrato de los diálogos de videojuego). Cuando haya video, un <video> 1:1 va en el mismo marco. */
+.sc-port{flex:0 0 84px;width:84px;height:84px;border-radius:16px;border:3px solid #AAF6E6;background:#0B2A2A radial-gradient(circle at 50% 30%,rgba(170,246,230,.28),rgba(11,42,42,0) 70%);overflow:hidden;box-shadow:0 8px 14px rgba(0,0,0,.35)}
+.sc-luca{display:block;width:118%;height:auto;margin:6% 0 0 -9%;transform-origin:50% 100%;animation:lucaTalk .34s ease-in-out var(--n,6) alternate}
+.sc-bub{position:relative;flex:1 1 auto;min-height:72px;margin:0;text-align:left;background:#FFFFFF;color:#141414;border:2.5px solid #141414;border-radius:18px;padding:14px 34px 14px 16px;font:700 15px/1.35 'Proxima Nova',sans-serif;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.35)}
+.sc-bub::before,.sc-bub::after{content:'';position:absolute;bottom:18px;width:0;height:0;border-style:solid;border-color:transparent}
+.sc-bub::before{left:-16px;border-width:8px 16px 8px 0;border-right-color:#141414}
+.sc-bub::after{left:-11px;bottom:20px;border-width:6px 12px 6px 0;border-right-color:#FFFFFF}
+.sc-txt i{font-style:normal;opacity:0;animation:scTw .01s linear both}
+.sc-cue{position:absolute;right:12px;bottom:10px;width:0;height:0;border:6px solid transparent;border-left:9px solid #0E8C79;border-right:0;animation:scBlink .9s steps(1) infinite;animation-delay:var(--dur,2s);animation-fill-mode:backwards}
+.sc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sc-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sc-dots{display:flex;gap:6px}
+.sc-dots i{width:8px;height:8px;border-radius:50%;background:rgba(251,248,242,.25)}
+.sc-dots i.is-on{background:#AAF6E6}
+.sc-next{height:46px;padding:0 18px}
+.sc-end{display:flex;flex-direction:column;gap:10px;animation:tkPop .5s}
+.sc-again{align-self:flex-start;background:none;border:none;padding:6px 0;color:#AAF6E6;font:700 13px/1 'Proxima Nova',sans-serif;text-decoration:underline;cursor:pointer}
+/* hasta que la escena entra en pantalla (.rv.is-in, script "reveal"), el tipeo espera */
+.sc-body.rv:not(.is-in) .sc-txt i,.sc-body.rv:not(.is-in) .sc-cue,.sc-body.rv:not(.is-in) .sc-luca{animation-play-state:paused}
+/* un toque mientras tipea completa la línea (clase en <html>, fuera del re-render) */
+html.tour-done .sc-txt i,html.tour-done .sc-cue{animation-delay:0s!important}
+html.tour-done .sc-luca{animation:none}
+@keyframes scTw{from{opacity:0}to{opacity:1}}
+@keyframes scBlink{0%,49%{opacity:0}50%,100%{opacity:1}}
+@keyframes lucaTalk{from{transform:none}to{transform:translateY(-3px) rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.sc-txt i{animation:none;opacity:1}.sc-cue{animation:none;opacity:1}.sc-luca{animation:none}.sc-img{transition:none}.sc-img.is-on{animation:none}.sc-end{animation:none}}
 .tag{flex-shrink:0;font:500 8.5px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-radius:6px;background:#FFD45C;color:#141414;align-self:flex-start}
 
 /* WALL (light) */
@@ -288,12 +325,25 @@ button{font-family:inherit;cursor:pointer}
   .pass-h{flex-direction:column;align-items:flex-start;gap:10px;max-width:340px}
   .stamps{width:560px}
   .cmp{height:600px;margin-top:52px}
-  .tour-grid{display:grid;grid-template-columns:7fr 4fr;gap:32px;margin-top:52px;align-items:start}
-  .pin{width:46px;height:46px;margin:-23px 0 0 -23px;font-size:15px;border-radius:11px}
-  .bubble{font-size:17px;padding:14px 18px;top:calc(100% + 28px)}
-  .chips{flex-wrap:wrap;overflow:visible}
-  .scard{padding:30px;gap:18px}
-  .scard h3{font-size:30px}
+  /* dos filas: render + directorio arriba (misma altura, el directorio se estira al 16:9 del render), diálogo abajo a la izquierda */
+  .tour-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);grid-template-areas:"win dir" "body .";gap:14px 32px;margin-top:52px;align-items:stretch}
+  .sc-win{grid-area:win}.sc-body{grid-area:body}.dir{grid-area:dir}
+  .dir{flex-direction:column;gap:0;overflow:hidden;padding:0;background:#0B2A2A;border:1px solid rgba(170,246,230,.18);border-radius:20px}
+  .dir-h{display:block;flex:0 0 auto;padding:18px 22px 14px;font:500 10.5px/1 'Druk Text Wide';letter-spacing:.16em;text-transform:uppercase;color:#AAF6E6;border-bottom:1px solid rgba(170,246,230,.14)}
+  .dir-row{flex:1 1 auto;height:auto;width:100%;border:none;border-radius:0;padding:10px 22px;gap:14px;font-size:13px;letter-spacing:.05em;text-align:left;border-bottom:1px solid rgba(251,248,242,.08);transition:background .15s}
+  .dir-row:last-child{border-bottom:none}
+  .dir-row:hover{background:rgba(170,246,230,.08)}
+  .dir-row.is-on,.dir-row.is-on:hover{background:#AAF6E6}
+  .dir-n{width:36px;height:36px;border-radius:8px;font-size:13px}
+  .dir-arrow{display:block;margin-left:auto;opacity:.35;font:800 14px/1 'Proxima Nova',sans-serif}
+  .dir-row.is-on .dir-arrow{display:none}
+  .dir-here{display:flex;align-items:center;gap:6px;margin-left:auto;font:500 8.5px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;color:#0F3B3A;visibility:hidden}
+  .dir-here::before{content:'';width:8px;height:8px;border-radius:50%;background:#0F3B3A}
+  .dir-row.is-on .dir-here{visibility:visible}
+  .sc-port{flex-basis:118px;width:118px;height:118px;border-radius:20px}
+  .sc-bub{font-size:18px;padding:18px 40px 18px 20px;min-height:96px}
+  .sc-tag{left:16px;top:16px;font-size:12px;padding:10px 12px}
+  .sc-fact{right:16px;top:16px;font-size:10.5px;padding:10px 12px}
   .wall-foot{margin-top:0}
   .sh-grid{display:grid;grid-template-columns:7fr 5fr;gap:32px;margin-top:52px}
   .diary{height:460px;margin-top:52px}
@@ -355,18 +405,9 @@ html:not(.hero-mode-video) .hero-video{display:none}
 .hero-c2 .btn-line{color:#FBF8F2;border-color:rgba(251,248,242,.7)}
 .mini-post{background:#FBF8F2;color:#141414;border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;align-self:flex-start;box-shadow:0 14px 34px rgba(0,0,0,.35)}
 .mini-post .pp{font:800 15px/1 'Ferryman',serif;color:#0E8C79}
-.mini-post .pb{white-space:nowrap;font:900 40px/.86 'Druk',sans-serif;background:url('../assets/iso-night.webp') center/cover;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px #0F3B3A}
+.mini-post .pb{white-space:nowrap;font:900 40px/.86 'Druk',sans-serif;background:url('../assets/aerial.webp') center/cover;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px #0F3B3A}
 .mini-post .pf{display:flex;justify-content:space-between;gap:10px;font:500 8.5px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;color:#7A6E5E}
 .mini-post .pf b{color:#0E8C79;font-weight:800}
-/* tour en oscuro */
-.on-dark .scard{background:#0F3B3A;border-color:rgba(170,246,230,.18);color:#FBF8F2}
-.on-dark .scard p{color:rgba(251,248,242,.75)}
-.on-dark .scard .ticket{--hole:#0F3B3A}
-.on-dark .scard-h .plate-n{background:#AAF6E6;color:#0F3B3A}
-.on-dark .chip{background:transparent;color:#FBF8F2;border-color:rgba(251,248,242,.3)}
-.on-dark .chip.is-on{background:#AAF6E6;color:#0F3B3A;border-color:#AAF6E6}
-.on-dark .bubble{border:none}
-.plan::before{display:none}
 /* pasaporte liviano */
 .stamps{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px}
 .stamp-in{height:54px}
@@ -406,7 +447,7 @@ html:not(.hero-mode-video) .hero-video{display:none}
 .bx p{margin:0;font-size:14px;line-height:1.5;color:#5A5145;max-width:420px}
 .bx-go{margin-top:auto;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.1em;text-transform:uppercase;color:#0E8C79}
 .bx-what{background:#0B2A2A;color:#FBF8F2;min-height:380px}
-.bx-what .bx-img{position:absolute;inset:0;background:url('../assets/iso-night.webp') 60% center/cover}
+.bx-what .bx-img{position:absolute;inset:0;background:url('../assets/aerial.webp') 60% center/cover}
 .bx-what::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,42,42,.15) 0%,rgba(11,42,42,.55) 45%,rgba(11,42,42,.96) 100%);z-index:1}
 .bx-what .bx-in{justify-content:flex-end}
 .bx-what .bx-gate,.bx-what .bx-go{color:#AAF6E6}
@@ -852,7 +893,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
         <h1>Something is <em>taking shape.</em></h1>
         <div class="emo">Every home has a first day.</div>
         <p>The home of Port St. Lucie’s first professional club starts rising this winter. Be there when it begins.</p>
-        <div class="hero-ctas"><a href="#postcards" class="btn btn-aq">Register · get your gift</a><a href="#tour" class="btn btn-line">Tour the stadium</a></div>
+        <div class="hero-ctas"><a href="#postcards" class="btn btn-aq">Register · get your gift</a><a href="#tour" class="btn btn-line">Meet the stadium</a></div>
       </div>
     </div>
   </section>
@@ -928,7 +969,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
           <div class="bx-num"><b>6,000</b><span>seats</span></div>
           <div class="bx-t">Our own stadium</div>
           <p>Built for Port St. Lucie SC — and for concerts, festivals and community days.</p>
-          <span class="bx-go">Tour it →</span>
+          <span class="bx-go">Take a look →</span>
         </div>
       </a>
       <a href="https://www.google.com/maps/search/?api=1&amp;query=US-1+%26+Walton+Rd%2C+Port+St.+Lucie%2C+FL" target="_blank" rel="noopener" class="rv bx bx-where">
@@ -1154,8 +1195,47 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
       </a></div>
       </div></section>
 
+  <!-- LUCA TOUR (v2: seis paradas con render; Luca cuenta qué vas a hacer en cada una) -->
+  <section class="sec bg-deep on-dark" id="tour"><div class="wrap">
+    <div class="rv sec-head">
+      <div><div class="k">Six stops with Luca</div><h2 class="h2 sig">Meet your future home.</h2></div>
+      <p class="lead">Six stops, one guide. Pick a stop or just hit Next. Luca does the talking.</p>
+    </div>
+    <div class="tour-grid">
+      <div class="rv sc-win">
+          <sc-for list="{{ stops }}" as="s" hint-placeholder-count="6"><img class="sc-img {{ s.cls }}" src="../assets/tour/{{ s.img }}.webp" alt="{{ s.alt }}" loading="lazy" decoding="async"></sc-for>
+          <div class="sc-tag"><b>0{{ tourN }}</b> / 06 · {{ tourName }}</div>
+          <div class="sc-fact">{{ tourFact }}</div>
+      </div>
+      <div class="rv sc-body">
+        <div class="sc-dlg" id="{{ tourKey }}" style="--dur:{{ tourDur }};--n:{{ tourTalk }}">
+          <div class="sc-port"><img class="sc-luca" src="../assets/luca-fan-bust.webp" alt="" decoding="sync"></div>
+          <button type="button" class="sc-bub" onClick="{{ tourNext }}"><span class="sc-txt" aria-hidden="true"><sc-for list="{{ tourChars }}" as="c"><i style="animation-delay:{{ c.d }}">{{ c.ch }}</i></sc-for></span><span class="sc-sr">{{ tourLine }}</span><span class="sc-cue" aria-hidden="true"></span></button>
+        </div>
+        <sc-if value="{{ tourEnd }}" hint-placeholder-val="{{ false }}">
+          <div class="sc-end" id="tour-end">
+            <a href="#postcards" class="ticket"><span class="tk-a"><span>Your Groundbreaking gift</span><b>Register · get your postcard</b></span><span class="tk-b">GO →</span></a>
+            <button type="button" class="sc-again" onClick="{{ tourAgain }}">↺ Take the tour again</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tourMore }}" hint-placeholder-val="{{ true }}">
+          <div class="sc-foot" id="tour-foot">
+            <div class="sc-dots" aria-hidden="true"><sc-for list="{{ tourDots }}" as="d"><i class="{{ d }}"></i></sc-for></div>
+            <button type="button" class="btn btn-aq sc-next" onClick="{{ tourNext }}">Next →</button>
+          </div>
+        </sc-if>
+      </div>
+      <nav class="rv dir" aria-label="Stops">
+        <div class="dir-h">Stadium directory</div>
+        <sc-for list="{{ stops }}" as="s" hint-placeholder-count="6">
+          <button type="button" class="dir-row {{ s.cls }}" onClick="{{ s.pick }}" aria-current="{{ s.cur }}"><span class="dir-n">0{{ s.n }}</span><span>{{ s.name }}</span><span class="dir-arrow" aria-hidden="true">→</span><span class="dir-here">You are here</span></button>
+        </sc-for>
+      </nav>
+    </div>
+  </div></section>
+
   <!-- TODAY VS 2028 -->
-  <section class="sec bg-con" id="build"><div class="wrap">
+  <section class="sec" id="build"><div class="wrap">
     <div class="rv sec-head">
       <div><div class="k">Today vs. 2028</div><h2 class="h2 sig">Drag to see it rise.</h2></div>
       <p class="lead">Same ground, two moments. From the plan to the place where we’ll celebrate the first goal.</p>
@@ -1170,36 +1250,6 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
       <input type="range" min="0" max="100" value="{{ pos }}" onChange="{{ onSlide }}" aria-label="Compare today and 2028">
     </div>
     <div class="rv note">“Today” uses the blueprint until the site photo arrives — shot from the same angle as the render.</div>
-  </div></section>
-
-  <!-- LUCA TOUR -->
-  <section class="sec bg-deep on-dark" id="tour"><div class="wrap">
-    <div class="rv sec-head">
-      <div><div class="k">Tour with Luca</div><h2 class="h2 sig">Walk through your future home.</h2></div>
-      <p class="lead">Pick a sector. Luca takes you there and shows you what you can do today.</p>
-    </div>
-    <div class="rv tour-grid">
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="plan">
-          <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="6">
-            <button type="button" class="pin {{ s.cls }}" style="left: {{ s.bx }}; top: {{ s.by }}" onClick="{{ s.pick }}" aria-label="{{ s.name }}">0{{ s.n }}</button>
-          </sc-for>
-          <img class="luca" src="../assets/luca-fan-bombo.webp" alt="Luca">
-          <div class="bubble">Where to? Tap a sector on the stadium and I’ll take you there!</div>
-        </div>
-        <div class="chips">
-          <sc-for list="{{ sectors }}" as="s" hint-placeholder-count="6">
-            <button type="button" class="chip {{ s.cls }}" onClick="{{ s.pick }}">0{{ s.n }} · {{ s.name }}</button>
-          </sc-for>
-        </div>
-      </div>
-      <div class="scard">
-        <div class="scard-h"><span class="plate-n">0{{ selN }}</span><span style="display:flex;flex-direction:column;gap:6px"><span class="k">Sector {{ selN }} of 6</span><h3>{{ selName }}</h3></span></div>
-        <p>{{ selDesc }}</p>
-        <span class="tag">{{ selType }}</span>
-        <a href="#tour" class="rv ticket"><span class="tk-a"><span>Admit one · Sector 0{{ selN }}</span><b>{{ selAction }}</b></span><span class="tk-b">GO →</span></a>
-      </div>
-    </div>
   </div></section>
 
   <!-- WALL -->
@@ -1670,7 +1720,7 @@ class DCLogic { constructor(){ this.props = {}; } setState(s){ Object.assign(thi
 class Component extends DCLogic {
   W = 2555; H = 1474;
   C = [{"x": 130, "y": 80, "w": 200, "rot": "-5.4deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my son, who will play on this pitch one day.", "n": "Marco R.", "b": "Supporter", "stk": "../assets/anchor.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 386, "y": 71, "w": 200, "rot": "2.2deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my grandfather, who taught me to love the game.", "n": "Mike T.", "b": "Neighbor", "stk": "../assets/heart.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 632, "y": 65, "w": 262, "rot": "0.9deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "a city that finally has a place to gather.", "n": "Maria C.", "b": "Academy family", "stk": "../assets/anchor.svg", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 847, "y": 92, "w": 240, "rot": "-2.0deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "everyone who came from far away and now belongs here.", "n": "Emma, 11", "b": "Academy", "stk": "../assets/heart.svg", "bg": "#FFFFFF", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1128, "y": 61, "w": 180, "rot": "-6.4deg", "fs": "16px", "pad": "18px", "sw": "47px", "t": "the first goal I scream with my friends.", "n": "Tomás, 12", "b": "Founding Crew", "stk": "../assets/anchor.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 1424, "y": 47, "w": 200, "rot": "-7.2deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my daughters, so they know it can be done.", "n": "Valen R.", "b": "Supporter", "stk": "../assets/heart.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2193, "y": 64, "w": 262, "rot": "-6.1deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "the neighborhood. It deserves this.", "n": "Laura P.", "b": "Neighbor", "stk": "../assets/anchor.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 154, "y": 314, "w": 220, "rot": "7.1deg", "fs": "20px", "pad": "21px", "sw": "56px", "t": "Port St. Lucie, and its very own club.", "n": "Lucía G.", "b": "Academy family", "stk": "../assets/drum.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 483, "y": 280, "w": 200, "rot": "7.1deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "Saturdays with the whole family.", "n": "Rosa D.", "b": "Academy", "stk": "../assets/ball.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 675, "y": 324, "w": 240, "rot": "4.7deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "the day my team makes its debut.", "n": "Kevin B.", "b": "Founding Crew", "stk": "../assets/drum.svg", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 969, "y": 320, "w": 240, "rot": "-0.3deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "the people who don’t know yet what’s coming.", "n": "Raúl M.", "b": "Supporter", "stk": "../assets/ball.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1181, "y": 270, "w": 240, "rot": "7.0deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "my dad, who misses the stadiums back home.", "n": "Carla S.", "b": "Neighbor", "stk": "../assets/drum.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1505, "y": 306, "w": 200, "rot": "5.5deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my students at the Academy.", "n": "Coach Jen", "b": "Academy family", "stk": "../assets/ball.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2254, "y": 274, "w": 262, "rot": "-3.7deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "the kid I was, with no stadium nearby.", "n": "Sam W.", "b": "Academy", "stk": "../assets/drum.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 110, "y": 549, "w": 200, "rot": "1.1deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my mom, our first fan.", "n": "Daniel P.", "b": "Founding Crew", "stk": "../assets/palm.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 338, "y": 532, "w": 180, "rot": "4.8deg", "fs": "16px", "pad": "18px", "sw": "47px", "t": "the Treasure Coast.", "n": "Sofía, 10", "b": "Supporter", "stk": "../assets/star.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 673, "y": 487, "w": 160, "rot": "-4.2deg", "fs": "14px", "pad": "16px", "sw": "42px", "t": "every Saturday night under the lights.", "n": "Gabi T.", "b": "Neighbor", "stk": "../assets/palm.svg", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1442, "y": 510, "w": 160, "rot": "4.1deg", "fs": "14px", "pad": "16px", "sw": "42px", "t": "my friends from the Sunday league.", "n": "Chris K.", "b": "Academy family", "stk": "../assets/star.svg", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1643, "y": 506, "w": 240, "rot": "-6.3deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "the club my grandkids will inherit.", "n": "José L.", "b": "Academy", "stk": "../assets/palm.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1972, "y": 519, "w": 160, "rot": "-0.0deg", "fs": "14px", "pad": "16px", "sw": "42px", "t": "a place where everyone sings the same song.", "n": "Andrés F.", "b": "Founding Crew", "stk": "../assets/star.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 2134, "y": 549, "w": 262, "rot": "-0.6deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "my brother, who is coaching the U10s.", "n": "Diego A.", "b": "Supporter", "stk": "../assets/palm.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 710, "y": 766, "w": 200, "rot": "-0.4deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "the first time Luca beats the drum here.", "n": "Ana M.", "b": "Neighbor", "stk": "../assets/luca-fan-bust.webp", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1491, "y": 767, "w": 180, "rot": "6.4deg", "fs": "16px", "pad": "18px", "sw": "47px", "t": "the city I chose to call home.", "n": "Pablo N.", "b": "Academy family", "stk": "../assets/pirate.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 1756, "y": 736, "w": 180, "rot": "6.2deg", "fs": "16px", "pad": "18px", "sw": "47px", "t": "whoever sits next to me in section 12.", "n": "Nico, 9", "b": "Academy", "stk": "../assets/luca-fan-bust.webp", "bg": "#FFFFFF", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2027, "y": 730, "w": 200, "rot": "-3.9deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "my son, who will play on this pitch one day.", "n": "Marco R.", "b": "Founding Crew", "stk": "../assets/pirate.svg", "bg": "#FFFFFF", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2231, "y": 739, "w": 240, "rot": "1.8deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "my grandfather, who taught me to love the game.", "n": "Mike T.", "b": "Supporter", "stk": "../assets/luca-fan-bust.webp", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 631, "y": 951, "w": 240, "rot": "-7.1deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "a city that finally has a place to gather.", "n": "Maria C.", "b": "Neighbor", "stk": "../assets/shovel.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 853, "y": 947, "w": 262, "rot": "-4.1deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "everyone who came from far away and now belongs here.", "n": "Emma, 11", "b": "Academy family", "stk": "../assets/crest-aqua.webp", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1152, "y": 994, "w": 240, "rot": "1.9deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "the first goal I scream with my friends.", "n": "Tomás, 12", "b": "Academy", "stk": "../assets/shovel.svg", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1398, "y": 952, "w": 262, "rot": "-0.8deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "my daughters, so they know it can be done.", "n": "Valen R.", "b": "Founding Crew", "stk": "../assets/crest-aqua.webp", "bg": "#AAF6E6", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2214, "y": 974, "w": 160, "rot": "6.7deg", "fs": "14px", "pad": "16px", "sw": "42px", "t": "the neighborhood. It deserves this.", "n": "Laura P.", "b": "Supporter", "stk": "../assets/shovel.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 175, "y": 1183, "w": 262, "rot": "3.5deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "Port St. Lucie, and its very own club.", "n": "Lucía G.", "b": "Neighbor", "stk": "../assets/anchor.svg", "bg": "#F4F1EA", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 415, "y": 1156, "w": 200, "rot": "2.9deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "Saturdays with the whole family.", "n": "Rosa D.", "b": "Academy family", "stk": "../assets/heart.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 688, "y": 1209, "w": 240, "rot": "-5.4deg", "fs": "22px", "pad": "22px", "sw": "61px", "t": "the day my team makes its debut.", "n": "Kevin B.", "b": "Academy", "stk": "../assets/anchor.svg", "bg": "#E9D4A7", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 986, "y": 1163, "w": 220, "rot": "0.9deg", "fs": "20px", "pad": "21px", "sw": "56px", "t": "the people who don’t know yet what’s coming.", "n": "Raúl M.", "b": "Founding Crew", "stk": "../assets/heart.svg", "bg": "#1E2422", "fg": "#F4F1EA", "staff": false, "photo": "", "role": ""}, {"x": 1200, "y": 1161, "w": 262, "rot": "-1.2deg", "fs": "24px", "pad": "24px", "sw": "66px", "t": "my dad, who misses the stadiums back home.", "n": "Carla S.", "b": "Supporter", "stk": "../assets/anchor.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 1531, "y": 1181, "w": 160, "rot": "1.2deg", "fs": "14px", "pad": "16px", "sw": "42px", "t": "my students at the Academy.", "n": "Coach Jen", "b": "Neighbor", "stk": "../assets/heart.svg", "bg": "#FFFFFF", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 2295, "y": 1176, "w": 200, "rot": "-7.2deg", "fs": "18px", "pad": "19px", "sw": "51px", "t": "the kid I was, with no stadium nearby.", "n": "Sam W.", "b": "Academy family", "stk": "../assets/anchor.svg", "bg": "#FFD1DC", "fg": "#0C0C0A", "staff": false, "photo": "", "role": ""}, {"x": 885, "y": 533, "w": 360, "rot": "1.8deg", "fs": "25px", "pad": "26px", "sw": "0px", "t": "[Agostina’s message to the community]", "n": "Agostina Galimberti", "b": "President · Co-Founder", "role": "President · Co-Founder", "stk": "../assets/anchor.svg", "bg": "#0C0C0A", "fg": "#F4F1EA", "staff": true, "photo": "../assets/agostina-galimberti.webp"}, {"x": 1666, "y": 110, "w": 360, "rot": "0.2deg", "fs": "25px", "pad": "26px", "sw": "0px", "t": "[Gustavo’s message to the community]", "n": "Gustavo Suárez", "b": "Founder & CEO", "role": "Founder & CEO", "stk": "../assets/anchor.svg", "bg": "#0C0C0A", "fg": "#F4F1EA", "staff": true, "photo": "../assets/gustavo-suarez.webp"}, {"x": 201, "y": 762, "w": 360, "rot": "1.3deg", "fs": "25px", "pad": "26px", "sw": "0px", "t": "[Bernardo’s message to the community]", "n": "Bernardo Romeo", "b": "Sporting Director", "role": "Sporting Director", "stk": "../assets/anchor.svg", "bg": "#0C0C0A", "fg": "#F4F1EA", "staff": true, "photo": "../assets/bernardo-romeo.webp"}, {"x": 1674, "y": 999, "w": 360, "rot": "-1.4deg", "fs": "25px", "pad": "26px", "sw": "0px", "t": "[Juan Ignacio’s message to the community]", "n": "Juan Ignacio Brown", "b": "Academy Director", "role": "Academy Director", "stk": "../assets/anchor.svg", "bg": "#0C0C0A", "fg": "#F4F1EA", "staff": true, "photo": "../assets/juan-ignacio-brown.webp"}];
-  state = { now: Date.now(), pos: 46, sector: 2, msg: 0, menu: false, lang: 'EN', tx: 0, ty: 0, sc: 0.4, anim: false, ready: false, cp: {}, top: -1 };
+  state = { now: Date.now(), pos: 46, ts: 0, tl: 0, tend: false, msg: 0, menu: false, lang: 'EN', tx: 0, ty: 0, sc: 0.4, anim: false, ready: false, cp: {}, top: -1 };
 
   componentDidMount() {
     this._t = setInterval(() => this.setState({ now: Date.now() }), 1000);
@@ -1681,6 +1731,8 @@ class Component extends DCLogic {
       .then(r => r.json()).then(j => { if (j && j.ok && j.messages) this._addMessages(j.messages, false); })
       .catch(() => {});
   }
+  // Tour: ir a una parada/línea. La clase tour-done (línea completada de un toque) vive en <html>, fuera del re-render.
+  _tourGo(s, l) { document.documentElement.classList.remove('tour-done'); this.setState({ ts: s, tl: l, tend: false }); }
   // Tarjetas nuevas: se acomodan en una banda debajo de las de muestra (9 columnas), el mundo crece hacia abajo.
   _addMessages(rows, focus) {
     const STK = { anchor: 'anchor.svg', ball: 'ball.svg', drum: 'drum.svg', heart: 'heart.svg', palm: 'palm.svg', pirate: 'pirate.svg', shovel: 'shovel.svg', star: 'star.svg', luca: 'luca-fan-bust.webp' };
@@ -1747,16 +1799,48 @@ class Component extends DCLogic {
     const mins = Math.floor(d / 60000); d -= mins * 60000;
     const secs = Math.floor(d / 1000);
 
-    const SECT = [
-      { n: 1, roman: 'I', name: 'The Arrival', x: '64%', y: '93%', bx: '33%', by: '70%', desc: 'The main gate and the plaza. Luca welcomes you and tells the story of the club.', action: 'Register and get your Founder number', type: 'CTA' },
-      { n: 2, roman: 'II', name: 'The Stands', x: '37%', y: '46%', bx: '58%', by: '26%', desc: 'Choose where you will cheer from and see the pitch from your seat.', action: 'Pick your seat and take the photo', type: 'Experience' },
-      { n: 3, roman: 'III', name: 'The Pitch', x: '64%', y: '46%', bx: '52%', by: '44%', desc: 'Where everything happens. The Academy kids will train here too.', action: 'Take a penalty against Luca', type: 'Experience' },
-      { n: 4, roman: 'IV', name: 'The Tunnel', x: '64%', y: '17%', bx: '30%', by: '47%', desc: 'The players’ walk to the pitch, and the official jersey.', action: 'Try on the jersey with your name', type: 'Experience' },
-      { n: 5, roman: 'V', name: 'The Terrace', x: '91%', y: '30%', bx: '70%', by: '56%', desc: 'Concerts, events and food, even on non-match days.', action: 'Get show and event updates', type: 'CTA' },
-      { n: 6, roman: 'VI', name: 'Outside', x: '93%', y: '88%', bx: '84%', by: '80%', desc: 'Gates, parking and everything that will surround the stadium.', action: 'How far is it from your home?', type: 'Light tool' }
+    // Tour: seis paradas con render real (assets/tour/). Guion de Luca aprobado el 26-oct: qué vas a hacer en cada lugar.
+    // Todo lo que dice Luca sale de los documentos del club (background sheets y deck de prensa del 28-sep).
+    const STOPS = [
+      { n: 1, name: 'The Gate', img: 'gate', fact: 'Open-air', alt: 'Main facade of Port St. Lucie Stadium, with the anchor and the name above the entrance', lines: [
+        'This is where you’ll walk in. Port St. Lucie Stadium, our name on the front, right on US-1.',
+        'No roof, no walls boxing you in. Florida air, palms, the breeze. You’ll feel it the second you arrive.',
+        'Come on, there’s a lot to show you.'] },
+      { n: 2, name: 'The Plaza', img: 'plaza', fact: 'Arrive early', alt: 'The plaza with the anchor fountain, the team store and the main entrance', lines: [
+        'Here’s where you’ll meet your friends before the match. “See you at the anchor” is going to be a thing.',
+        'Team store right there. Your first jersey. Your kid’s first scarf.',
+        'Get here early. Kickoff is the middle of the day, not the start of it.'] },
+      { n: 3, name: 'The Terrace', img: 'terrace', fact: 'Hospitality', alt: 'The terrace under the wooden roof at sunset, looking over the stands', lines: [
+        'Up here you’ll watch the match under the roof, cold drink in hand, the pitch right in front of you.',
+        'Birthday with your friends? Night out with the office? This is where you bring them.',
+        'And yes, the sunset does that every evening.'] },
+      { n: 4, name: 'The Pitch', img: 'pitch', fact: '6,000 seats', alt: 'Aerial view of the stadium on a match night, with the big screen lit', lines: [
+        '6,000 of us on day one. When the club climbs, we add more stands.',
+        'You’ll sing with the whole stand, watch the replay on that screen, hug a stranger after a goal.',
+        'First professional match night in this city’s history. You’ll want to say you were here.'] },
+      { n: 5, name: 'The District', img: 'district', fact: 'Stay longer', alt: 'The Walton & One promenade, with restaurants, palms and string lights', lines: [
+        'After the final whistle, nobody goes home. Burgers with your friends, a table under the lights, ice cream for the kids.',
+        'Restaurants, shops, somewhere to sit. This is Walton & One, right outside the gates.',
+        'Match day starts at lunch and ends after dinner.'] },
+      { n: 6, name: 'The Lawn', img: 'lawn', fact: 'Come back', alt: 'Families on the lawn in front of the stadium on a sunny day', lines: [
+        'No match this weekend? Come anyway. Concerts, festivals, family days, a Sunday on the grass.',
+        'This place is open all year, not just on match days.',
+        'First shovel: December 12. Gates open: early 2028. Grab your postcard and you’re in from day one.'] }
     ];
-    const sectors = SECT.map((s, i) => ({ ...s, cls: i === this.state.sector ? 'is-on' : '', pick: () => this.setState({ sector: i }) }));
-    const sel = SECT[this.state.sector];
+    const TW = 28; // ms por letra
+    const ts = this.state.ts, tl = this.state.tl, stop = STOPS[ts], line = stop.lines[tl];
+    const stops = STOPS.map((s, i) => ({ ...s, cls: i === ts ? 'is-on' : '', cur: i === ts ? 'true' : 'false', pick: () => this._tourGo(i, 0) }));
+    const tourChars = line.split('').map((ch, i) => ({ ch, d: (250 + i * TW) + 'ms' }));
+    const lastLine = tl === stop.lines.length - 1, lastStop = ts === STOPS.length - 1;
+    const tourNext = () => {
+      // Primer toque mientras tipea: completa la línea. Después: siguiente línea, siguiente parada o el cierre.
+      const last = document.querySelector('#tour .sc-txt i:last-child');
+      const typing = last && getComputedStyle(last).opacity !== '1' && !document.documentElement.classList.contains('tour-done');
+      if (typing) { document.documentElement.classList.add('tour-done'); return; }
+      if (!lastLine) this._tourGo(ts, tl + 1);
+      else if (!lastStop) this._tourGo(ts + 1, 0);
+      else { document.documentElement.classList.remove('tour-done'); this.setState({ tend: true }); }
+    };
 
     const st = this.state;
     const cards = this.C.map((c, i) => {
@@ -1775,7 +1859,9 @@ class Component extends DCLogic {
     return {
       days: pad(days), hours: pad(hours), mins: pad(mins), secs: pad(secs),
       pos: st.pos, posPct: st.pos + '%', onSlide: (e) => this.setState({ pos: Number(e.target.value) }),
-      sectors, selN: sel.n, selName: sel.name, selDesc: sel.desc, selAction: sel.action, selType: sel.type,
+      stops, tourN: stop.n, tourName: stop.name, tourFact: stop.fact, tourLine: line, tourChars, tourNext,
+      tourKey: 'tour-' + ts + '-' + tl, tourDur: (250 + line.length * TW + 150) + 'ms', tourTalk: Math.max(3, Math.round(line.length * TW / 340)),
+      tourDots: stop.lines.map((_, i) => i === tl ? 'is-on' : ''), tourEnd: st.tend, tourMore: !st.tend, tourAgain: () => this._tourGo(0, 0),
       cards, count: this.C.length,
       worldStyle: 'width: ' + this.W + 'px; height: ' + this.H + 'px; transform: translate(' + st.tx + 'px,' + st.ty + 'px) scale(' + st.sc + '); transition: ' + (st.anim ? 'transform .7s cubic-bezier(.22,.61,.36,1)' : 'none'),
       zoomPct: Math.round(st.sc * 100) + '%',
