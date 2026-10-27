@@ -159,14 +159,23 @@ button{font-family:inherit;cursor:pointer}
 .pin{position:absolute;z-index:2;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:9px;border:2px solid #FBF8F2;background:#0F3B3A;color:#AAF6E6;font:800 12px/1 'Druk Text Wide';display:flex;align-items:center;justify-content:center;transition:transform .2s;box-shadow:0 6px 14px rgba(0,0,0,.35)}
 .pin.is-on{background:#AAF6E6;color:#0F3B3A;transform:scale(1.15);box-shadow:0 0 0 8px rgba(170,246,230,.35)}
 /* directorio: las seis paradas como señalética de estadio. En móvil, tira horizontal de placas; en escritorio, tótem. */
-.dir{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+/* DIRECTORIO como señalética (27-oct): placas con pictograma y nombre; en escritorio, un tótem con tapa clara, marco con
+   tornillos y poste con base. Los pictogramas son SVG en máscara: toman el color del texto (crema en las placas, verde en la activa). */
+.dir{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}
 .dir::-webkit-scrollbar{display:none}
 .dir-h{display:none}
-.dir-row{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 12px 0 6px;border-radius:10px;border:1.5px solid rgba(251,248,242,.3);background:transparent;color:#FBF8F2;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
-.dir-n{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:rgba(251,248,242,.12);font:800 11px/1 'Druk Text Wide';flex-shrink:0}
+.dir-row{position:relative;flex-shrink:0;display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 12px 0 6px;border-radius:6px;border:2px solid rgba(251,248,242,.55);background:#0B2A2A;color:#FBF8F2;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.dir-n{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:4px;background:#FBF8F2;color:#0B2A2A;font:800 11px/1 'Druk Text Wide';flex-shrink:0}
+.dir-ic{display:block;width:18px;height:18px;flex-shrink:0;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
 .dir-row.is-on{background:#AAF6E6;color:#0F3B3A;border-color:#AAF6E6}
 .dir-row.is-on .dir-n{background:#0F3B3A;color:#AAF6E6}
-.dir-here,.dir-arrow{display:none}
+.dir-here{display:none}
+.ic-gate{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 21V10a8 8 0 0 1 16 0v11'/%3E%3Cpath d='M9 21v-7h6v7'/%3E%3Cpath d='M2 21h20'/%3E%3C/svg%3E")}
+.ic-plaza{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3Cpath d='M16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z'/%3E%3Cpath d='M2 20c0-3.5 2.7-6 6-6s6 2.5 6 6'/%3E%3Cpath d='M13 14.6c.9-.4 1.9-.6 3-.6 3.3 0 6 2.5 6 6'/%3E%3C/svg%3E")}
+.ic-terrace{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 20h18'/%3E%3Cpath d='M3 20v-4h5v-4h5v-4h5V4'/%3E%3Cpath d='M21 4h-3'/%3E%3C/svg%3E")}
+.ic-pitch{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z'/%3E%3Cpath d='M12 8l3.8 2.8-1.5 4.4h-4.6L8.2 10.8z'/%3E%3Cpath d='M12 3v5'/%3E%3Cpath d='M3.5 10.4l4.7.4'/%3E%3Cpath d='M20.5 10.4l-4.7.4'/%3E%3Cpath d='M6.3 19.2l3.4-4'/%3E%3Cpath d='M17.7 19.2l-3.4-4'/%3E%3C/svg%3E")}
+.ic-district{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 21h18'/%3E%3Cpath d='M5 21V9h6v12'/%3E%3Cpath d='M11 21V4h8v17'/%3E%3Cpath d='M14 8h2'/%3E%3Cpath d='M14 12h2'/%3E%3Cpath d='M14 16h2'/%3E%3Cpath d='M7 13h2'/%3E%3Cpath d='M7 17h2'/%3E%3C/svg%3E")}
+.ic-lawn{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21v-5'/%3E%3Cpath d='M12 16c-4.4 0-7-2.8-7-6.2S8.1 3 12 3s7 3.4 7 6.8S16.4 16 12 16z'/%3E%3Cpath d='M4 21h16'/%3E%3C/svg%3E")}
 /* escena: el render de la parada y, debajo, Luca con el globo */
 .sc-body{display:flex;flex-direction:column;gap:14px}
 .sc-win{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0B2A2A}
@@ -179,14 +188,20 @@ button{font-family:inherit;cursor:pointer}
 .sc-tag{position:absolute;left:12px;top:12px;padding:9px 11px;border-radius:8px;background:rgba(11,42,42,.78);color:#FBF8F2;font:800 10.5px/1 'Druk Text Wide';letter-spacing:.08em;text-transform:uppercase;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .sc-tag b{color:#AAF6E6;font-weight:800}
 .sc-fact{position:absolute;right:12px;top:12px;padding:9px 11px;border-radius:8px;background:#AAF6E6;color:#0F3B3A;font:800 9.5px/1 'Druk Text Wide';letter-spacing:.1em;text-transform:uppercase}
-.sc-dlg{display:flex;align-items:flex-end;gap:10px}
-/* retrato de Luca en un marco (como el retrato de los diálogos de videojuego). Cuando haya video, un <video> 1:1 va en el mismo marco. */
-.sc-port{flex:0 0 84px;width:84px;height:84px;border-radius:16px;border:3px solid #AAF6E6;background:#0B2A2A radial-gradient(circle at 50% 30%,rgba(170,246,230,.28),rgba(11,42,42,0) 70%);overflow:hidden;box-shadow:0 8px 14px rgba(0,0,0,.35)}
-.sc-luca{display:block;width:118%;height:auto;margin:6% 0 0 -9%;transform-origin:50% 100%;animation:lucaTalk .34s ease-in-out var(--n,6) alternate}
+/* el retrato se monta sobre la esquina inferior izquierda del render (27-oct: Luca un 20 % más grande y superpuesto al cuadro):
+   margen negativo = gap de la grilla (20) + lo que pisa el render (30 / 40 en escritorio); el globo queda donde estaba */
+.sc-dlg{display:flex;align-items:flex-start;gap:12px}
+/* retrato de Luca en un marco (como el retrato de los diálogos de videojuego): cuatro loops 1:1 mudos apilados (dos "vivo",
+   dos "hablando"; assets/luca/, 27-oct), el script "luca" del final muestra uno por vez con un fundido. El póster (primer cuadro
+   real) va de fondo del marco, así nunca se ve vacío. El video se acerca a la cara: 170 % con el centro de la cara en el centro
+   del marco. El marco lleva data-keep: morphdom no lo toca en los re-renders. */
+.sc-port{position:relative;z-index:2;flex:0 0 100px;width:100px;height:100px;margin-top:-50px;border-radius:18px;border:3px solid #AAF6E6;background:#070706 url(../assets/luca/face-poster.webp) 50% 23.5%/170% no-repeat;overflow:hidden;box-shadow:0 8px 14px rgba(0,0,0,.35)}
+.sc-port video{position:absolute;left:-35%;top:-16%;width:170%;height:170%;object-fit:cover;opacity:0;transition:opacity .14s linear;pointer-events:none}
+.sc-port video.on{opacity:1}
 .sc-bub{position:relative;flex:1 1 auto;min-height:72px;margin:0;text-align:left;background:#FFFFFF;color:#141414;border:2.5px solid #141414;border-radius:18px;padding:14px 34px 14px 16px;font:700 15px/1.35 'Proxima Nova',sans-serif;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.35)}
-.sc-bub::before,.sc-bub::after{content:'';position:absolute;bottom:18px;width:0;height:0;border-style:solid;border-color:transparent}
+.sc-bub::before,.sc-bub::after{content:'';position:absolute;top:16px;width:0;height:0;border-style:solid;border-color:transparent}
 .sc-bub::before{left:-16px;border-width:8px 16px 8px 0;border-right-color:#141414}
-.sc-bub::after{left:-11px;bottom:20px;border-width:6px 12px 6px 0;border-right-color:#FFFFFF}
+.sc-bub::after{left:-11px;top:18px;border-width:6px 12px 6px 0;border-right-color:#FFFFFF}
 .sc-txt i{font-style:normal;opacity:0;animation:scTw .01s linear both}
 .sc-cue{position:absolute;right:12px;bottom:10px;width:0;height:0;border:6px solid transparent;border-left:9px solid #0E8C79;border-right:0;animation:scBlink .9s steps(1) infinite;animation-delay:var(--dur,2s);animation-fill-mode:backwards}
 .sc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -198,14 +213,12 @@ button{font-family:inherit;cursor:pointer}
 .sc-end{display:flex;flex-direction:column;gap:10px;animation:tkPop .5s}
 .sc-again{align-self:flex-start;background:none;border:none;padding:6px 0;color:#AAF6E6;font:700 13px/1 'Proxima Nova',sans-serif;text-decoration:underline;cursor:pointer}
 /* hasta que la escena entra en pantalla (.rv.is-in, script "reveal"), el tipeo espera */
-.sc-body.rv:not(.is-in) .sc-txt i,.sc-body.rv:not(.is-in) .sc-cue,.sc-body.rv:not(.is-in) .sc-luca{animation-play-state:paused}
+.sc-body.rv:not(.is-in) .sc-txt i,.sc-body.rv:not(.is-in) .sc-cue,html.luca-wait .sc-txt i,html.luca-wait .sc-cue{animation-play-state:paused}
 /* un toque mientras tipea completa la línea (clase en <html>, fuera del re-render) */
 html.tour-done .sc-txt i,html.tour-done .sc-cue{animation-delay:0s!important}
-html.tour-done .sc-luca{animation:none}
 @keyframes scTw{from{opacity:0}to{opacity:1}}
 @keyframes scBlink{0%,49%{opacity:0}50%,100%{opacity:1}}
-@keyframes lucaTalk{from{transform:none}to{transform:translateY(-3px) rotate(-2deg)}}
-@media (prefers-reduced-motion:reduce){.sc-txt i{animation:none;opacity:1}.sc-cue{animation:none;opacity:1}.sc-luca{animation:none}.sc-img{transition:none}.sc-img.is-on{animation:none}.sc-end{animation:none}}
+@media (prefers-reduced-motion:reduce){.sc-txt i{animation:none;opacity:1}.sc-cue{animation:none;opacity:1}.sc-img{transition:none}.sc-img.is-on{animation:none}.sc-end{animation:none}}
 .tag{flex-shrink:0;font:500 8.5px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border-radius:6px;background:#FFD45C;color:#141414;align-self:flex-start}
 
 /* WALL (light) */
@@ -328,19 +341,29 @@ html.tour-done .sc-luca{animation:none}
   /* dos filas: render + directorio arriba (misma altura, el directorio se estira al 16:9 del render), diálogo abajo a la izquierda */
   .tour-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);grid-template-areas:"win dir" "body .";gap:14px 32px;margin-top:52px;align-items:stretch}
   .sc-win{grid-area:win}.sc-body{grid-area:body}.dir{grid-area:dir}
-  .dir{flex-direction:column;gap:0;overflow:hidden;padding:0;background:#0B2A2A;border:1px solid rgba(170,246,230,.18);border-radius:20px}
-  .dir-h{display:block;flex:0 0 auto;padding:18px 22px 14px;font:500 10.5px/1 'Druk Text Wide';letter-spacing:.16em;text-transform:uppercase;color:#AAF6E6;border-bottom:1px solid rgba(170,246,230,.14)}
-  .dir-row{flex:1 1 auto;height:auto;width:100%;border:none;border-radius:0;padding:10px 22px;gap:14px;font-size:13px;letter-spacing:.05em;text-align:left;border-bottom:1px solid rgba(251,248,242,.08);transition:background .15s}
-  .dir-row:last-child{border-bottom:none}
+  /* tótem: marco grueso con línea interior, tapa clara y tornillos (::before) */
+  .dir{position:relative;flex-direction:column;gap:0;overflow:visible;padding:0;background:#0B2A2A;border:5px solid #163E3C;border-radius:10px;box-shadow:inset 0 0 0 2px rgba(251,248,242,.14),0 24px 50px rgba(0,0,0,.4)}
+  .dir-h{display:flex;justify-content:space-between;align-items:center;flex:0 0 auto;padding:16px 24px;background:#FBF8F2;color:#0B2A2A;font:800 12px/1 'Druk Text Wide';letter-spacing:.18em;text-transform:uppercase;border-radius:4px 4px 0 0}
+  .dir-hc{font-size:9.5px;letter-spacing:.14em;color:#0E8C79}
+  .dir::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;border-radius:5px;background:
+    radial-gradient(circle at 10px 10px,#D9CDB4 0 2.5px,rgba(0,0,0,.4) 3px,transparent 4.5px),
+    radial-gradient(circle at calc(100% - 10px) 10px,#D9CDB4 0 2.5px,rgba(0,0,0,.4) 3px,transparent 4.5px),
+    radial-gradient(circle at 10px calc(100% - 10px),#8FA7A3 0 2.5px,rgba(0,0,0,.4) 3px,transparent 4.5px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - 10px),#8FA7A3 0 2.5px,rgba(0,0,0,.4) 3px,transparent 4.5px)}
+  .dir-row{flex:1 1 auto;height:auto;width:100%;min-width:0;overflow:hidden;border:none;border-radius:0;padding:10px 16px 10px 16px;gap:12px;font-size:13px;letter-spacing:.04em;text-align:left;border-bottom:1.5px solid rgba(251,248,242,.14);box-shadow:none;transition:background .15s}
+  .dir-nm{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .dir-row:last-child{border-bottom:none;border-radius:0 0 4px 4px}
   .dir-row:hover{background:rgba(170,246,230,.08)}
   .dir-row.is-on,.dir-row.is-on:hover{background:#AAF6E6}
-  .dir-n{width:36px;height:36px;border-radius:8px;font-size:13px}
-  .dir-arrow{display:block;margin-left:auto;opacity:.35;font:800 14px/1 'Proxima Nova',sans-serif}
-  .dir-row.is-on .dir-arrow{display:none}
-  .dir-here{display:flex;align-items:center;gap:6px;margin-left:auto;font:500 8.5px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;color:#0F3B3A;visibility:hidden}
-  .dir-here::before{content:'';width:8px;height:8px;border-radius:50%;background:#0F3B3A}
-  .dir-row.is-on .dir-here{visibility:visible}
-  .sc-port{flex-basis:118px;width:118px;height:118px;border-radius:20px}
+  .dir-n{width:38px;height:38px;border-radius:5px;font-size:13px}
+  .dir-ic{width:24px;height:24px}
+  /* "You are here" va como segunda línea de la placa activa, alineada con el nombre (86 = número + pictograma + gaps) */
+  .dir-row.is-on{flex-wrap:wrap;row-gap:5px}
+  .dir-here{display:none;flex:0 0 100%;align-items:center;gap:6px;margin-left:86px;font:800 8px/1 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;color:#0F3B3A}
+  .dir-here::before{content:'';width:9px;height:9px;border-radius:50%;background:#FF0033;box-shadow:0 0 0 3px rgba(255,0,51,.25)}
+  .dir-row.is-on .dir-here{display:flex}
+  .sc-port{flex-basis:142px;width:142px;height:142px;margin-top:-60px;border-radius:22px}
+  .sc-dlg{gap:14px}
   .sc-bub{font-size:18px;padding:18px 40px 18px 20px;min-height:96px}
   .sc-tag{left:16px;top:16px;font-size:12px;padding:10px 12px}
   .sc-fact{right:16px;top:16px;font-size:10.5px;padding:10px 12px}
@@ -1208,9 +1231,9 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
           <div class="sc-fact">{{ tourFact }}</div>
       </div>
       <div class="rv sc-body">
-        <div class="sc-dlg" id="{{ tourKey }}" style="--dur:{{ tourDur }};--n:{{ tourTalk }}">
-          <div class="sc-port"><img class="sc-luca" src="../assets/luca-fan-bust.webp" alt="" decoding="sync"></div>
-          <button type="button" class="sc-bub" onClick="{{ tourNext }}"><span class="sc-txt" aria-hidden="true"><sc-for list="{{ tourChars }}" as="c"><i style="animation-delay:{{ c.d }}">{{ c.ch }}</i></sc-for></span><span class="sc-sr">{{ tourLine }}</span><span class="sc-cue" aria-hidden="true"></span></button>
+        <div class="sc-dlg">
+          <div class="sc-port" data-keep aria-hidden="true"><video data-luca="idle" data-clip="idle-a" src="../assets/luca/face-idle-a.mp4" muted playsinline preload="none"></video><video data-luca="idle" data-clip="idle-b" src="../assets/luca/face-idle-b.mp4" muted playsinline preload="none"></video><video data-luca="idle" data-clip="idle-c" data-weight="2" src="../assets/luca/face-idle-c.mp4" muted playsinline preload="none"></video><video data-luca="talk" data-clip="talk-a" src="../assets/luca/face-talk-a.mp4" muted playsinline preload="none"></video><video data-luca="talk" data-clip="talk-b" src="../assets/luca/face-talk-b.mp4" muted playsinline preload="none"></video><video data-luca="talk" data-clip="talk-c" src="../assets/luca/face-talk-c.mp4" muted playsinline preload="none"></video><video data-luca="talk" data-clip="talk-d" src="../assets/luca/face-talk-d.mp4" muted playsinline preload="none"></video></div>
+          <button type="button" class="sc-bub" id="{{ tourKey }}" style="--dur:{{ tourDur }}" onClick="{{ tourNext }}"><span class="sc-txt" aria-hidden="true"><sc-for list="{{ tourChars }}" as="c"><i style="animation-delay:{{ c.d }}">{{ c.ch }}</i></sc-for></span><span class="sc-sr">{{ tourLine }}</span><span class="sc-cue" aria-hidden="true"></span></button>
         </div>
         <sc-if value="{{ tourEnd }}" hint-placeholder-val="{{ false }}">
           <div class="sc-end" id="tour-end">
@@ -1226,11 +1249,12 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
         </sc-if>
       </div>
       <nav class="rv dir" aria-label="Stops">
-        <div class="dir-h">Stadium directory</div>
+        <div class="dir-h"><span>Stadium directory</span><span class="dir-hc">06 stops</span></div>
         <sc-for list="{{ stops }}" as="s" hint-placeholder-count="6">
-          <button type="button" class="dir-row {{ s.cls }}" onClick="{{ s.pick }}" aria-current="{{ s.cur }}"><span class="dir-n">0{{ s.n }}</span><span>{{ s.name }}</span><span class="dir-arrow" aria-hidden="true">→</span><span class="dir-here">You are here</span></button>
+          <button type="button" class="dir-row {{ s.cls }}" onClick="{{ s.pick }}" aria-current="{{ s.cur }}"><span class="dir-n">0{{ s.n }}</span><i class="dir-ic ic-{{ s.img }}" aria-hidden="true"></i><span class="dir-nm">{{ s.name }}</span><span class="dir-here">You are here</span></button>
         </sc-for>
       </nav>
+      </div>
     </div>
   </div></section>
 
@@ -1860,7 +1884,7 @@ class Component extends DCLogic {
       days: pad(days), hours: pad(hours), mins: pad(mins), secs: pad(secs),
       pos: st.pos, posPct: st.pos + '%', onSlide: (e) => this.setState({ pos: Number(e.target.value) }),
       stops, tourN: stop.n, tourName: stop.name, tourFact: stop.fact, tourLine: line, tourChars, tourNext,
-      tourKey: 'tour-' + ts + '-' + tl, tourDur: (250 + line.length * TW + 150) + 'ms', tourTalk: Math.max(3, Math.round(line.length * TW / 340)),
+      tourKey: 'tour-' + ts + '-' + tl, tourDur: (250 + line.length * TW + 150) + 'ms',
       tourDots: stop.lines.map((_, i) => i === tl ? 'is-on' : ''), tourEnd: st.tend, tourMore: !st.tend, tourAgain: () => this._tourGo(0, 0),
       cards, count: this.C.length,
       worldStyle: 'width: ' + this.W + 'px; height: ' + this.H + 'px; transform: translate(' + st.tx + 'px,' + st.ty + 'px) scale(' + st.sc + '); transition: ' + (st.anim ? 'transform .7s cubic-bezier(.22,.61,.36,1)' : 'none'),
@@ -1941,7 +1965,7 @@ class Component extends DCLogic {
     var next = document.createElement('div');
     tpl.content.childNodes.forEach(function(ch){ rend(ch, vals, next); });
     if (first || !window.morphdom){ root.innerHTML = ''; while (next.firstChild) root.appendChild(next.firstChild); }
-    else { morphdom(root, next, { childrenOnly: true, onBeforeElUpdated: function(f, t){ if (f.classList && t.classList && f.classList.contains('is-in')) t.classList.add('is-in'); return !f.isEqualNode(t); } }); }
+    else { morphdom(root, next, { childrenOnly: true, onBeforeElUpdated: function(f, t){ if (f.hasAttribute && f.hasAttribute('data-keep')) return false; if (f.classList && t.classList && f.classList.contains('is-in')) t.classList.add('is-in'); return !f.isEqualNode(t); } }); }
     root.querySelectorAll('[data-ev-pointerleave]').forEach(function(el){ if (!el.__pl){ el.__pl = true; el.addEventListener('pointerleave', function(e){ var f = H[el.getAttribute('data-ev-pointerleave')]; if (f) f(e); }); } });
     root.querySelectorAll('[data-ref]').forEach(function(el){ var f = R[el.getAttribute('data-ref')]; if (f) f(el); });
     if (first){ first = false; if (comp.componentDidMount) comp.componentDidMount(); }
@@ -2153,6 +2177,34 @@ class Component extends DCLogic {
   function scan(){ all().forEach(function(el){ io.observe(el); }); pcsFit(); }
   function pcsFit(){ var f = document.querySelector('.pcs-frame'); if (f && f.clientWidth) document.documentElement.style.setProperty('--pcs-scale', (f.clientWidth / 720).toFixed(4)); }
   scan(); setInterval(scan, 800); addEventListener('resize', pcsFit);
+})();
+</script>
+
+<script src="../assets/luca/luca-face.js"></script>
+<script>
+// v2: Luca en video en el tour (reproductor en ../assets/luca/luca-face.js; cómo funciona y por qué no se notan los cortes, ahí).
+// Habla mientras el globo tipea: misma detección que tourNext (última letra invisible, sin tour-done, escena ya en pantalla).
+// Le pasa cuándo termina el tipeo (--dur del globo menos los 150 ms del cue) para que elija el clip de habla del largo justo.
+// El marco .sc-port (data-keep) sobrevive al re-render, así que se monta una sola vez.
+(function(){
+  var face = null, bubId = null, waitSince = 0;
+  function tick(){
+    var port = document.querySelector('#tour .sc-port'); if (!port) return;
+    if (!face || face.port !== port){ face = LucaFace.mount(port); face.port = port; }
+    var bub = document.querySelector('#tour .sc-bub'), body = document.querySelector('#tour .sc-body');
+    var inView = !!body && body.classList.contains('is-in');
+    var root = document.documentElement;
+    if (bub && inView && bub.id !== bubId){
+      // globo nuevo: el tipeo espera (html.luca-wait) a que Luca empiece a hablar, hasta 900 ms, así arrancan juntos
+      bubId = bub.id; waitSince = performance.now(); root.classList.add('luca-wait');
+      face.typing(performance.now() + 900 + (parseFloat(getComputedStyle(bub).getPropertyValue('--dur')) || 2500) - 150);
+    }
+    var last = bub && bub.querySelector('.sc-txt i:last-child');
+    var typing = !!last && inView && !root.classList.contains('tour-done') && getComputedStyle(last).opacity !== '1';
+    face.set(typing ? 'talk' : 'idle');
+    if (root.classList.contains('luca-wait') && (face.state === 'talk' || !typing || performance.now() - waitSince > 900)) root.classList.remove('luca-wait');
+  }
+  setInterval(tick, 100);
 })();
 </script>
 

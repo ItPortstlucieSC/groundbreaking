@@ -184,9 +184,34 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   línea (clase `tour-done` en `<html>`, fuera del re-render); después Next pasa de línea, de parada y al final muestra
   el ticket "Register · get your postcard" + "Take the tour again". Estado en `ts`/`tl`/`tend`. Índice: directorio de
   señalética (`.dir`: tótem "Stadium directory" en escritorio con "● You are here", tira horizontal de placas en móvil;
-  reemplazó a la aérea con pines, que quedaba rara ahí). Luca va en un marco de retrato (`.sc-port`, cuadrado
-  redondeado con borde aquamarina) como en los diálogos de videojuego: cuando se generen los videos de Luca hablando
-  (idle + talking, 1:1, mudos, pendiente), un `<video>` reemplaza la imagen dentro del mismo marco. Título elegido por
+  reemplazó a la aérea con pines, que quedaba rara ahí). **27-oct, tarde: más cartel.** Pictograma por parada
+  (`.dir-ic.ic-{img}`, SVG de trazo en `mask` con `currentColor`, 6 íconos en el CSS móvil), tapa crema con "06 stops"
+  (`.dir-h` + `.dir-hc`), marco grueso con línea interior y tornillos en las esquinas (`.dir::before`), poste con base
+  debajo (`.dir::after`, cae en la celda vacía de la grilla), "You are here" con punto rojo en una segunda línea de la
+  placa activa. En móvil, las placas llevan pictograma, borde crema y radio chico. Las filas clipean (`overflow:hidden`,
+  nombre con elipsis) porque el tótem tiene `overflow:visible` para el poste. **Probado y descartado el mismo día
+  (Mariano: "queda muy pesado"):** flechas direccionales por parada en las placas, y un segundo cartel con un plano
+  cenital dibujado en SVG a partir de la aérea (no hay plano de planta; la posición del Lawn era deducida). Si se
+  retoma, la idea y lo aprendido quedaron en el historial de esta sesión; el repo no conserva el código. Luca va en un marco de retrato (`.sc-port`, cuadrado
+  redondeado con borde aquamarina) como en los diálogos de videojuego. **Desde el 27-oct es video:** siete loops 1:1
+  mudos en `assets/luca/` (`face-idle-a/b/c.mp4` = vivo: sonrisa corta / cejas de saludo / casi quieto, este con
+  `data-weight="2"`; `face-talk-a/b.mp4` = frases largas, `face-talk-c/d.mp4` = frases cortas; `face-poster.webp` = primer
+  cuadro real, de fondo del marco), apilados dentro de `.sc-port` y manejados por **`assets/luca/luca-face.js`**
+  (`LucaFace.mount`; copia del módulo del repo del sitio del club, no editarlo acá). Todos los clips empiezan y terminan en
+  el mismo cuadro, y el reproductor **corta solo en tramos de reposo** medidos cuadro a cuadro (`META` dentro del módulo):
+  al final de un clip, o antes si cambia el estado y hay reposo a mano; un clip de habla termina la frase antes de pasar a
+  "vivo"; para empezar a hablar elige el clip de habla más corto que cubra lo que falta de texto. El glue (script "luca"
+  del final del body) detecta el tipeo igual que `tourNext` (última letra con opacidad < 1, sin `tour-done`, escena en
+  pantalla), le pasa cuándo termina (`--dur` del globo − 150 ms) y **retiene el tipeo** (`html.luca-wait`, hasta 900 ms)
+  hasta que Luca arranca a hablar, así salen juntos. `.sc-port` lleva `data-keep` y el hook `onBeforeElUpdated` de
+  morphdom devuelve `false` en esos nodos (el re-render de cada segundo no les toca clases ni `src`); por eso el `id` del
+  diálogo pasó del `.sc-dlg` al botón `.sc-bub` (lo que se recrea por línea es solo el globo). Tamaño (27-oct, tarde):
+  100 px en móvil y 142 en escritorio, montado sobre la esquina inferior izquierda del render (`margin-top` negativo =
+  gap de la grilla + 30/40 px que pisa el render; `.sc-dlg` alinea arriba y la flecha del globo subió a `top:16px`).
+  Los clips se cargan cuando el tour se acerca (`IntersectionObserver`, margen 60 %) y se pausan al alejarse; `muted`
+  forzado por JS y reintento con el primer gesto, como el hero. Reduce Motion: solo el póster. Origen, método y cómo
+  regenerar: `docs/luca/face/README.md` del repo del sitio del club (PSLSC Website); `post.py` de ahí copia videos y
+  módulo a `assets/luca/`. Título elegido por
   Mariano: antetítulo "Six stops with Luca", h2 "Meet your future home." (se evitó "walk through": al club le suena a
   recorrer el estadio a pie); el CTA del hero pasó a "Meet the stadium" y el de la card A a "Take a look →". Se quitaron las seis "experiencias" que no existían (penal contra Luca,
   camiseta con tu nombre, etc.) y el ticket por sector. Reduce Motion: texto completo, sin tipeo. Chequeo headless:
