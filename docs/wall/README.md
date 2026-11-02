@@ -9,7 +9,9 @@ panel de moderación a la vez.
   `approved`: para sacar uno (ofensivo, spam), en la columna `status` elegir `hidden` y desaparece en la próxima
   carga. La política se cambia en la pestaña `config` (`auto_approve` FALSE = entran como `pending` y se publican
   al poner `approved`), sin volver a desplegar.
-- **Registros de postales** → pestaña `registrations` (postal elegida, nombre, email, domicilio o "solo digital").
+- **Registros de postales** → pestaña `registrations`: postal elegida, nombre tal como va en la postal, email, idioma del
+  mensaje (`message_lang`), `digital_only`, domicilio (`country` US/AR, `street`, `street2`, `city`, `state`, `zip`) y
+  `consent`. **Este backend solo guarda: el mail con la postal todavía no sale** (irá por ActiveCampaign).
 - Protecciones: honeypot, largo máximo (140 caracteres el mensaje), un envío por email por minuto, bloqueo
   contra escrituras simultáneas. El email nunca sale del Sheet.
 - Solo adultos: el formulario exige el check "I'm 18 or older" (columna `is_adult`). Si un menor quiere dejar un
