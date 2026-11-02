@@ -142,7 +142,7 @@ button{font-family:inherit;cursor:pointer}
 .stamp.todo{opacity:.4;filter:grayscale(1)}
 
 /* SLIDER */
-.cmp{--cmp:46%;position:relative;height:300px;margin-top:30px;overflow:hidden;border-radius:20px;user-select:none;-webkit-user-select:none;cursor:ew-resize;touch-action:pan-y;background:#0B2A2A}
+.cmp{--cmp:72%;position:relative;height:300px;margin-top:30px;overflow:hidden;border-radius:20px;user-select:none;-webkit-user-select:none;cursor:ew-resize;touch-action:pan-y;background:#0B2A2A}
 .cmp-a,.cmp-b{position:absolute;inset:0}
 .cmp-a{clip-path:inset(0 calc(100% - var(--cmp)) 0 0)}
 .cmp-a img,.cmp-b img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
@@ -1275,7 +1275,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
       <div class="cmp-b"><img src="assets/aerial.webp" alt="Night render of the finished stadium, with the pitch, the big screen and the plaza full of people" loading="lazy" decoding="async" draggable="false"><div class="cmp-tag" style="right:12px;background:#AAF6E6;color:#0F3B3A">2028</div></div>
       <div class="cmp-a"><img src="assets/aerial-blueprint.webp" alt="The same view of the stadium drawn as a line plan" loading="lazy" decoding="async" draggable="false"><div class="cmp-tag" style="left:12px;background:#0F3B3A;color:#AAF6E6">THE PLAN</div></div>
       <div class="cmp-line"></div>
-      <input type="range" min="0" max="100" value="46" aria-label="Compare the plan and the stadium in 2028">
+      <input type="range" min="0" max="100" value="72" aria-label="Compare the plan and the stadium in 2028">
       <div class="cmp-knob" aria-hidden="true"><span class="cmp-drag">Drag</span><span class="cmp-arr">⇆</span></div>
     </div>
   </div></section>
@@ -2223,7 +2223,7 @@ class Component extends DCLogic {
         var t0 = performance.now(), D = 1400;
         (function step(now){
           var t = Math.min(1, (now - t0) / D);
-          set(46 + 16 * (1 - Math.cos(t * Math.PI * 2)) / 2);
+          set(72 - 16 * (1 - Math.cos(t * Math.PI * 2)) / 2);
           raf = t < 1 ? requestAnimationFrame(step) : 0;
         })(t0);
       }, 600);
