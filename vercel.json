@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/v2/:path*", "destination": "/", "permanent": false }
+  ]
+}

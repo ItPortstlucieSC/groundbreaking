@@ -1,6 +1,6 @@
 // Imitación local del web app de Apps Script (docs/wall/Code.gs) para probar la v2 sin deploy.
 //   node docs/wall/mock-server.mjs            → http://localhost:4322  (aprueba todo; ?auto=0 deja los mensajes en pending)
-//   luego abrir  http://localhost:4321/v2/?api=http://localhost:4322
+//   luego abrir  http://localhost:4321/?api=http://localhost:4322
 import http from 'node:http';
 import fs from 'node:fs';
 import os from 'node:os';

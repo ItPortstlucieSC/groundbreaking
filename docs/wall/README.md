@@ -18,10 +18,10 @@ panel de moderación a la vez.
 ## El Sheet actual
 **Groundbreaking · muro y registros** (creado el 22-oct-2026 en el Drive de Mariano, para arrancar):
 https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit
-Web app (ya en `v2/config.js`), versión 3 desde el 23-oct-2026:
+Web app (ya en `config.js`), versión 3 desde el 23-oct-2026:
 `https://script.google.com/macros/s/AKfycbyLkNTj13PDbgY3wvYeAM1borHAGv9Rw2xZjQh-k7qZHuN42I0nONRiJLycNE1TVSio/exec`
 Cambiarlo por otro (p. ej. uno de la cuenta del club, `press@portstluciesc.com`) es repetir el deploy en el Sheet
-nuevo y pegar la URL nueva en `v2/config.js`. Los datos viejos se copian a mano (dos pestañas).
+nuevo y pegar la URL nueva en `config.js`. Los datos viejos se copian a mano (dos pestañas).
 
 ## Actualizar el script (desde la terminal, sin abrir el editor)
 `docs/wall/` es el proyecto de Apps Script (`.clasp.json` apunta al script del Sheet; `.claspignore` deja subir solo
@@ -40,13 +40,13 @@ de tocar nada acá para no pisarlo.
 ## Deploy inicial (si se cambia de Sheet)
 1. En el Sheet nuevo: Extensiones → Apps Script. Pegar `Code.gs`, guardar.
 2. Implementar → Nueva implementación → Aplicación web → "Ejecutar como: yo" · "Acceso: cualquier persona".
-3. Pegar la URL `/exec` en `v2/config.js` y el ID del script (Configuración del proyecto) en `docs/wall/.clasp.json`.
+3. Pegar la URL `/exec` en `config.js` y el ID del script (Configuración del proyecto) en `docs/wall/.clasp.json`.
    No hace falta correr `setup`: el primer envío crea la pestaña `config` y el desplegable de status.
 
 ## Probar en local sin deploy
 ```bash
 node docs/wall/mock-server.mjs          # imita el web app en http://localhost:4322 (aprueba todo)
-# abrir http://localhost:4321/v2/?api=http://localhost:4322
+# abrir http://localhost:4321/?api=http://localhost:4322
 ```
 Sin `?api=` y con `GB_API` vacío en `config.js`, los formularios corren en modo demo: no guardan nada y lo avisan en
 consola. Con `?auto=0` el mock deja los mensajes en `pending`, como el Sheet real con moderación.

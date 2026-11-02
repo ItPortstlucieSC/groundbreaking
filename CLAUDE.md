@@ -10,11 +10,11 @@ carpeta madre `PSLSC/`. Este archivo es lo propio de este repo.
   reglas de bloques del sitio del club: CSS bajo `.pslsc`, JS como data URI).
 
 ## Dónde se ve
-- **Público (Vercel, cuenta de Mariano, proyecto `groundbreaking`)**: https://groundbreaking-eight.vercel.app/v2/ (v2)
-  y https://groundbreaking-eight.vercel.app/ (v1). Se publica con `npx vercel deploy --prod --yes` desde la raíz del
+- **Público (Vercel, cuenta de Mariano, proyecto `groundbreaking`)**: https://groundbreaking-eight.vercel.app/. `/v2/` redirige a la raíz
+  (`vercel.json`) porque ese link llegó a circular. Se publica con `npx vercel deploy --prod --yes` desde la raíz del
   repo (el vínculo está en `.vercel/`, ignorado por git; `.vercelignore` deja afuera `docs/`). No está conectado al
   repo de GitHub: hay que volver a correr el deploy después de cada push.
-- Sin hosting: `https://raw.githack.com/ItPortstlucieSC/groundbreaking/develop/v2/index.html` (pantalla intermedia).
+- Sin hosting: `https://raw.githack.com/ItPortstlucieSC/groundbreaking/develop/index.html` (pantalla intermedia).
 
 ## Ramas
 - `main` = lo publicado. `develop` = trabajo. Nada a `main` sin el OK de Martín.
@@ -103,11 +103,10 @@ se re-renderiza (morphdom) y pisa las del hero. Poster y fondo de respaldo: `ass
   a la izquierda, 2,4 s, entrada y salida suaves).
 - **Ver localmente con Range** (Safari): `npx -y http-server . -p 4321 -c-1`.
 
-## Versión 2 (`v2/index.html`)
-**Qué está subido (22-oct-2026):** `v2/` completa, `assets/hero/`, `docs/wall/` y `docs/hero-loop/` (sin los videos
-ni los PNG grandes, que quedan locales por `.gitignore`). `index.html` (v1) NO se tocó en el repo: los cambios del
-hero vivo descritos arriba se hicieron primero sobre `index.html` en local y viven en `v2/index.html`; la raíz sigue
-siendo la v1 tal como la publicó Martín.
+## La versión actual
+**Una sola versión (2-nov-2026):** lo que se trabajó como "v2" en `index.html` pasó a la raíz (`index.html`,
+`config.js`, con `assets/` sin `../`) y `v2/` se eliminó en `develop`. La v1 de Martín queda en `main` y en la historia
+de git (`eee3bf2`). Lo que sigue es la historia de cómo se llegó acá; donde dice "v2" hoy es la raíz.
 
 Página aparte para no pisar la v1 al publicar: misma base que `index.html` (comparte `assets/`, referenciados como
 `../assets/`) con los ajustes pedidos el 22-oct:
@@ -153,9 +152,9 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   state, zip}`. Escape, la X, el fondo y "Back to the site" cierran; `html.mdl-open` bloquea el scroll.
 - Muro con backend (22-oct): `docs/wall/Code.gs` (Apps Script sobre un Google Sheet: pestañas `messages` y
   `registrations`, moderación por columna `status`, honeypot y 1 envío/email/minuto) + `docs/wall/README.md` con el
-  deploy. La URL del web app va en `v2/config.js` (`window.GB_API`); `?api=` la pisa para probar con
+  deploy. La URL del web app va en `config.js` (`window.GB_API`); `?api=` la pisa para probar con
   `docs/wall/mock-server.mjs`. Sheet actual (22-oct, Drive de Mariano, cambiable por otro):
-  https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit. Web app en `v2/config.js`; con `GB_API` vacío aparece una etiqueta roja
+  https://docs.google.com/spreadsheets/d/158ywNxMUd1Ubt7RAEFI6A4qUPAGmgsLlBPdxokqGZxA/edit. Web app en `config.js`; con `GB_API` vacío aparece una etiqueta roja
   "Demo mode · nothing is saved". `docs/wall/` es el proyecto clasp del script (ID en `.clasp.json`): para publicar
   cambios, `clasp push` + `create-version` + `update-deployment` a la implementación `AKfycbyLk…` (ver README).
   Versión 3 activa desde el 23-oct: publica al instante; `hidden` en la columna status lo saca del muro. Sin URL, los formularios corren en modo demo (no guardan, avisan en consola).

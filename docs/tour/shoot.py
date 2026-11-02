@@ -2,7 +2,7 @@
 # Requiere el servidor local en el 4321 (npx -y http-server . -p 4321 -c-1) y Playwright para Python con el Chrome instalado.
 import sys, time
 from playwright.sync_api import sync_playwright
-URL = "http://localhost:4321/v2/"
+URL = "http://localhost:4321/"
 OUT = "docs/tour/shots"  # correr desde la raíz del repo; las capturas quedan ahí (ignoradas por git)
 errors = []
 def run(p, name, w, h, mobile=False):
