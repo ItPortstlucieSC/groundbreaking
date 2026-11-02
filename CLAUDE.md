@@ -260,6 +260,20 @@ tira con ticket, los chips y el modal con checkbox de "digital" (ya no existen).
 - **Impresión, pendiente:** master en PDF desde este HTML. Faltan cupo, firma, letra, remitente (marketing) y **imágenes a
   300 dpi**: 6,25 × 4,5 in con sangría piden ~1875 × 1350 px, y en el repo `aerial` es 1920×1072, `aerial-blueprint` 1600×893
   y `obra` 1280×720. La firma "Gustavo Suárez" y las tipografías manuscritas del dorso son provisorias.
+## Slider (feature/slider)
+Propuesta y motivos: `../docs/frentes/groundbreaking/PROPUESTA-slider.md`. Reemplaza lo que más arriba se cuenta de "Drag to see it rise".
+
+- **Todavía compara el plano con el render**, por eso dice "The plan vs. 2028" / "THE PLAN". **"Today" va solo con la foto aérea
+  real del lote**, desde el ángulo del render (se le pidió al club). Cuando llegue: cambiar la imagen de `.cmp-a`, el kicker, la
+  etiqueta y el lead. La foto va al natural, sin el duotono de la propuesta (decisión de Martín, 2-nov).
+- **La posición vive en `--cmp` sobre `.cmp`**, que lleva `data-keep`: morphdom no la toca y arrastrar no re-renderiza la página
+  (el componente ya no tiene `pos` ni `onSlide`). Todo está en el script "Slider", después del de "reveal".
+- **Pointer events, no el range:** en iOS el range solo responde si tocás el pulgar, que es invisible. El `<input>` queda para
+  teclado y lectores de pantalla (flechas ±1, Shift + flecha ±10). Con el dedo la línea recién se mueve si el gesto arrancó
+  horizontal, porque Safari manda `pointermove` antes de ceder al scroll (probado en el simulador de iPhone).
+- **Las etiquetas viven dentro de su cara**, así que la línea las recorta y nunca quedan sobre la imagen equivocada.
+- Arranca con el 72 % de la caja del lado del plano, para que haya que arrastrar para ver el estadio. Al entrar en pantalla, un barrido de 72 % a 56 % y vuelta, una vez (sin él con Reduce Motion). La manija dice "Drag" hasta
+  el primer arrastre (`data-cmp-touched` en `<html>`).
 
 ## Reglas
 - Fases: "Antes" (hasta el 12/12) y "Después" (desde el 13/12). Sin fase "Durante": el día del evento el contenido vive
