@@ -792,11 +792,11 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 /* Aviso breve al pie */
 .toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translate(-50%,16px);z-index:1200;max-width:min(92vw,560px);padding:14px 18px;border-radius:10px;background:#0F3B3A;color:#FBF8F2;box-shadow:0 18px 44px rgba(0,0,0,.35);font:600 14px/1.4 'Proxima Nova',system-ui,sans-serif;opacity:0;transition:opacity .35s ease,transform .35s ease}
 .toast.is-on{opacity:1;transform:translate(-50%,0)}
-/* "Be part of the wall": destacado en la cabecera del muro */
-.wall-hl{display:inline-block;font:800 26px/1.1 'Ferryman',Georgia,serif;color:#0F3B3A;text-decoration:none;background:linear-gradient(transparent 60%,#AAF6E6 60%);padding:0 2px;transition:background-color .2s}
-.wall-hl:hover{background:#AAF6E6}
-.wall-lead-sub{display:block;margin-top:10px}
-@media (min-width:900px){.wall-hl{font-size:30px}}
+/* Cabecera del muro (27-oct): el título es la frase a completar, con el hueco a la vista; un solo CTA, "Add your message" */
+.wall-blank{display:inline-block;width:2.6em;margin:0 .08em 0 .18em;border-bottom:.07em solid currentColor;vertical-align:-.04em}
+.wall-cta{display:flex;width:fit-content;margin-top:18px}
+.mdl-help{margin:6px 0 14px;font-size:13px;line-height:1.45;color:#5A5145}
+.mdl-help-chk{margin:0 0 14px 30px}
 /* Explicación del muro (reemplaza al selector de mensajes) */
 .wall-why{margin-top:26px;display:flex;flex-direction:column;gap:22px}
 .wall-why h3{margin:10px 0 0;font:800 30px/1.02 'Ferryman',Georgia,serif;color:#141414}
@@ -1279,8 +1279,8 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   <!-- WALL -->
   <section class="sec bg-con" id="wall"><div class="wrap">
     <div class="rv sec-head">
-      <div><div class="k">Community wall</div><h2 class="h2">I’m building this home for…</h2></div>
-      <p class="lead"><a href="#message" class="wall-hl">Be part of the wall →</a><span class="wall-lead-sub">Drag, zoom and tap any card to read it. On opening day, every message rains down from the stands.</span></p>
+      <div><div class="k">Community wall · Finish the sentence</div><h2 class="h2">I’m building this home for<span class="wall-blank" aria-hidden="true"></span>.</h2></div>
+      <p class="lead">Finish it and pin it on the wall. On December 12, every message gets printed and rains down from the stands.<a href="#message" class="btn btn-aq wall-cta">Add your message →</a></p>
     </div>
 
     <div class="rv wall-stage" ref="{{ wallRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMove }}" onPointerUp="{{ onUp }}" onPointerLeave="{{ onUp }}">
@@ -1301,7 +1301,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
         </sc-for>
       </div>
       <div class="wall-vig"></div>
-      <div class="hud hud-tl"><span class="hud-pill"><b>{{ count }}</b> messages</span><span class="hud-pill hint">Drag the wall or the cards · Scroll to zoom · Tap to read</span></div>
+      <div class="hud hud-tl"><span class="hud-pill"><b>{{ count }}</b> messages</span><span class="hud-pill hint">Drag · Scroll to zoom · Tap a card to read</span></div>
       <div class="hud hud-br">
         <button type="button" onClick="{{ zoomOut }}" aria-label="Zoom out">−</button>
         <span class="hud-pill pct">{{ zoomPct }}</span>
@@ -1312,13 +1312,12 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
     <div class="rv wall-bottom2">
       <div class="wall-why">
         <div class="wall-why-txt">
-          <div class="k">Why a wall</div>
-          <h3>What does this club mean to you?</h3>
-          <p>Finish the sentence and leave it on the wall. <b>On opening day, every message gets printed and rains down from the stands as confetti.</b></p>
+          <div class="k">Your message</div>
+          <h3>Add yours. It goes up right away.</h3>
+          <p>Your email stays with the club, and a moderator can take down anything that doesn’t belong.</p>
         </div>
         <div class="wall-foot">
-          <a href="#message" class="btn btn-aq">Leave your message</a>
-          <div class="flag">Your email never leaves the club.</div>
+          <a href="#message" class="btn btn-aq">Add your message →</a>
         </div>
       </div>
     </div>
@@ -1363,31 +1362,33 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   <div class="mdl-box" role="dialog" aria-modal="true" aria-labelledby="wmdl-title">
     <button type="button" class="mdl-x" data-wmdl-close aria-label="Close">✕</button>
     <form class="mdl-form" data-wmdl-form novalidate action="#" method="post">
-      <div class="mdl-head"><span class="k">Community wall</span><h2 id="wmdl-title">I’m building this home for…</h2><p>Finish the sentence. It goes up on the wall right away, and on opening day it rains down from the stands.</p></div>
-      <fieldset><legend>1 · The message</legend>
-        <label class="mdl-f">I’m building this home for…<textarea name="text" required maxlength="140" rows="3" placeholder="my son, who will play on this pitch one day." data-wmdl-text></textarea><span class="wm-count"><b data-wmdl-count>0</b> / 140</span></label>
+      <div class="mdl-head"><span class="k">Community wall</span><h2 id="wmdl-title">Finish the sentence.</h2><p>It goes up on the wall right away. On opening day it rains down from the stands with the rest.</p></div>
+      <fieldset><legend>1 · Your message</legend>
+        <label class="mdl-f">I’m building this home for…<textarea name="text" required maxlength="140" rows="3" placeholder="e.g. my son, who’ll play on this pitch one day." data-wmdl-text></textarea><span class="wm-count"><b data-wmdl-count>0</b> / 140</span></label>
         <div class="mdl-fields" style="margin-top:14px">
-          <label class="mdl-f">Your name, as it will appear<input name="name" required maxlength="40" autocomplete="given-name" placeholder="Marco R."></label>
-          <label class="mdl-f">You are<select name="badge"><option>Supporter</option><option>Neighbor</option><option>Academy family</option><option>Academy</option><option>Founding Crew</option></select></label>
+          <label class="mdl-f">Name on the card<input name="name" required maxlength="40" autocomplete="given-name" placeholder="Marco R."></label>
+          <label class="mdl-f">You’re a…<select name="badge"><option>Supporter</option><option>Neighbor</option><option>Academy family</option><option>Academy</option><option>Founding Crew</option></select></label>
         </div>
         <div class="wm-lg">Pick a sticker</div>
         <div class="wm-stk" role="radiogroup" aria-label="Sticker"><label title="Anchor"><input type="radio" name="sticker" value="anchor" checked><img src="../assets/anchor.svg" alt="Anchor"></label><label title="Heart"><input type="radio" name="sticker" value="heart"><img src="../assets/heart.svg" alt="Heart"></label><label title="Ball"><input type="radio" name="sticker" value="ball"><img src="../assets/ball.svg" alt="Ball"></label><label title="Star"><input type="radio" name="sticker" value="star"><img src="../assets/star.svg" alt="Star"></label><label title="Palm"><input type="radio" name="sticker" value="palm"><img src="../assets/palm.svg" alt="Palm"></label><label title="Drum"><input type="radio" name="sticker" value="drum"><img src="../assets/drum.svg" alt="Drum"></label><label title="Shovel"><input type="radio" name="sticker" value="shovel"><img src="../assets/shovel.svg" alt="Shovel"></label><label title="Pirate"><input type="radio" name="sticker" value="pirate"><img src="../assets/pirate.svg" alt="Pirate"></label><label title="Luca"><input type="radio" name="sticker" value="luca"><img src="../assets/luca-fan-bust.webp" alt="Luca"></label></div>
       </fieldset>
-      <fieldset><legend>2 · You · never shown</legend>
+      <fieldset><legend>2 · Your email</legend>
         <div class="mdl-fields">
           <label class="mdl-f">Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
         </div>
-        <label class="mdl-chk"><input type="checkbox" name="consent" value="1" required>Show this message on the wall and print it for opening day. A moderator may take it down if it doesn’t belong. Your email stays private.</label>
+        <p class="mdl-help">Only the club sees it. Never on the wall.</p>
+        <label class="mdl-chk"><input type="checkbox" name="consent" value="1" required>Put my message on the wall and print it for opening day.</label>
+        <p class="mdl-help mdl-help-chk">A moderator can take down anything that doesn’t belong.</p>
         <label class="mdl-chk"><input type="checkbox" name="adult" value="1" required>I’m 18 or older.</label>
         <input type="text" name="hp" tabindex="-1" autocomplete="off" class="wm-hp" aria-hidden="true">
       </fieldset>
-      <div class="mdl-foot"><button type="submit" class="btn btn-sea" data-wmdl-submit><span class="btn-txt">Put it on the wall →</span><span class="btn-load" aria-hidden="true"><i></i>Putting it up…</span></button><span class="mdl-err" data-wmdl-err hidden></span></div>
+      <div class="mdl-foot"><button type="submit" class="btn btn-sea" data-wmdl-submit><span class="btn-txt">Add it to the wall →</span><span class="btn-load" aria-hidden="true"><i></i>Putting it up…</span></button><span class="mdl-err" data-wmdl-err hidden></span></div>
     </form>
     <div class="mdl-done" data-wmdl-done hidden>
       <span class="k" style="color:#0E8C79">Got it</span>
       <h2>Thanks, <span data-wdone-name></span>.</h2>
       <div class="wm-preview" data-wdone-card><img src="" alt="" data-wdone-stk><small>I’m building this home for…</small><q data-wdone-text></q><div class="who"><b data-wdone-who></b><span data-wdone-badge></span></div></div>
-      <p>We read every message before it goes up. Yours will be on the wall in the next few days, and on opening day it rains down from the stands with all the others.</p>
+      <p>We read every message before it goes up. Yours will be on the wall in the next few days, and on opening day it rains down from the stands with the rest.</p>
       <button type="button" class="btn btn-sea" data-wmdl-close>Back to the site</button>
     </div>
   </div>
@@ -2344,7 +2345,7 @@ window.gbApi = function(payload){
           close(true); form.reset(); count.textContent = '0';
           var stage = document.querySelector('.wall-stage'); if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
           setTimeout(function(){ if (window.gbWall) window.gbWall.add({ id: res.id, t: t, n: d.name, b: d.badge, stk: d.sticker }); }, 380);
-          say('It’s on the wall. Our team reads every message and may take one down if it doesn’t belong.');
+          say('Thanks, ' + (d.name.split(' ')[0] || d.name) + '. It’s on the wall.');
           return;
         }
         // Con moderación (lo normal): gracias + aviso de que se aprueba y se ve en los próximos días.

@@ -174,6 +174,18 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   links en nav, menú móvil y footer; la card "B · Where" del bento ahora abre Google Maps (US-1 & Walton Rd) en
   otra pestaña. El `state.pos`/`onSlide` del componente quedaron sin uso. En la cabecera del muro el lead es
   `.wall-hl` "Be part of the wall →" (Ferryman, subrayado aquamarine, abre el modal) + la instrucción debajo.
+  **Copy del muro reescrito (27-oct, revisión de UX writing; Mariano: "el componente entero es un poco confuso"):**
+  el problema era que la frase a completar no se señalaba como tal, había tres verbos para la misma acción ("Be part
+  of the wall", "Leave your message", "Put it on the wall") y el confeti se explicaba cuatro veces. Ahora: eyebrow
+  "Community wall · Finish the sentence", el H2 es la frase con el hueco a la vista (`.wall-blank`), un lead de una
+  idea ("Finish it and pin it on the wall. On December 12, every message gets printed and rains down from the stands.")
+  y **un solo CTA en todos lados: "Add your message →"** (`.wall-cta` en el lead, botón de abajo; en el modal "Add it
+  to the wall →"). La instrucción de uso vive solo en el HUD ("Drag · Scroll to zoom · Tap a card to read"). El bloque
+  "Why a wall" pasó a "Your message / Add yours. It goes up right away." con una línea de confianza (email con el club,
+  moderación) y el mismo botón, sin `.flag`. Modal: título "Finish the sentence.", la frase aparece solo como label del
+  campo, placeholder con "e.g.", "Name on the card", "You're a…", "2 · Your email" con ayuda "Only the club sees it.
+  Never on the wall." (`.mdl-help`), checkbox de consentimiento en una sola afirmación y la moderación como ayuda
+  debajo (`.mdl-help-chk`). Toast al publicar: "Thanks, {nombre}. It's on the wall." Se quitó el CSS de `.wall-hl`.
 - 26-oct: el tour (`#tour`) se rehízo como recorrido de 6 paradas con render real (`assets/tour/gate|plaza|terrace|
   pitch|district|lawn.webp`, 1600×900 q80, sacados del deck "Media Push · Groundbreaking" del 28-sep que dejó Mariano en
   `~/Desktop/groundbreaking | walk through/`). Luca (bust) cuenta en primera persona qué vas a hacer en cada lugar, en
