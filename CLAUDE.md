@@ -238,6 +238,21 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   de texto `.post-big`/`.big`.
 Para regenerarla desde la v1 hay que rehacer esos cambios (no hay build): es una copia editada, no una derivación.
 
+## Slider (feature/slider)
+Propuesta y motivos: `../docs/frentes/groundbreaking/PROPUESTA-slider.md`. Reemplaza lo que más arriba se cuenta de "Drag to see it rise".
+
+- **Todavía compara el plano con el render**, por eso dice "The plan vs. 2028" / "THE PLAN". **"Today" va solo con la foto aérea
+  real del lote**, desde el ángulo del render (se le pidió al club). Cuando llegue: cambiar la imagen de `.cmp-a`, el kicker, la
+  etiqueta y el lead, y sumar el duotono verde (no está hecho porque no hay foto contra la cual ajustarlo).
+- **La posición vive en `--cmp` sobre `.cmp`**, que lleva `data-keep`: morphdom no la toca y arrastrar no re-renderiza la página
+  (el componente ya no tiene `pos` ni `onSlide`). Todo está en el script "Slider", después del de "reveal".
+- **Pointer events, no el range:** en iOS el range solo responde si tocás el pulgar, que es invisible. El `<input>` queda para
+  teclado y lectores de pantalla (flechas ±1, Shift + flecha ±10). Con el dedo la línea recién se mueve si el gesto arrancó
+  horizontal, porque Safari manda `pointermove` antes de ceder al scroll (probado en el simulador de iPhone).
+- **Las etiquetas viven dentro de su cara**, así que la línea las recorta y nunca quedan sobre la imagen equivocada.
+- Al entrar en pantalla, un barrido de 46 % a 62 % y vuelta, una vez (sin él con Reduce Motion). La manija dice "Drag" hasta
+  el primer arrastre (`data-cmp-touched` en `<html>`).
+
 ## Reglas
 - Fases: "Antes" (hasta el 12/12) y "Después" (desde el 13/12). Sin fase "Durante": el día del evento el contenido vive
   en redes.
