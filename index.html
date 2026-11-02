@@ -1386,16 +1386,17 @@ html:not(.print-closed) .pmd-closed,html.print-closed .pmd-opts{display:none}
   <!-- TODAY VS 2028 -->
   <section class="sec" id="build"><div class="wrap">
     <div class="rv sec-head">
-      <div><div class="k">The plan vs. 2028</div><h2 class="h2 sig">Same ground. Two moments.</h2></div>
-      <p class="lead">Drag the line. The stadium on paper, and the place it becomes when we celebrate the first goal.</p>
+      <div><div class="k">The ground vs. 2028</div><h2 class="h2 sig">Same ground. Two moments.</h2></div>
+      <p class="lead">Drag the line. The lot before the first shovel, and the place it becomes when we celebrate the first goal.</p>
     </div>
     <div class="rv cmp" data-keep>
       <div class="cmp-b"><img src="assets/aerial.webp" alt="Night render of the finished stadium, with the pitch, the big screen and the plaza full of people" loading="lazy" decoding="async" draggable="false"><div class="cmp-tag" style="right:12px;background:#AAF6E6;color:#0F3B3A">2028</div></div>
-      <div class="cmp-a"><img src="assets/aerial-blueprint.webp" alt="The same view of the stadium drawn as a line plan" loading="lazy" decoding="async" draggable="false"><div class="cmp-tag" style="left:12px;background:#0F3B3A;color:#AAF6E6">THE PLAN</div></div>
+      <div class="cmp-a"><img src="assets/terreno.webp" alt="Illustration of the vacant lot before construction, from the same angle" loading="lazy" decoding="async" draggable="false"><div class="cmp-tag" style="left:12px;background:#0F3B3A;color:#AAF6E6">THE GROUND</div></div>
       <div class="cmp-line"></div>
-      <input type="range" min="0" max="100" value="72" aria-label="Compare the plan and the stadium in 2028">
+      <input type="range" min="0" max="100" value="72" aria-label="Compare the ground and the stadium in 2028">
       <div class="cmp-knob" aria-hidden="true"><span class="cmp-drag">Drag</span><span class="cmp-arr">⇆</span></div>
     </div>
+    <div class="rv note">Illustration of the site before construction.</div>
   </div></section>
 
   <!-- WALL -->
@@ -2361,7 +2362,7 @@ class Component extends DCLogic {
   scan(); setInterval(scan, 800); addEventListener('resize', pcsFit);
 })();
 
-// Slider "The plan vs. 2028". La posición vive en --cmp de .cmp (data-keep, morphdom no lo toca), así arrastrar no re-renderiza la página.
+// Slider "The ground vs. 2028". La posición vive en --cmp de .cmp (data-keep, morphdom no lo toca), así arrastrar no re-renderiza la página.
 // Se maneja con pointer events y no con el range porque en iOS el range solo responde si tocás el pulgar, que es invisible.
 (function(){
   function setup(box){
