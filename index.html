@@ -110,13 +110,6 @@ button{font-family:inherit;cursor:pointer}
 .cd-nums .cd-n{border-radius:0!important}
 .cd-n b{font:900 78px/.88 'Druk',sans-serif;color:#AAF6E6;letter-spacing:.01em;font-variant-numeric:tabular-nums}
 .cd-n span{margin-top:10px;font:500 9px/1 'Druk Text Wide';letter-spacing:.18em;color:rgba(251,248,242,.6)}
-.ticket{position:relative;background:#AAF6E6;color:#0F3B3A;border-radius:14px;display:flex;align-items:stretch;overflow:hidden;min-height:84px}
-.ticket::before,.ticket::after{content:'';position:absolute;left:72%;width:22px;height:22px;border-radius:50%;background:var(--hole,#0F3B3A);margin-left:-11px}
-.ticket::before{top:-11px}.ticket::after{bottom:-11px}
-.ticket .tk-a{flex:0 0 72%;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;gap:6px}
-.ticket .tk-a span{font:500 9px/1 'Druk Text Wide';letter-spacing:.14em;text-transform:uppercase}
-.ticket .tk-a b{font:800 17px/1.15 'Ferryman',serif}
-.ticket .tk-b{flex-grow:1;display:flex;align-items:center;justify-content:center;border-left:2px dashed rgba(15,59,58,.35);font:800 15px/1 'Druk Text Wide'}
 
 /* FACTS */
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:32px}
@@ -326,7 +319,6 @@ html.tour-done .sc-txt i,html.tour-done .sc-cue{animation-delay:0s!important}
   .cd .wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px;grid-template-areas:"copy ticket" "nums nums";gap:30px 48px;align-items:center}
   .cd-copy{grid-area:copy}
   .cd-copy b{font-size:30px}
-  .cd .ticket{grid-area:ticket}
   .cd-nums{grid-area:nums}
   .cd-n{padding:30px 8px 24px}
   .cd-n b{font-size:168px}
@@ -394,7 +386,7 @@ body,.pg{background:#F1EDE6}
 .flag{border-left-color:#0F3B3A}
 /* radios más arquitectónicos */
 .btn,.burger,.plate-n,.chip,.pill,.cmp-tag,.cmp-knob,.pin{border-radius:6px!important}
-.fact,.scard,.stops,.sh-now,.pass,.cmp,.plan,.plan::before,.sh-map,.diary,.diary-c,.hero-panel,.ticket,.cd-n,.wsel-card{border-radius:8px!important}
+.fact,.scard,.stops,.sh-now,.pass,.cmp,.plan,.plan::before,.sh-map,.diary,.diary-c,.hero-panel,.cd-n,.wsel-card{border-radius:8px!important}
 .wall-stage{border-radius:8px!important}
 /* hero sobrio */
 .hero{min-height:820px}
@@ -635,7 +627,7 @@ html,body{background:#F1EDE6}
 .pcx .lbl{font:500 10px/1 'Druk Text Wide';letter-spacing:.16em;text-transform:uppercase}
 .pcx .f1{background:#FBF8F2;color:#0F3B3A;padding:34px 34px 28px;display:flex;flex-direction:column}
 .pcx .f1::before{content:'';position:absolute;inset:12px;border:2px solid #0F3B3A;border-radius:4px;pointer-events:none}
-.pcx .f1 .pre{font:800 46px/1 'Ferryman',serif;color:#FF7A6B;text-align:center;margin-top:auto;transform:rotate(-2deg)}
+.pcx .f1 .pre{font:800 46px/1 'Ferryman',serif;color:#0E8C79;text-align:center;margin-top:auto;transform:rotate(-2deg)}
 .pcx .f1 .big{white-space:nowrap;text-align:center;font:900 122px/.84 'Druk',sans-serif;letter-spacing:.005em;background:url('assets/aerial.webp') 50% 55%/cover;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:3px #0F3B3A;margin-top:22px}
 .pcx .f1 .row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding:0 14px 6px}
 .pcx .f1 .row .lbl{color:#0F3B3A}
@@ -660,7 +652,7 @@ html,body{background:#F1EDE6}
 .pcx .f3 .tk b{display:block;font:900 34px/1 'Druk',sans-serif;letter-spacing:.02em}
 .pcx .f4{background:#AAF6E6;color:#0F3B3A}
 .pcx .f4::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(15,59,58,.14) 1.6px,transparent 1.6px);background-size:18px 18px}
-.pcx .f4 .sun{position:absolute;right:-60px;top:-60px;width:420px;height:420px;border-radius:50%;background:#FFD45C}
+.pcx .f4 .sun{position:absolute;right:-60px;top:-60px;width:420px;height:420px;border-radius:50%;background:#E9D4A7}
 .pcx .f4 .luca{position:absolute;right:14px;bottom:-30px;height:450px}
 .pcx .f4 .hi{position:absolute;left:36px;top:40px;font:800 40px/1 'Ferryman',serif;color:#0E8C79;transform:rotate(-3deg)}
 .pcx .f4 .tit{position:absolute;left:36px;top:98px;font:800 50px/.96 'Druk Text Wide';text-transform:uppercase;letter-spacing:.01em;width:390px}
@@ -682,7 +674,6 @@ html,body{background:#F1EDE6}
 .pcs-copy{display:flex;flex-direction:column;gap:10px}
 .pcs-h{margin:0;font:800 34px/1 'Ferryman',Georgia,serif;letter-spacing:-.005em;color:#FBF8F2}
 .pcs-copy p{margin:0;font-size:15.5px;line-height:1.5;color:rgba(251,248,242,.82)}
-.pcs .ticket{--hole:#0F3B3A;margin-top:8px;min-height:84px}
 .pcs-right{display:flex;flex-direction:column;gap:14px;min-width:0}
 .pcs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 14px}
 .pcs-card{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;text-align:left;cursor:pointer;width:100%;display:flex;flex-direction:column;gap:14px;color:inherit;text-decoration:none;min-width:0}
@@ -693,32 +684,19 @@ html,body{background:#F1EDE6}
 .pcs-right .pcs-card:hover .pcs-frame{transform:rotate(0) translateY(-3px)}
 /* Caída en 4 tiempos cuando la tira entra en pantalla (.pcs-right.is-in lo pone el script "reveal") */
 .pcs-right.rv{opacity:1;transform:none}.pcs-right.rv.is-in{animation:none}
-.pcs-right:not(.is-in) .pcs-frame,.pcs-right:not(.is-in) .pcs-lbl,.pcs-right:not(.is-in) .pcs-line{opacity:0}
+.pcs-right:not(.is-in) .pcs-frame,.pcs-right:not(.is-in) .pcs-lbl{opacity:0}
 .pcs-right.is-in .pcs-frame{animation:pcsDrop .95s cubic-bezier(.22,.9,.3,1) backwards}
 .pcs-right.is-in .pcs-card:nth-child(2) .pcs-frame{animation-delay:.16s}.pcs-right.is-in .pcs-card:nth-child(3) .pcs-frame{animation-delay:.32s}.pcs-right.is-in .pcs-card:nth-child(4) .pcs-frame{animation-delay:.48s}
 .pcs-right.is-in .pcs-lbl{animation:rvIn .5s ease backwards}
 .pcs-right.is-in .pcs-card:nth-child(1) .pcs-lbl{animation-delay:.55s}.pcs-right.is-in .pcs-card:nth-child(2) .pcs-lbl{animation-delay:.71s}.pcs-right.is-in .pcs-card:nth-child(3) .pcs-lbl{animation-delay:.87s}.pcs-right.is-in .pcs-card:nth-child(4) .pcs-lbl{animation-delay:1.03s}
-.pcs-right.is-in .pcs-line{animation:rvIn .6s ease 1.1s backwards}
 @keyframes pcsDrop{0%{opacity:0;transform:translateY(-120px) rotate(calc(var(--rot,0deg) * -1.6))}55%{opacity:1;transform:translateY(10px) rotate(calc(var(--rot,0deg) * 1.3))}78%{transform:translateY(-4px) rotate(var(--rot,0deg))}100%{opacity:1;transform:translateY(0) rotate(var(--rot,0deg))}}
 /* Selección: el estado vive en <html data-pick> (sobrevive al re-render de #app); vale para la tira y el modal */
 html[data-pick="1"] .pcs-card:nth-child(1) .pcs-frame,html[data-pick="2"] .pcs-card:nth-child(2) .pcs-frame,html[data-pick="3"] .pcs-card:nth-child(3) .pcs-frame,html[data-pick="4"] .pcs-card:nth-child(4) .pcs-frame{outline:3px solid #AAF6E6;outline-offset:4px}
 .pcs-lbl b::before{content:'Pick'}
 html[data-pick="1"] .pcs-card:nth-child(1) .pcs-lbl b::before,html[data-pick="2"] .pcs-card:nth-child(2) .pcs-lbl b::before,html[data-pick="3"] .pcs-card:nth-child(3) .pcs-lbl b::before,html[data-pick="4"] .pcs-card:nth-child(4) .pcs-lbl b::before{content:'Picked ✓'}
 html[data-pick="1"] .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .pcs-card:nth-child(2) .pcs-lbl b,html[data-pick="3"] .pcs-card:nth-child(3) .pcs-lbl b,html[data-pick="4"] .pcs-card:nth-child(4) .pcs-lbl b{color:#AAF6E6}
-/* El GO reacciona a la selección: salto del ticket + flecha que empuja, y queda con halo mientras haya elegida */
-.pcs .ticket .tk-a i,.pcs .ticket .tk-a em{font-style:normal}
-.pcs .ticket .tk-k1,.pcs .ticket .tk-t1{display:none}
-html[data-pick] .pcs .ticket .tk-k0,html[data-pick] .pcs .ticket .tk-t0{display:none}
-html[data-pick] .pcs .ticket .tk-k1,html[data-pick] .pcs .ticket .tk-t1{display:inline}
-html[data-pick="1"] .tk-k1 em::before{content:'01'}html[data-pick="2"] .tk-k1 em::before{content:'02'}html[data-pick="3"] .tk-k1 em::before{content:'03'}html[data-pick="4"] .tk-k1 em::before{content:'04'}
-html[data-pick] .pcs .ticket{box-shadow:0 0 0 3px rgba(170,246,230,.35),0 14px 34px rgba(0,0,0,.35)}
-html[data-pick] .pcs .ticket .tk-b{animation:tkArrow 1.6s ease-in-out .9s infinite}
-html.pcs-nudge .pcs .ticket{animation:tkPop .55s cubic-bezier(.2,.7,.2,1)}
-html.pcs-nudge .pcs .ticket .tk-b{animation:tkNudge .9s ease 2}
 @keyframes tkPop{0%{transform:scale(1)}35%{transform:scale(1.035) translateY(-3px)}100%{transform:scale(1)}}
-@keyframes tkNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
-@keyframes tkArrow{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
-@media (prefers-reduced-motion:reduce){.pcs-right .pcs-frame,.pcs-right .pcs-lbl,.pcs-right .pcs-line{opacity:1!important;animation:none!important}html[data-pick] .pcs .ticket .tk-b,html.pcs-nudge .pcs .ticket,html.pcs-nudge .pcs .ticket .tk-b{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.pcs-right .pcs-frame,.pcs-right .pcs-lbl{opacity:1!important;animation:none!important}}
 /* Modal de registro (fuera de #app: su estado no se pisa con el re-render) */
 .mdl{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;padding:16px}
 .mdl[hidden]{display:none}
@@ -809,12 +787,6 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 .pcs-lbl span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .pcs-lbl b{white-space:nowrap;flex:none}
 .pcs-lbl b{font-weight:800;color:#FBF8F2}
-.pcs-line{display:flex;flex-direction:column;gap:8px;font:500 8px/1.3 'Druk Text Wide',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#AAF6E6}
-.pcs-chip{display:flex;align-items:center;gap:8px;padding:9px 11px 8px;border-radius:8px;border:1px solid rgba(170,246,230,.35)}
-.pcs-chip i{flex:0 0 7px;height:7px;border-radius:50%;background:#AAF6E6}
-.pcs-chip.is-dark{background:#AAF6E6;color:#0F3B3A;border-color:#AAF6E6}
-.pcs-chip.is-dark i{background:#FF7A6B}
-.pcs-dash{display:none}
 /* el countdown queda sin ticket: una sola columna */
 .cd .wrap{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"copy" "nums"!important}
 @media (min-width:900px){
@@ -825,9 +797,6 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   .pcs-right{flex:1 1 auto;gap:22px;padding-top:6px}
   .pcs-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding:6px 4px 0}
   .pcs-lbl{font-size:8.5px}
-  .pcs-line{flex-direction:row;align-items:center;gap:12px;font-size:8.5px}
-  .pcs-chip{display:inline-flex}
-  .pcs-dash{display:block;flex:1 1 auto;height:0;border-top:2px dashed rgba(170,246,230,.35)}
 }
 /* v2: EN/ES dentro del nav */
 .nav .lang button{color:rgba(15,59,58,.6)}
@@ -838,6 +807,156 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   .intro__label{font-size:14px;padding:10px 14px 9px}
   .intro__skip{right:32px;bottom:32px;font-size:11px;padding:13px 18px 12px}
 }
+/* ---------- Postales: tira (un botón del sitio, las postales como atajo) ---------- */
+.pcs-in{display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.pcs-cta{display:flex;flex-direction:column;align-items:stretch;gap:12px}
+.pcs-cta .btn{width:100%}
+.pcs-note{font:500 9px/1.5 'Druk Text Wide',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(170,246,230,.8);text-align:center}
+.pcs .if-closed,html.print-closed .pcs .if-print{display:none}
+html.print-closed .pcs .if-closed{display:inline}
+.pcs-right .pcs-lbl{font-size:8.5px}
+.pcs-right .pcs-lbl b{opacity:0;transition:opacity .2s}
+.pcs-right .pcs-card:hover .pcs-lbl b,.pcs-right .pcs-card:focus-visible .pcs-lbl b{opacity:1}
+@media (max-width:899px){
+  .pcs-right{margin:0 -20px}
+  .pcs-right .pcs-grid{display:flex;gap:14px;padding:12px 20px 10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none}
+  .pcs-right .pcs-grid::-webkit-scrollbar{display:none}
+  .pcs-right .pcs-card{flex:0 0 80%;scroll-snap-align:start}
+}
+@media (min-width:900px){
+  .pcs-in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"copy cta" "right right";gap:30px 48px;align-items:end}
+  .pcs-copy{grid-area:copy;max-width:620px}
+  .pcs-cta{grid-area:cta;align-items:center}
+  .pcs-cta .btn{width:auto}
+  .pcs-right{grid-area:right}
+  /* Postales en fila a todo el ancho: grandes y sin taparse. La que señalás se endereza y pasa adelante. */
+  .pcs-right .pcs-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding:6px 4px 0}
+  .pcs-right .pcs-card{position:relative}
+  .pcs-right .pcs-card:hover,.pcs-right .pcs-card:focus-visible{z-index:5}
+  .pcs-right .pcs-card:hover .pcs-frame,.pcs-right .pcs-card:focus-visible .pcs-frame{transform:rotate(0) translateY(-8px) scale(1.04)}
+}
+
+/* ---------- Postales: dorso (mismo del lienzo; acá se llena en vivo con lo que escribe la persona) ---------- */
+.pcx .bk{background:#FBF8F2;color:#1E2E5A;display:grid;grid-template-columns:57% 43%}
+.pcx .bk::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(122,110,94,.07) 1px,transparent 1px);background-size:6px 6px;pointer-events:none}
+.pcx .bk .l{position:relative;padding:34px 26px 26px 34px;display:flex;flex-direction:column;min-width:0}
+.pcx .bk .r{position:relative;border-left:2px solid #D9D0C0;margin:28px 0;min-width:0}
+.pcx .bk .msg{font:400 25px/1.55 'Hand';color:#1E2E5A;transform:rotate(-1.2deg);transform-origin:left top;overflow-wrap:anywhere}
+.pcx .bk .msg em{font-style:normal;color:#0E8C79}
+.pcx .bk .sub{margin-top:14px;font:400 19px/1.4 'Note';color:#1E2E5A;transform:rotate(-1deg)}
+.pcx .bk .sig{margin-top:auto;display:flex;align-items:flex-end;gap:12px}
+.pcx .bk .sig b{font:400 46px/1 'Sign';color:#1E2E5A;font-weight:400;white-space:nowrap}
+.pcx .bk .sig span{font:500 8px/1.3 'Druk Text Wide';letter-spacing:.12em;text-transform:uppercase;color:#7A6E5E;padding-bottom:8px;white-space:nowrap}
+.pcx .bk .meta{position:absolute;left:34px;bottom:10px;font:500 7px/1 'Druk Text Wide';letter-spacing:.14em;text-transform:uppercase;color:#A89C88}
+.pcx .bk .post{position:absolute;right:30px;top:2px;width:98px;height:120px;background:#FFFDF6;padding:7px;outline:5px dotted #FBF8F2;outline-offset:-2px;box-shadow:0 0 0 1px #CFC5B3;transform:rotate(3deg);display:flex;flex-direction:column;gap:5px}
+.pcx .bk .post i{flex:1;background:#0F3B3A;border-radius:3px;display:flex;align-items:center;justify-content:center}
+.pcx .bk .post i img{height:58px}
+.pcx .bk .post div{display:flex;justify-content:space-between;font:800 8px/1 'Druk Text Wide';letter-spacing:.06em;color:#0F3B3A}
+.pcx .bk .pm{position:absolute;right:92px;top:16px;width:118px;height:118px;border-radius:50%;border:2.5px solid rgba(30,46,90,.62);display:flex;align-items:center;justify-content:center;transform:rotate(-14deg)}
+.pcx .bk .pm::before{content:'';position:absolute;inset:8px;border-radius:50%;border:1.5px solid rgba(30,46,90,.5)}
+.pcx .bk .pm span{font:800 9px/1.25 'Druk Text Wide';letter-spacing:.08em;text-align:center;color:rgba(30,46,90,.72);text-transform:uppercase}
+.pcx .bk .pm span b{display:block;font-size:15px;letter-spacing:.04em}
+.pcx .bk .wv{position:absolute;right:-12px;top:46px;width:150px}
+.pcx .bk .addr{position:absolute;left:26px;right:30px;top:188px;display:flex;flex-direction:column}
+.pcx .bk .addr div{height:44px;border-bottom:1.5px solid #CFC5B3;display:flex;align-items:flex-end;padding-bottom:6px;font:400 21px/1 'Note';color:#1E2E5A;white-space:nowrap;overflow:hidden}
+.pcx .bk .addr div.nm{font:400 21px/1 'Hand'}
+.pcx .bk .addr div.ph{color:#A89C88}
+.pcx .bk .addr div.ct{font:800 13px/1 'Druk Text Wide';letter-spacing:.12em;color:#1E2E5A}
+
+/* ---------- Postales: registro por pasos. A la izquierda la postal, que se da vuelta y se llena en vivo. ---------- */
+.mdl[data-mdl]{padding:0}
+.mdl-box.pmd{width:100%;height:100vh;height:100dvh;max-height:none;border-radius:0;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.pmd .mdl-x{z-index:3;background:rgba(251,248,242,.92)}
+.pmd-left{position:relative;flex:none;background:#0F3B3A;padding:16px 20px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;overflow:hidden}
+.pmd-left::before{content:'';position:absolute;inset:-20%;background:radial-gradient(50% 55% at 50% 50%,rgba(170,246,230,.18),rgba(170,246,230,0) 70%);pointer-events:none}
+.pmd-stage{position:relative;width:min(100%,330px);aspect-ratio:720/510;perspective:1400px;transition:width .35s ease}
+.mdl[data-step="done"] .pmd-stage{width:min(100%,270px)}
+.mdl[data-step="2"] .pmd-stage{width:min(100%,300px)}
+@media (max-width:899px){.mdl[data-step="2"] .pmd-back .pc{transform:scale(calc(var(--pv-scale,.42) * 1.72))}}
+.mdl[data-step="3"] .pmd-left{display:none}
+.pmd-flip{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.3,.75,.2,1)}
+.pmd-flip.is-back{transform:rotateY(180deg)}
+.pmd-face{position:absolute;inset:0;overflow:hidden;border-radius:4px;-webkit-backface-visibility:hidden;backface-visibility:hidden;box-shadow:0 18px 40px rgba(0,0,0,.45);background:#FBF8F2}
+.pmd-back{transform:rotateY(180deg)}
+.pmd-face .pc{position:absolute;left:0;top:0;transform:scale(var(--pv-scale,.45));transform-origin:0 0}
+.pmd-bar{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;width:min(100%,330px);transition:width .35s ease}
+.mdl[data-step="done"] .pmd-bar{width:min(100%,270px)}
+.mdl[data-step="2"] .pmd-bar{width:min(100%,300px)}
+.pmd-flipbtn{flex:none;height:32px;padding:0 11px;border:0;border-radius:6px;background:#AAF6E6;color:#0F3B3A;font:800 9px/1 'Druk Text Wide',sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.pmd-flipbtn:focus-visible{outline:2px solid #FBF8F2;outline-offset:2px}
+.pmd-cap{min-width:0;font:500 9px/1.3 'Druk Text Wide',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#AAF6E6}
+.pmd-right{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.pmd-form{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.pmd-form[hidden]{display:none}
+.pmd-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;padding:20px 20px 18px;-webkit-overflow-scrolling:touch}
+.pmd-prog{list-style:none;margin:0 44px 18px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.pmd-prog li{padding-top:8px;border-top:3px solid #E2D8C4;font:500 8.5px/1 'Druk Text Wide',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#A89C88;white-space:nowrap}
+.mdl[data-step="1"] .pmd-prog li:nth-child(-n+1),.mdl[data-step="2"] .pmd-prog li:nth-child(-n+2),.mdl[data-step="3"] .pmd-prog li:nth-child(-n+3){border-color:#0E8C79;color:#0F3B3A}
+.pmd-panel[hidden]{display:none}
+.pmd-panel h2{margin:0;font:800 30px/1.02 'Ferryman',Georgia,serif;color:#141414;outline:none}
+.pmd-panel>p{margin:8px 0 0;font-size:15px;line-height:1.45;color:#5A5145}
+.pmd .pcs-grid{margin-top:18px;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pmd .pcs-lbl{display:none}
+.pmd-panel>p.pmd-desc{margin-top:16px;padding-top:14px;border-top:1px solid #E2D8C4;color:#141414}
+.pmd .mdl-fields{margin-top:18px;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px 12px}
+.pmd .mdl-f{grid-column:1/-1}
+.pmd .mdl-f.s2{grid-column:span 2}.pmd .mdl-f.s4{grid-column:span 4}
+.pmd .mdl-f select{height:46px;padding:0 10px}
+.pmd .mdl-help{margin:0;font:400 12.5px/1.4 'Proxima Nova',system-ui,sans-serif;letter-spacing:0;color:#7A6E5E}
+.pmd-seg{border:0;padding:0;margin:0;grid-column:1/-1;min-width:0}
+.pmd-seg legend{float:left;width:100%;padding:0;margin:0 0 6px;font:600 12px/1 'Proxima Nova',system-ui,sans-serif;letter-spacing:.02em;text-transform:none;color:#5A5145}
+.pmd-seg-in{clear:both;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:#F1EDE6;border-radius:8px}
+.pmd-seg label{position:relative;cursor:pointer}
+.pmd-seg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pmd-seg span{display:flex;align-items:center;justify-content:center;height:38px;border-radius:6px;font:600 14px/1 'Proxima Nova',system-ui,sans-serif;color:#5A5145}
+.pmd-seg input:checked+span{background:#0F3B3A;color:#AAF6E6}
+.pmd-seg input:focus-visible+span{outline:2px solid #0F3B3A;outline-offset:2px}
+.pmd-opts{margin-top:18px;display:grid;gap:10px}
+.pmd-opt{position:relative;display:block;cursor:pointer}
+.pmd-opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pmd-opt>span{display:flex;flex-direction:column;gap:5px;padding:14px 14px 13px 42px;border:1.5px solid #DCD4C6;border-radius:8px;background:#FFFFFF;position:relative}
+.pmd-opt>span::before{content:'';position:absolute;left:14px;top:15px;width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #A89C88;background:#FFFFFF}
+.pmd-opt b{font:800 11px/1.2 'Druk Text Wide',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#0F3B3A}
+.pmd-opt small{font:400 13.5px/1.35 'Proxima Nova',system-ui,sans-serif;color:#5A5145}
+.pmd-opt input:checked+span{border-color:#0F3B3A;background:#F4FBF8;box-shadow:inset 0 0 0 1px #0F3B3A}
+.pmd-opt input:checked+span::before{box-shadow:inset 0 0 0 5.5px #0F3B3A}
+.pmd-opt input:focus-visible+span{outline:2px solid #0F3B3A;outline-offset:2px}
+.pmd-closed{margin:18px 0 0;padding:12px 14px;border-radius:8px;background:#F1EDE6;font-size:14px;line-height:1.4;color:#5A5145}
+html:not(.print-closed) .pmd-closed,html.print-closed .pmd-opts{display:none}
+.pmd-addr[hidden]{display:none}
+.pmd .mdl-chk{margin-top:18px;font-size:14px}
+.pmd-foot{flex:none;display:flex;align-items:center;gap:10px;padding:12px 20px calc(12px + env(safe-area-inset-bottom));border-top:1px solid #E2D8C4;background:#FBF8F2}
+.pmd-foot .btn{border:0;cursor:pointer;height:48px}
+.pmd-foot [data-mdl-next]{flex:1 1 auto;padding:0 14px}
+.pmd-back-btn{flex:none;height:48px;padding:0 14px;border:1.5px solid #DCD4C6;border-radius:6px;background:transparent;color:#0F3B3A;font:800 11px/1 'Druk Text Wide',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.pmd-back-btn[hidden]{display:none}
+.pmd .mdl-err{margin:14px 0 0;display:block}
+.pmd .mdl-err[hidden]{display:none}
+.pmd .mdl-done{padding:24px 20px;gap:10px;overflow-y:auto}
+.pmd .mdl-done[hidden]{display:none}
+.pmd .mdl-done h2{outline:none}
+.pmd-done-btns{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.pmd .mdl-done .pmd-done-btns .btn{align-self:stretch;margin:0}
+.pmd-btn-ln{background:transparent;color:#0F3B3A;box-shadow:inset 0 0 0 1.5px #0F3B3A}
+.pmd-link{align-self:flex-start;margin-top:4px;padding:6px 0;border:0;background:none;color:#5A5145;font:600 14px/1 'Proxima Nova',system-ui,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media (min-width:900px){
+  .mdl[data-mdl]{padding:16px}
+  .mdl-box.pmd{width:min(100%,1060px);height:min(740px,calc(100vh - 32px));border-radius:8px;display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr)}
+  .pmd-left,.mdl[data-step="3"] .pmd-left{display:flex;justify-content:center;gap:22px;padding:36px}
+  .pmd-stage,.mdl[data-step="2"] .pmd-stage,.mdl[data-step="done"] .pmd-stage{width:100%;transform:rotate(-1.5deg)}
+  .pmd-bar,.mdl[data-step="2"] .pmd-bar,.mdl[data-step="done"] .pmd-bar{width:100%}
+  .pmd-flipbtn{height:36px;padding:0 14px;font-size:10px}
+  .pmd-cap{font-size:10px}
+  .pmd-scroll{padding:28px 30px 20px}
+  .pmd-panel h2{font-size:36px}
+  .pmd .pcs-grid{gap:12px;padding:2px}
+  .pmd-opts{grid-template-columns:1fr 1fr}
+  .pmd-foot{padding:14px 30px}
+  .pmd .mdl-done{padding:44px 44px 30px 34px;justify-content:center}
+  .pmd .mdl-done h2{font-size:40px}
+  .pmd-done-btns{flex-direction:row;flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){.pmd-flip,.pmd-stage{transition:none}}
 </style>
 <script src="config.js"></script>
 <script>
@@ -937,9 +1056,8 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
   <section class="pcs on-dark pcx" id="postcards"><div class="wrap pcs-in">
     <div class="rv pcs-copy">
       <span class="k" style="color:#AAF6E6">Your Groundbreaking gift</span>
-      <h2 class="pcs-h">One postcard, yours twice.</h2>
-      <p>Register and pick your favorite. We email it to you today, and on December 12 the very same postcard lands printed in your mailbox. We keep you posted in between.</p>
-      <a href="#register" class="ticket"><span class="tk-a"><span class="tk-k"><i class="tk-k0">Admit one · Dec 12</i><i class="tk-k1">Postcard <em></em> picked · one step left</i></span><b><i class="tk-t0">Pick a postcard, then register</i><i class="tk-t1">Great pick. Now register</i></b></span><span class="tk-b">GO →</span></a>
+      <h2 class="pcs-h"><span class="if-print">One postcard, yours twice.</span><span class="if-closed">One postcard, yours today.</span></h2>
+      <p>Pick your favorite and we email it to you today.<span class="if-print"> On December 12 we mail you the printed one, with the first-shovel postmark.</span></p>
     </div>
     <div class="rv pcs-right">
       <div class="pcs-grid">
@@ -974,8 +1092,8 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
           <div class="ft"><img src="assets/palm.svg" alt="" style="height:40px"><span class="lbl">Port St. Lucie SC · Dec 12, 2026</span></div>
         </div></div><div class="pcs-lbl"><span>04 · Hey, it’s Luca!</span><b></b></div></button>
       </div>
-      <div class="pcs-line"><span class="pcs-chip"><i></i>Today · your postcard, by email</span><span class="pcs-dash"></span><span class="pcs-chip is-dark"><i></i>December 12 · the same one, printed, in your mailbox</span></div>
     </div>
+    <div class="rv pcs-cta"><a href="#register" class="btn btn-aq">Get my postcard →</a><span class="pcs-note"><span class="if-print">Printed · USA &amp; Argentina · Until Dec 7</span><span class="if-closed">By email · Free</span></span></div>
   </div></section>
 
   <!-- FACTS + PASSPORT -->
@@ -1237,7 +1355,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
         </div>
         <sc-if value="{{ tourEnd }}" hint-placeholder-val="{{ false }}">
           <div class="sc-end" id="tour-end">
-            <a href="#postcards" class="ticket"><span class="tk-a"><span>Your Groundbreaking gift</span><b>Register · get your postcard</b></span><span class="tk-b">GO →</span></a>
+            <a href="#register" class="btn btn-aq">Get my postcard →</a>
             <button type="button" class="sc-again" onClick="{{ tourAgain }}">↺ Take the tour again</button>
           </div>
         </sc-if>
@@ -1396,39 +1514,99 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 <div class="toast" data-toast hidden role="status" aria-live="polite"></div>
 
 <!-- Registro (v2): modal con la postal elegida (se puede cambiar), email y domicilio; check "solo digital" -->
-<div class="mdl" data-mdl hidden>
+<div class="mdl" data-mdl data-step="1" hidden>
   <div class="mdl-bd" data-mdl-close></div>
-  <div class="mdl-box pcx" role="dialog" aria-modal="true" aria-labelledby="mdl-title">
+  <div class="mdl-box pmd pcx" role="dialog" aria-modal="true" aria-labelledby="mdl-title">
     <button type="button" class="mdl-x" data-mdl-close aria-label="Close">✕</button>
-    <form class="mdl-form" data-mdl-form novalidate action="#" method="post">
-      <div class="mdl-head"><span class="k">Your Groundbreaking gift</span><h2 id="mdl-title">Your postcard, your details.</h2><p>Pick the postcard you want twice: by email today, printed at your door on December 12.</p></div>
-      <fieldset><legend>1 · Your postcard</legend><div class="pcs-grid" data-mdl-grid></div></fieldset>
-      <fieldset><legend>2 · You</legend>
-        <div class="mdl-fields">
-          <label class="mdl-f">First name<input name="name" required autocomplete="given-name" placeholder="How it should read on the postcard"></label>
-          <label class="mdl-f">Email<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+    <div class="pmd-left">
+      <div class="pmd-stage" data-pv>
+        <div class="pmd-flip" data-pv-flip>
+          <div class="pmd-face pmd-front" data-pv-front></div>
+          <div class="pmd-face pmd-back"><div class="pc bk">
+            <div class="l">
+              <div class="msg"><span data-pv-msg></span> <em data-pv-name></em></div>
+              <div class="sub" data-pv-sub></div>
+              <div class="sig"><b>Gustavo Suárez</b><span>Founder &amp; CEO<br>Port St. Lucie SC</span></div>
+            </div>
+            <div class="r">
+              <div class="post"><i><img src="assets/crest-aqua.webp" alt=""></i><div><span>SEE YOU</span><span>12/12</span></div></div>
+              <div class="pm"><span>Port St. Lucie FL<b>DEC 12</b>2026 · First shovel</span></div>
+              <svg class="wv" viewBox="0 0 150 60" aria-hidden="true"><g fill="none" stroke="rgba(30,46,90,.55)" stroke-width="2.2"><path d="M0 8 q9 -6 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 19 q9 -6 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 30 q9 -6 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 41 q9 -6 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/><path d="M0 52 q9 -6 18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0 t18 0"/></g></svg>
+              <div class="addr"><div class="nm" data-pv-to></div><div data-pv-l1></div><div data-pv-l2></div><div class="ct" data-pv-ct></div></div>
+            </div>
+            <span class="meta">Port St. Lucie SC · Groundbreaking postcard · Front <span data-pv-n></span> of 04</span>
+          </div></div>
         </div>
-        <label class="mdl-chk"><input type="checkbox" name="digital" value="1" data-mdl-digital>I only want the digital postcard. Skip the mailing address.</label>
-      </fieldset>
-      <fieldset data-mdl-addr><legend>3 · Where the printed one goes</legend>
-        <div class="mdl-fields">
-          <label class="mdl-f" style="grid-column:1/-1">Street address<input name="street" required autocomplete="street-address"></label>
-          <div class="mdl-row" style="grid-column:1/-1">
-            <label class="mdl-f">City<input name="city" required autocomplete="address-level2"></label>
-            <label class="mdl-f">State<input name="state" required autocomplete="address-level1"></label>
-            <label class="mdl-f">ZIP<input name="zip" required autocomplete="postal-code" inputmode="numeric"></label>
-          </div>
+      </div>
+      <div class="pmd-bar"><span class="pmd-cap" data-pv-cap aria-live="polite"></span><button type="button" class="pmd-flipbtn" data-pv-toggle>Flip ↻</button></div>
+    </div>
+    <div class="pmd-right">
+      <form class="mdl-form pmd-form" data-mdl-form novalidate action="#" method="post">
+        <div class="pmd-scroll" data-mdl-scroll>
+          <ol class="pmd-prog" aria-hidden="true"><li>Postcard</li><li>You</li><li>Delivery</li></ol>
+
+          <section class="pmd-panel" data-panel="1">
+            <h2 id="mdl-title" tabindex="-1">Pick your postcard.</h2>
+            <p>Four fronts, one message from the club on the back.</p>
+            <div class="pcs-grid" data-mdl-grid></div>
+            <p class="pmd-desc" data-pick-desc aria-live="polite"></p>
+          </section>
+
+          <section class="pmd-panel" data-panel="2" hidden>
+            <h2 tabindex="-1">Who’s it for?</h2>
+            <p>This is how it reads on the back.</p>
+            <div class="mdl-fields">
+              <label class="mdl-f">Name on the postcard<input name="name" required maxlength="40" autocomplete="given-name" placeholder="Sofía, Mateo, The Rodríguez family…" data-pv-in></label>
+              <label class="mdl-f">Your email<input type="email" name="email" required maxlength="120" autocomplete="email" placeholder="you@example.com"><span class="mdl-help">Your postcard lands here.</span></label>
+              <fieldset class="pmd-seg"><legend>Message in</legend><div class="pmd-seg-in">
+                <label><input type="radio" name="message_lang" value="en" data-pv-in checked><span>English</span></label>
+                <label><input type="radio" name="message_lang" value="es" data-pv-in><span>Español</span></label>
+              </div></fieldset>
+            </div>
+          </section>
+
+          <section class="pmd-panel" data-panel="3" hidden>
+            <h2 tabindex="-1">How do you want it?</h2>
+            <p class="pmd-closed">Printed copies closed on December 7. Yours comes by email.</p>
+            <div class="pmd-opts">
+              <label class="pmd-opt"><input type="radio" name="delivery" value="printed" data-pv-in checked><span><b>Email + printed</b><small>By email today. In the mail on December 12, with the first-shovel postmark.</small></span></label>
+              <label class="pmd-opt"><input type="radio" name="delivery" value="digital" data-pv-in><span><b>Email only</b><small>Yours today, ready to download and share.</small></span></label>
+            </div>
+            <div class="pmd-addr" data-mdl-addr>
+              <div class="mdl-fields">
+                <fieldset class="pmd-seg"><legend>Mail it to</legend><div class="pmd-seg-in">
+                  <label><input type="radio" name="country" value="US" data-pv-in checked><span>United States</span></label>
+                  <label><input type="radio" name="country" value="AR" data-pv-in><span>Argentina</span></label>
+                </div></fieldset>
+                <label class="mdl-f"><span data-lbl-us="Street address" data-lbl-ar="Calle y número">Street address</span><input name="street" required maxlength="120" autocomplete="address-line1" data-pv-in></label>
+                <label class="mdl-f s2"><span data-lbl-us="Apt (optional)" data-lbl-ar="Piso / depto (opcional)">Apt (optional)</span><input name="street2" maxlength="40" autocomplete="address-line2" data-pv-in></label>
+                <label class="mdl-f s4"><span data-lbl-us="City" data-lbl-ar="Localidad">City</span><input name="city" required maxlength="60" autocomplete="address-level2" data-pv-in></label>
+                <label class="mdl-f s4"><span data-lbl-us="State" data-lbl-ar="Provincia">State</span><select name="state" required autocomplete="address-level1" data-pv-in data-mdl-state></select></label>
+                <label class="mdl-f s2"><span data-lbl-us="ZIP" data-lbl-ar="Código postal">ZIP</span><input name="zip" required maxlength="10" autocomplete="postal-code" data-pv-in data-mdl-zip></label>
+              </div>
+            </div>
+            <label class="mdl-chk"><input type="checkbox" name="consent" value="1" required>Send my postcard and use my details only for that. I’m 18 or older.</label>
+          </section>
+
+          <input type="text" name="hp" tabindex="-1" autocomplete="off" class="wm-hp" aria-hidden="true">
+          <span class="mdl-err" data-mdl-err role="alert" hidden></span>
         </div>
-        <p class="mdl-note">Only used to mail your postcard. Nothing else, nobody else.</p>
-      </fieldset>
-      <div class="mdl-foot"><button type="submit" class="btn btn-sea">Send my postcard →</button><span class="mdl-err" data-mdl-err hidden>Pick a postcard first.</span></div>
-    </form>
-    <div class="mdl-done" data-mdl-done hidden>
-      <span class="k" style="color:#0E8C79">You’re in</span>
-      <h2>Thanks, <span data-done-name></span>.</h2>
-      <p>Postcard <b data-done-card></b> is on its way to <b data-done-email></b>.</p>
-      <p data-done-mail></p>
-      <button type="button" class="btn btn-sea" data-mdl-close>Back to the site</button>
+        <div class="pmd-foot">
+          <button type="button" class="pmd-back-btn" data-mdl-back hidden>← Back</button>
+          <button type="submit" class="btn btn-sea" data-mdl-next>Next →</button>
+        </div>
+      </form>
+      <div class="mdl-done" data-mdl-done hidden>
+        <span class="k" style="color:#0E8C79">You’re in</span>
+        <h2 tabindex="-1" data-done-title></h2>
+        <p>Your postcard is on its way to <b data-done-email></b>.</p>
+        <p data-done-mail></p>
+        <div class="pmd-done-btns">
+          <a class="btn btn-sea" data-done-cal download="groundbreaking-dec-12.ics">Add Dec 12 to my calendar</a>
+          <a class="btn pmd-btn-ln" data-done-share target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
+        </div>
+        <button type="button" class="pmd-link" data-mdl-close>Back to the site</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1440,7 +1618,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 /* 01 · Greetings from */
 .f1{background:#FBF8F2;color:#0F3B3A;padding:34px 34px 28px;display:flex;flex-direction:column}
 .f1::before{content:'';position:absolute;inset:12px;border:2px solid #0F3B3A;border-radius:4px;pointer-events:none}
-.f1 .pre{font:800 46px/1 'Ferryman',serif;color:#FF7A6B;text-align:center;margin-top:auto;transform:rotate(-2deg)}
+.f1 .pre{font:800 46px/1 'Ferryman',serif;color:#0E8C79;text-align:center;margin-top:auto;transform:rotate(-2deg)}
 .f1 .big{white-space:nowrap;text-align:center;font:900 122px/.84 'Druk',sans-serif;letter-spacing:.005em;background:url('assets/aerial.webp') 50% 55%/cover;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:3px #0F3B3A;margin-top:22px}
 .f1 .row{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding:0 14px 6px}
 .f1 .row .lbl{color:#0F3B3A}
@@ -1471,7 +1649,7 @@ html[data-pick="1"] .mdl .pcs-card:nth-child(1) .pcs-lbl b,html[data-pick="2"] .
 /* 04 · Luca */
 .f4{background:#AAF6E6;color:#0F3B3A}
 .f4::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(15,59,58,.14) 1.6px,transparent 1.6px);background-size:18px 18px}
-.f4 .sun{position:absolute;right:-60px;top:-60px;width:420px;height:420px;border-radius:50%;background:#FFD45C}
+.f4 .sun{position:absolute;right:-60px;top:-60px;width:420px;height:420px;border-radius:50%;background:#E9D4A7}
 .f4 .luca{position:absolute;right:14px;bottom:-30px;height:450px}
 .f4 .hi{position:absolute;left:36px;top:40px;font:800 40px/1 'Ferryman',serif;color:#0E8C79;transform:rotate(-3deg)}
 .f4 .tit{position:absolute;left:36px;top:98px;font:800 50px/.96 'Druk Text Wide';text-transform:uppercase;letter-spacing:.01em;width:390px}
@@ -1634,7 +1812,7 @@ h3{margin:0 0 16px;font:800 18px/1.1 'Druk Text Wide',sans-serif;text-transform:
     <section><h3>Un dorso</h3><div class="grid"><figure class="fr"><div class="scw" data-w="720"><div class="sci" style="width:720px"><div class="pc bk">
     <div class="l">
       <div class="msg">Thanks for being part of this, <em>Sofía.</em></div>
-      <div class="sub">You were here for the first shovel. We’ll save you a seat for everything that comes next.</div>
+      <div class="sub">You’re part of the first shovel. We’ll save you a seat for everything that comes next.</div>
       <div class="sig"><b>Gustavo Suárez</b><span>Founder &amp; CEO<br>Port St. Lucie SC</span></div>
     </div>
     <div class="r">
@@ -1648,7 +1826,7 @@ h3{margin:0 0 16px;font:800 18px/1.1 'Druk Text Wide',sans-serif;text-transform:
   </div></div></div><figcaption><b>EN</b><span><strong>English · USA</strong>Mensaje y nombre a mano, firma del club y matasellos del 12/12.</span></figcaption></figure><figure class="fr"><div class="scw" data-w="720"><div class="sci" style="width:720px"><div class="pc bk">
     <div class="l">
       <div class="msg">Gracias por ser parte de esto, <em>Sofía.</em></div>
-      <div class="sub">Estuviste en la primera palada. Te guardamos un lugar para todo lo que viene.</div>
+      <div class="sub">Sos parte de la primera palada. Te guardamos un lugar para todo lo que viene.</div>
       <div class="sig"><b>Gustavo Suárez</b><span>Founder &amp; CEO<br>Port St. Lucie SC</span></div>
     </div>
     <div class="r">
@@ -1684,7 +1862,7 @@ h3{margin:0 0 16px;font:800 18px/1.1 'Druk Text Wide',sans-serif;text-transform:
         <div class="b"><div class="th" style="width:300px;height:212px"><div style="transform:scale(0.4167);transform-origin:0 0;width:720px;height:510px"><div class="pc bk">
     <div class="l">
       <div class="msg">Thanks for being part of this, <em>Sofía.</em></div>
-      <div class="sub">You were here for the first shovel. We’ll save you a seat for everything that comes next.</div>
+      <div class="sub">You’re part of the first shovel. We’ll save you a seat for everything that comes next.</div>
       <div class="sig"><b>Gustavo Suárez</b><span>Founder &amp; CEO<br>Port St. Lucie SC</span></div>
     </div>
     <div class="r">
@@ -2210,69 +2388,158 @@ class Component extends DCLogic {
 </script>
 
 <script>
-// v2: selección de postal (estado en <html data-pick>, sobrevive al re-render), el GO que reacciona, y el modal de registro.
+// Postales: tocar una postal abre el registro con esa elegida (estado en <html data-pick>, sobrevive al re-render).
+// Registro en 3 pasos (postal · quién · entrega); la postal de la izquierda se da vuelta y se llena en vivo.
+// Cierre de impresas: 7/12 a la noche en Port St. Lucie (?print=closed lo fuerza para revisar ese estado).
 (function(){
   var root = document.documentElement;
   var mdl = document.querySelector('[data-mdl]'); if (!mdl) return;
-  var form = mdl.querySelector('[data-mdl-form]'), done = mdl.querySelector('[data-mdl-done]'), grid = mdl.querySelector('[data-mdl-grid]');
-  var addr = mdl.querySelector('[data-mdl-addr]'), digital = mdl.querySelector('[data-mdl-digital]'), err = mdl.querySelector('[data-mdl-err]');
-  var NAMES = { 1: 'Greetings from Port St. Lucie', 2: 'The first shovel', 3: 'Saving you a seat', 4: 'Hey, it’s Luca!' };
-  var lastFocus = null, nudgeTimer;
+  var $ = function(sel){ return mdl.querySelector(sel); };
+  var form = $('[data-mdl-form]'), done = $('[data-mdl-done]'), grid = $('[data-mdl-grid]'), err = $('[data-mdl-err]');
+  var addr = $('[data-mdl-addr]'), next = $('[data-mdl-next]'), back = $('[data-mdl-back]'), scroll = $('[data-mdl-scroll]');
+  var flip = $('[data-pv-flip]'), stage = $('[data-pv]'), stateSel = $('[data-mdl-state]'), zip = $('[data-mdl-zip]');
+  var NAMES = { 1: 'Greetings', 2: 'First shovel', 3: 'Saving you a seat', 4: 'Hey, it’s Luca!' };
+  var DESC = {
+    1: 'The classic. Made to send to the family, wherever they are.',
+    2: 'The stadium blueprint, with the exact spot of the first shovel.',
+    3: 'The pitch as it is today, before everything begins.',
+    4: 'Luca and his drum. This one’s for the kids.'
+  };
+  var TEXT = {
+    en: { msg: 'Thanks for being part of this,', sub: 'You’re part of the first shovel. We’ll save you a seat for everything that comes next.' },
+    es: { msg: 'Gracias por ser parte de esto,', sub: 'Sos parte de la primera palada. Te guardamos un lugar para todo lo que viene.' }
+  };
+  var STATES = {
+    US: 'AL AK AZ AR CA CO CT DC DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA PR RI SC SD TN TX UT VT VA WA WV WI WY'.split(' '),
+    AR: ['Buenos Aires','CABA','Catamarca','Chaco','Chubut','Córdoba','Corrientes','Entre Ríos','Formosa','Jujuy','La Pampa','La Rioja','Mendoza','Misiones','Neuquén','Río Negro','Salta','San Juan','San Luis','Santa Cruz','Santa Fe','Santiago del Estero','Tierra del Fuego','Tucumán']
+  };
+  var PRINT_CLOSES = Date.parse('2026-12-08T00:00:00-05:00');
+  var printClosed = Date.now() >= PRINT_CLOSES || /[?&]print=closed\b/.test(location.search);
+  if (printClosed){ root.classList.add('print-closed'); form.elements.delivery.value = 'digital'; $('[data-panel="3"] h2').textContent = 'One last thing.'; }
+  var step = 1, lastFocus = null, finished = false;
 
+  function val(k){ var f = form.elements[k]; return f ? String(f.value || '').trim() : ''; }
+  function printed(){ return !printClosed && val('delivery') === 'printed'; }
+
+  function fit(){
+    if (stage.clientWidth) mdl.style.setProperty('--pv-scale', (stage.clientWidth / 720).toFixed(4));
+    var f = grid.querySelector('.pcs-frame'); if (f && f.clientWidth) mdl.style.setProperty('--mdl-scale', (f.clientWidth / 720).toFixed(4));
+  }
+  function showBack(on){ flip.classList.toggle('is-back', !!on); }
   function pick(n){
     root.setAttribute('data-pick', n); err.hidden = true;
-    root.classList.remove('pcs-nudge'); void root.offsetWidth; root.classList.add('pcs-nudge');
-    clearTimeout(nudgeTimer); nudgeTimer = setTimeout(function(){ root.classList.remove('pcs-nudge'); }, 2200);
+    var src = document.querySelector('.pcs-right [data-pick-card="' + n + '"] .pc');
+    $('[data-pv-front]').innerHTML = src ? src.outerHTML : '';
+    $('[data-pv-n]').textContent = '0' + n;
+    $('[data-pv-cap]').textContent = '0' + n + ' · ' + NAMES[n];
+    $('[data-pick-desc]').textContent = DESC[n];
+    showBack(false);
   }
-  function fit(){ var f = mdl.querySelector('.pcs-frame'); if (f && f.clientWidth) mdl.style.setProperty('--mdl-scale', (f.clientWidth / 720).toFixed(4)); }
-  function open(){
-    if (!grid.children.length){ var src = document.querySelector('.pcs-grid'); if (src) grid.innerHTML = src.innerHTML; }
+  // El dorso refleja lo que hay en el formulario. Con el nombre vacío deja el hueco a la vista.
+  function paint(){
+    var t = TEXT[val('message_lang')] || TEXT.en, name = val('name'), us = val('country') !== 'AR', p = printed();
+    $('[data-pv-msg]').textContent = t.msg;
+    $('[data-pv-name]').textContent = name ? name + '.' : '…';
+    $('[data-pv-sub]').textContent = t.sub;
+    $('[data-pv-to]').textContent = name;
+    var l1 = [val('street'), val('street2')].filter(Boolean).join(', ');
+    var l2 = [val('city'), [val('state'), val('zip')].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+    var e1 = $('[data-pv-l1]'), e2 = $('[data-pv-l2]');
+    e1.textContent = p ? (l1 || (us ? '[Street address]' : '[Calle y número]')) : '';
+    e2.textContent = p ? (l2 || (us ? '[City, State ZIP]' : '[Localidad, Provincia]')) : '';
+    e1.classList.toggle('ph', p && !l1); e2.classList.toggle('ph', p && !l2);
+    $('[data-pv-ct]').textContent = p ? (us ? 'USA' : 'ARGENTINA') : 'BY EMAIL';
+  }
+  // Los campos del domicilio cambian con el país; apagados no se validan ni se envían.
+  function setCountry(){
+    var key = val('country') === 'AR' ? 'AR' : 'US', prev = stateSel.value;
+    Array.prototype.forEach.call(addr.querySelectorAll('[data-lbl-us]'), function(l){ l.textContent = l.getAttribute(key === 'AR' ? 'data-lbl-ar' : 'data-lbl-us'); });
+    stateSel.innerHTML = '<option value="">' + (key === 'AR' ? 'Elegí' : 'Choose') + '</option>' + STATES[key].map(function(o){ return '<option>' + o + '</option>'; }).join('');
+    if (STATES[key].indexOf(prev) > -1) stateSel.value = prev;
+    zip.pattern = key === 'AR' ? '[A-Za-z]?[0-9]{4}[A-Za-z]{0,3}' : '[0-9]{5}(-[0-9]{4})?';
+    zip.title = key === 'AR' ? 'Código postal, por ejemplo 1425 o C1425ABC' : '5-digit ZIP code';
+    zip.inputMode = key === 'AR' ? 'text' : 'numeric';
+  }
+  function setDelivery(){
+    var on = printed(); addr.hidden = !on;
+    Array.prototype.forEach.call(addr.querySelectorAll('input,select'), function(i){ i.disabled = !on; });
+  }
+  function go(n){
+    step = n; mdl.setAttribute('data-step', n); err.hidden = true;
+    Array.prototype.forEach.call(mdl.querySelectorAll('[data-panel]'), function(p){ p.hidden = +p.getAttribute('data-panel') !== n; });
+    back.hidden = n === 1;
+    next.textContent = n === 3 ? 'Send my postcard →' : 'Next →';
+    showBack(n > 1);
+    scroll.scrollTop = 0;
+    // El ancho de la postal cambia con el paso en móvil: se vuelve a medir durante y al final de la transición.
+    fit(); setTimeout(fit, 400);
+    var h = $('[data-panel="' + n + '"] h2'); if (h) h.focus({ preventScroll: true });
+  }
+  function valid(n){
+    var fields = $('[data-panel="' + n + '"]').querySelectorAll('input:not([type=radio]),select');
+    for (var i = 0; i < fields.length; i++){ if (!fields[i].disabled && !fields[i].reportValidity()) return false; }
+    return true;
+  }
+  function open(n){
+    if (!grid.children.length){ var src = document.querySelector('.pcs-right .pcs-grid'); if (src) grid.innerHTML = src.innerHTML; }
+    if (finished){ form.reset(); finished = false; if (printClosed) form.elements.delivery.value = 'digital'; setCountry(); setDelivery(); }
     lastFocus = document.activeElement;
-    form.hidden = false; done.hidden = true; err.hidden = true;
-    mdl.hidden = false; root.classList.add('mdl-open'); fit();
-    var first = root.hasAttribute('data-pick') ? form.querySelector('input[name="name"]') : grid.querySelector('[data-pick-card]');
-    if (first) first.focus();
+    form.hidden = false; done.hidden = true;
+    mdl.hidden = false; root.classList.add('mdl-open');
+    var on = document.querySelector('.nav .lang button.is-on');
+    if (!val('name') && on && /ES/.test(on.textContent)) form.elements.message_lang.value = 'es';
+    pick(n || root.getAttribute('data-pick') || 1); paint(); go(1);
   }
   function close(){
     mdl.hidden = true; root.classList.remove('mdl-open');
     if (location.hash === '#register') history.replaceState(null, '', location.pathname + location.search);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  function setDigital(){
-    var on = digital.checked; addr.hidden = on;
-    Array.prototype.forEach.call(addr.querySelectorAll('input'), function(i){ i.required = !on; });
-  }
   document.addEventListener('click', function(e){
     var t = e.target; if (!t.closest) return;
-    var card = t.closest('[data-pick-card]'); if (card){ pick(card.getAttribute('data-pick-card')); return; }
-    var go = t.closest('a[href="#register"]'); if (go){ e.preventDefault(); open(); return; }
+    var card = t.closest('[data-pick-card]');
+    if (card){ var n = card.getAttribute('data-pick-card'); if (mdl.hidden) open(n); else pick(n); return; }
+    var cta = t.closest('a[href="#register"]'); if (cta){ e.preventDefault(); open(); return; }
     if (t.closest('[data-mdl-close]')) close();
   });
+  $('[data-pv-toggle]').addEventListener('click', function(){ showBack(!flip.classList.contains('is-back')); });
+  back.addEventListener('click', function(){ go(step - 1); });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !mdl.hidden) close(); });
   addEventListener('resize', function(){ if (!mdl.hidden) fit(); });
-  digital.addEventListener('change', setDigital); setDigital();
+  form.addEventListener('input', paint);
+  form.addEventListener('change', function(e){
+    if (e.target.name === 'country') setCountry();
+    if (e.target.name === 'delivery' || e.target.name === 'country') setDelivery();
+    paint();
+  });
   form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var n = root.getAttribute('data-pick');
-    if (!n){ err.hidden = false; var c = grid.querySelector('[data-pick-card]'); if (c) c.focus(); return; }
-    if (!form.checkValidity()){ form.reportValidity(); return; }
-    var d = { type: 'register', postcard: n }; new FormData(form).forEach(function(v, k){ d[k] = v; });
-    d.digital_only = !!digital.checked; delete d.digital;
-    var btn = form.querySelector('button[type=submit]'); btn.disabled = true;
+    e.preventDefault(); err.hidden = true;
+    if (!valid(step)) return;
+    if (step < 3){ go(step + 1); return; }
+    var d = { type: 'register', postcard: root.getAttribute('data-pick'), digital_only: !printed(), consent: true };
+    ['name', 'email', 'message_lang', 'hp'].forEach(function(k){ d[k] = val(k); });
+    if (printed()) ['country', 'street', 'street2', 'city', 'state', 'zip'].forEach(function(k){ d[k] = val(k); });
+    next.disabled = true; next.textContent = 'Sending…';
     window.gbApi(d).then(function(res){
-      btn.disabled = false;
+      next.disabled = false; next.textContent = 'Send my postcard →';
       if (!res || !res.ok){ err.textContent = (res && res.error) || 'Something went wrong. Try again.'; err.hidden = false; return; }
       showDone(d);
     });
   });
   function showDone(d){
-    var n = d.postcard;
-    done.querySelector('[data-done-name]').textContent = d.name;
-    done.querySelector('[data-done-card]').textContent = '0' + n + ' · ' + NAMES[n];
+    finished = true; mdl.setAttribute('data-step', 'done');
+    done.querySelector('[data-done-title]').textContent = 'Thanks, ' + d.name + '.';
     done.querySelector('[data-done-email]').textContent = d.email;
-    done.querySelector('[data-done-mail]').textContent = digital.checked ? 'Digital only, as you asked. Nothing in the mail.' : 'December 12: the printed one goes to ' + d.street + ', ' + d.city + '.';
-    form.hidden = true; done.hidden = false; done.querySelector('button').focus();
+    done.querySelector('[data-done-mail]').textContent = d.digital_only ? '' : 'The printed one goes in the mail on December 12, to ' + d.street + ', ' + d.city + '.';
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Port St. Lucie SC//Groundbreaking//EN', 'BEGIN:VEVENT', 'UID:groundbreaking-2026-12-12@portstluciesc.com',
+      'DTSTAMP:20261102T000000Z', 'DTSTART:20261212T150000Z', 'SUMMARY:Port St. Lucie Stadium · Groundbreaking', 'LOCATION:US-1 & Walton Rd\\, Port St. Lucie\\, FL', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    done.querySelector('[data-done-cal]').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+    var text = d.message_lang === 'es' ? 'Ya tengo mi postal de la primera palada del estadio de Port St. Lucie SC. Pedí la tuya: ' : 'I got my postcard from the first shovel of the Port St. Lucie SC stadium. Get yours: ';
+    done.querySelector('[data-done-share]').href = 'https://wa.me/?text=' + encodeURIComponent(text + location.origin + location.pathname + '#postcards');
+    form.hidden = true; done.hidden = false; showBack(false); fit(); setTimeout(fit, 400);
+    done.querySelector('h2').focus({ preventScroll: true });
   }
+  setCountry(); setDelivery();
   if (location.hash === '#register') open();
 })();
 

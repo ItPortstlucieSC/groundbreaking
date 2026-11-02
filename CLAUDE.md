@@ -238,6 +238,29 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   de texto `.post-big`/`.big`.
 Para regenerarla desde la v1 hay que rehacer esos cambios (no hay build): es una copia editada, no una derivación.
 
+## Postales (feature/postales)
+Propuesta y decisiones: `../docs/frentes/groundbreaking/PROPUESTA-postales.md`. Reemplaza lo que más arriba se cuenta de la
+tira con ticket, los chips y el modal con checkbox de "digital" (ya no existen).
+
+- **Tira (`#postcards`):** titular, un párrafo, las 4 postales y **un botón del sitio** ("Get my postcard →"). Tocar una
+  postal abre el registro con esa elegida. En móvil, las postales son un carrusel con snap y el botón va debajo. El mismo
+  botón reemplazó al ticket del final del tour.
+- **Frentes:** coral y amarillo quedan solo en stickers: "Greetings from" (01) pasó a `#0E8C79` y el sol de Luca (04) a arena
+  `#E9D4A7`. En escritorio la tira lleva el texto y el botón arriba y las postales en fila a todo el ancho (se probó un abanico solapado y se descartó: se tapaban el texto).
+- **Registro (`[data-mdl]`, `.pmd`):** 3 pasos (Postcard · You · Delivery) con la postal a la izquierda, que se da vuelta sola
+  al pasar al paso 2 (o con "Flip") y **se llena en vivo**: nombre, mensaje EN/ES, domicilio. Entra con la 01 elegida, así
+  nunca hay error de "elegí una". En móvil, en el paso 2 el dorso hace zoom a la mitad del mensaje para que el nombre se lea, y en el 3 la postal se oculta.
+- **Entrega:** "Email + printed" (por defecto) o "Email only". Domicilio según país, **solo US y AR**; en AR los campos van en
+  español y Provincia/CP cambian. Un solo consentimiento obligatorio, con 18+. Sin opt-in de novedades (decisión del 2-nov).
+- **Cierre de impresas:** `PRINT_CLOSES` en el script (fin del 7/12, hora de Florida). Después la tira y el paso 3 quedan solo
+  digital (`html.print-closed`). `?print=closed` lo fuerza para revisarlo.
+- **Lo que falta para publicar:** el **mail no sale todavía** (ActiveCampaign + imagen de la postal con el nombre), aunque el
+  copy diga "we email it to you today". `Code.gs` nuevo **sin desplegar** en el web app (ver `docs/wall/README.md`): el de
+  producción guarda lo básico y descarta `country`, `street2`, `message_lang` y `consent`.
+- **Impresión, pendiente:** master en PDF desde este HTML. Faltan cupo, firma, letra, remitente (marketing) y **imágenes a
+  300 dpi**: 6,25 × 4,5 in con sangría piden ~1875 × 1350 px, y en el repo `aerial` es 1920×1072, `aerial-blueprint` 1600×893
+  y `obra` 1280×720. La firma "Gustavo Suárez" y las tipografías manuscritas del dorso son provisorias.
+
 ## Reglas
 - Fases: "Antes" (hasta el 12/12) y "Después" (desde el 13/12). Sin fase "Durante": el día del evento el contenido vive
   en redes.

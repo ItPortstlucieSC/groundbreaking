@@ -12,11 +12,13 @@
 var AUTO_APPROVE_DEFAULT = true;
 var STATUSES = ['approved', 'hidden', 'pending'];
 var MAX_TEXT = 140, MAX_NAME = 40;
+var COUNTRIES = ['US', 'AR'];
 var BADGES = ['Supporter', 'Neighbor', 'Academy family', 'Academy', 'Founding Crew'];
 var STICKERS = ['anchor', 'ball', 'drum', 'heart', 'palm', 'pirate', 'shovel', 'star', 'luca'];
 var COLS = {
   messages: ['id', 'timestamp', 'status', 'display_name', 'badge', 'sticker', 'message', 'is_adult', 'email', 'consent', 'lang', 'page', 'user_agent'],
-  registrations: ['id', 'timestamp', 'postcard', 'name', 'email', 'digital_only', 'street', 'city', 'state', 'zip', 'lang', 'page', 'user_agent']
+  // Las columnas nuevas van al final: el Sheet ya tiene filas y no se pueden correr las existentes.
+  registrations: ['id', 'timestamp', 'postcard', 'name', 'email', 'digital_only', 'street', 'city', 'state', 'zip', 'lang', 'page', 'user_agent', 'country', 'street2', 'message_lang', 'consent']
 };
 
 /** Correr desde el editor (se puede repetir sin romper nada): pestañas, encabezados, desplegable de status y config. */
@@ -100,12 +102,18 @@ function saveRegistration_(d, email) {
   var postcard = parseInt(d.postcard, 10);
   if (!(postcard >= 1 && postcard <= 4)) return { ok: false, error: 'Pick a postcard first.' };
   var name = clean_(d.name, MAX_NAME); if (!name) return { ok: false, error: 'We need a name for the postcard.' };
-  var digital = !!d.digital_only;
-  if (!digital && !(clean_(d.street, 120) && clean_(d.city, 60) && clean_(d.zip, 12))) return { ok: false, error: 'We need the address for the printed postcard.' };
-  var id = Utilities.getUuid();
-  sheet_('registrations').appendRow([id, new Date(), postcard, name, email, digital,
+  if (!d.consent) return { ok: false, error: 'We need your OK to send your postcard.' };
+  var digital = !!d.digital_only, country = clean_(d.country, 2).toUpperCase();
+  // Las impresas solo van a EE. UU. y Argentina.
+  if (!digital && COUNTRIES.indexOf(country) < 0) return { ok: false, error: 'Printed copies ship to the US and Argentina only.' };
+  if (!digital && !(clean_(d.street, 120) && clean_(d.city, 60) && clean_(d.state, 30) && clean_(d.zip, 12))) return { ok: false, error: 'We need the address for the printed postcard.' };
+  var id = Utilities.getUuid(), sh = sheet_('registrations'), H = COLS.registrations;
+  // Sheet creado antes de sumar las columnas nuevas: se completa el encabezado (solo agrega al final).
+  if (sh.getLastColumn() < H.length) sh.getRange(1, 1, 1, H.length).setValues([H]);
+  sh.appendRow([id, new Date(), postcard, name, email, digital,
     digital ? '' : clean_(d.street, 120), digital ? '' : clean_(d.city, 60), digital ? '' : clean_(d.state, 30), digital ? '' : clean_(d.zip, 12),
-    clean_(d.lang, 5), clean_(d.page, 80), clean_(d.ua, 160)]);
+    clean_(d.lang, 5), clean_(d.page, 80), clean_(d.ua, 160),
+    digital ? '' : country, digital ? '' : clean_(d.street2, 40), d.message_lang === 'es' ? 'es' : 'en', true]);
   return { ok: true, id: id, status: 'saved' };
 }
 
