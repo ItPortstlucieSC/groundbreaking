@@ -56,10 +56,8 @@ button{font-family:inherit;cursor:pointer}
 .nav{position:sticky;top:0;z-index:20;background:rgba(251,248,242,.94);backdrop-filter:blur(14px);border-bottom:1px solid #E2D8C4}
 .nav .wrap{height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .lg{display:flex;align-items:center;gap:12px;color:#0F3B3A}
-.lg-mark{width:48px;height:auto;flex-shrink:0}
-.lg-word{display:flex;flex-direction:column;gap:3px}
-.lg-word b{font:800 11.5px/1 'Druk Text Wide';letter-spacing:.06em;color:#141414;white-space:nowrap}
-.lg-word span{font:800 11.5px/1 'Druk Text Wide';letter-spacing:.06em;color:#FF7A6B}
+/* logo del estadio (marketing, 3-nov): versión negra en el nav, aqua en el footer; SVG sacado del .ai */
+.lg-img{display:block;height:44px;width:auto}
 .nav-links{display:none}
 .nav-r{display:flex;align-items:center;gap:8px}
 .nav-r .btn{height:42px;padding:0 14px;font-size:10.5px}
@@ -289,6 +287,7 @@ html.tour-done .sc-txt i,html.tour-done .sc-cue{animation-delay:0s!important}
 .ft-links a{font:800 11px/1.2 'Druk Text Wide';letter-spacing:.06em;text-transform:uppercase;color:rgba(251,248,242,.85)}
 .ft-club{display:flex;align-items:center;gap:12px;padding:18px 0;border-top:1px solid rgba(251,248,242,.15);border-bottom:1px solid rgba(251,248,242,.15);margin-top:34px}
 .ft-club img{width:38px}
+.ft-club .lg-img{width:auto;height:56px;margin-left:auto}
 .ft-club span{font-size:12px;color:rgba(251,248,242,.6)}
 .ft-club a{font:700 13px/1 'Proxima Nova';color:#FBF8F2}
 .legal{font-size:11px;line-height:1.7;color:rgba(251,248,242,.45);margin-top:18px}
@@ -302,8 +301,7 @@ html.tour-done .sc-txt i,html.tour-done .sc-cue{animation-delay:0s!important}
   .sec-head .lead{margin:0}
   .util span{display:block}
   .nav .wrap{height:82px}
-  .lg-mark{width:62px}
-  .lg-word b,.lg-word span{font-size:12px}
+  .lg-img{height:54px}
   .nav-links{display:flex;gap:22px}
   .cta-l{display:inline}
   .pill.hide-m{display:flex}
@@ -383,7 +381,6 @@ body,.pg{background:#F1EDE6}
 .bg-con{background:#E4DED3}
 .bg-deep{background:#0B2A2A;color:#FBF8F2}
 .h2.sig{font:800 28px/1.02 'Druk Text Wide',sans-serif;letter-spacing:.01em;text-transform:uppercase}
-.lg-word span{color:#0E8C79}
 .nav{background:rgba(241,237,230,.94)}
 .nav-links a.is-on{color:#0E8C79!important}
 .fact a,.stop a{color:#0E8C79}
@@ -439,10 +436,9 @@ html:not(.hero-mode-video) .hero-video{display:none}
 .diary-c{max-width:520px}
 .nav .wrap{gap:8px}
 .lg{gap:8px}
-.lg-mark{width:40px}
-.lg-word b,.lg-word span{font-size:10.5px}
+.lg-img{height:40px}
 .burger{width:42px;height:42px;flex-shrink:0}
-@media (min-width:900px){.lg-mark{width:62px}.lg-word b,.lg-word span{font-size:12px}.lg{gap:12px}}
+@media (min-width:900px){.lg-img{height:54px}.lg{gap:12px}}
 .diary-c b{font:800 22px/1.1 'Druk Text Wide',sans-serif!important;text-transform:uppercase}
 @media (min-width:900px){
   .h2.sig{font-size:56px}
@@ -1009,12 +1005,7 @@ html:not(.print-closed) .pmd-closed,html.print-closed .pmd-opts{display:none}
 <div class="pg">
 
   <header class="nav"><div class="wrap">
-    <a href="#top" class="lg" aria-label="Port St. Lucie Stadium"><svg viewBox="0 0 120 70" class="lg-mark" aria-hidden="true">
-  <path d="M6 30 C22 18 34 18 48 28 S78 40 92 26 S110 16 114 22" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-  <path d="M10 34 V62 H110 V28" fill="none" stroke="currentColor" stroke-width="3"/>
-  <circle cx="60" cy="40" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/>
-  <path d="M60 43 V58 M55 47 H65 M52 52 Q60 62 68 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-</svg><span class="lg-word"><b>PORT ST. LUCIE</b><span>STADIUM</span></span></a>
+    <a href="#top" class="lg" aria-label="Groundbreaking · Port St. Lucie Stadium"><img class="lg-img" src="assets/logo-groundbreaking-negro.svg" alt="" width="941" height="330"></a>
     <nav class="nav-links" aria-label="Stadium">
       <a href="#tour" class="is-on">The Stadium</a><a href="#build">The Build</a><a href="#wall">Community</a><a href="#">2027 Home ↗</a>
     </nav>
@@ -1466,12 +1457,7 @@ html:not(.print-closed) .pmd-closed,html.print-closed .pmd-opts{display:none}
     <div class="ft-club">
       <img src="assets/crest-aqua.webp" alt="">
       <div style="display:flex;flex-direction:column;gap:4px"><span>A Port St. Lucie SC home</span><a href="https://www.portstluciesc.com/">Port St. Lucie SC ↗</a></div>
-      <div class="lg" style="margin-left:auto;color:#AAF6E6"><svg viewBox="0 0 120 70" class="lg-mark" aria-hidden="true">
-  <path d="M6 30 C22 18 34 18 48 28 S78 40 92 26 S110 16 114 22" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-  <path d="M10 34 V62 H110 V28" fill="none" stroke="currentColor" stroke-width="3"/>
-  <circle cx="60" cy="40" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/>
-  <path d="M60 43 V58 M55 47 H65 M52 52 Q60 62 68 52" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-</svg></div>
+      <img class="lg-img" src="assets/logo-groundbreaking-aqua.svg" alt="Groundbreaking · Port St. Lucie Stadium" width="941" height="330">
     </div>
     <div class="legal">© 2026 Port St. Lucie SC · Treasure Coast, FL · USL Corporate · Terms · Privacy · Do Not Sell My Information</div>
   </div></footer>

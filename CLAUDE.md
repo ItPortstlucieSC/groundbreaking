@@ -276,6 +276,13 @@ Propuesta y motivos: `../docs/frentes/groundbreaking/PROPUESTA-slider.md`. Reemp
 - Arranca con el 72 % de la caja del lado del terreno, para que haya que arrastrar para ver el estadio. Al entrar en pantalla, un barrido de 72 % a 56 % y vuelta, una vez (sin él con Reduce Motion). La manija dice "Drag" hasta
   el primer arrastre (`data-cmp-touched` en `<html>`).
 
+## Logo del estadio (feature/logo)
+Logo "Groundbreaking" de marketing (3-nov): estadio de línea con el escudo + la palabra. El `.ai` trae tres versiones (aqua sobre
+negro, negro, blanco); de ahí salen `assets/logo-groundbreaking-negro.svg` (nav, sobre crema) y `-aqua.svg` (footer, sobre verde),
+vectoriales, sin fondo y recortados al dibujo (`pdftocairo -svg` + quitar el rectángulo de fondo y ajustar el `viewBox`). Se usan
+con sus colores originales, sin recolorear. Alto: 40 px en el nav móvil, 54 en escritorio, 56 en el footer. Reemplazó al
+pictograma dibujado a mano + "PORT ST. LUCIE / STADIUM".
+
 ## Reglas
 - Fases: "Antes" (hasta el 12/12) y "Después" (desde el 13/12). Sin fase "Durante": el día del evento el contenido vive
   en redes.
