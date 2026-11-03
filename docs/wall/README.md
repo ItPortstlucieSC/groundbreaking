@@ -14,8 +14,8 @@ panel de moderación a la vez.
   `consent`. **Este backend solo guarda: el mail con la postal todavía no sale** (irá por ActiveCampaign).
 - Protecciones: honeypot, largo máximo (140 caracteres el mensaje), un envío por email por minuto, bloqueo
   contra escrituras simultáneas. El email nunca sale del Sheet.
-- Solo adultos: el formulario exige el check "I'm 18 or older" (columna `is_adult`). Si un menor quiere dejar un
-  mensaje, lo deja un adulto por él.
+- Edad (muro): el formulario exige el check "I'm 13 or older" (3-nov; antes era 18). La columna del Sheet sigue
+  llamándose `is_adult` para no romper la cabecera, pero significa "13 o más". El registro de postales sigue en 18+.
 
 ## El Sheet actual
 **Groundbreaking · muro y registros** (creado el 22-oct-2026 en el Drive de Mariano, para arrancar):

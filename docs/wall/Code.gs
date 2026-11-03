@@ -88,7 +88,7 @@ function saveMessage_(d, email) {
   var text = clean_(d.text, MAX_TEXT);
   if (text.length < 3) return { ok: false, error: 'Finish the sentence first.' };
   if (!d.consent) return { ok: false, error: 'We need your OK to show the message.' };
-  if (!d.adult) return { ok: false, error: 'You need to be 18 or older to leave a message.' };
+  if (!d.adult) return { ok: false, error: 'You need to be 13 or older to leave a message.' };
   var badge = BADGES.indexOf(d.badge) > -1 ? d.badge : 'Supporter';
   var sticker = STICKERS.indexOf(d.sticker) > -1 ? d.sticker : 'anchor';
   var status = autoApprove_() ? 'approved' : 'pending';

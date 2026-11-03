@@ -112,7 +112,8 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
 `../assets/`) con los ajustes pedidos el 22-oct:
 - Contador centrado y translúcido mientras carga el video (`.intro__cd`, misma fecha objetivo `2026-12-12T10:00-05:00`,
   lo actualiza el script de la intro y se apaga al salir).
-- Sin la franja de vista previa ni la barra verde de arriba del nav (`.pvstrip` y `.util`); el EN/ES pasó al `.nav-r`.
+- Sin la franja de vista previa ni la barra verde de arriba del nav (`.pvstrip` y `.util`); el EN/ES pasó al `.nav-r`
+  y el 3-nov se quitó del todo (selector, CSS `.lang` y estado `lang`; el copy es solo en inglés).
 - Hero sin los pills ("Render · video loop", "US-1 & Walton Rd").
 - Sin la card "From first shovel to gates open" (`.bx-when`); el bento queda con 3 cards.
 - Intro a pantalla completa también en vertical (cover, recortada; sin la franja 16:9 ni el zoom de salida), con la
@@ -161,7 +162,7 @@ Página aparte para no pisar la v1 al publicar: misma base que `index.html` (com
   El componente carga los aprobados en `componentDidMount` (`_addMessages`: banda de 9 columnas debajo de las 42
   tarjetas de muestra, el mundo `W×H` crece) y expone `window.gbWall.add`. "Leave your message" abre el modal
   `[data-wmdl]`: mensaje (140), nombre como aparece, insignia, sticker, email (nunca se muestra), consentimiento y
-  el check "I'm 18 or older" (decidido 22-oct: sin opción "en nombre de mi hijo"). Al enviar: botón en estado de
+  el check "I'm 13 or older" (3-nov, antes 18; decidido 22-oct: sin opción "en nombre de mi hijo"). Al enviar: botón en estado de
   carga ≥1,1 s. Política decidida el 22-oct (tarde): **se publica al instante** (`auto_approve` TRUE en la pestaña
   `config` del Sheet; el script lee eso, sin redeploy): el modal se cierra solo, el muro se centra y enfoca la
   tarjeta nueva (`is-new`) y un toast lo confirma. El sitio solo muestra `status = approved`: para sacar un mensaje
@@ -287,4 +288,5 @@ pictograma dibujado a mano + "PORT ST. LUCIE / STADIUM".
 - Fases: "Antes" (hasta el 12/12) y "Después" (desde el 13/12). Sin fase "Durante": el día del evento el contenido vive
   en redes.
 - Copy en inglés.
-- El chequeo de edad del muro deja los datos siempre en manos de un adulto.
+- El chequeo de edad del muro es "I'm 13 or older" (3-nov; antes 18+): es el piso de COPPA para pedirle el email a un
+  menor sin permiso de los padres. El consentimiento del registro de postales sigue en 18+.
